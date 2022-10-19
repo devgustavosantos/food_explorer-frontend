@@ -1,12 +1,13 @@
 export default {
   COLORS: {
     BLUE_900: "#01070a",
-    BLUE_800: "#001119",
-    BLUE_700: "#01131d",
-    BLUE_600: "#0d1721",
-    BLUE_500: "#0d1d25",
-    BLUE_400: "#141d22",
-    BLUE_300: "#82f3ff",
+    BLUE_800: "#000A0F",
+    BLUE_700: "#001119",
+    BLUE_600: "#01131d",
+    BLUE_500: "#0d1721",
+    BLUE_400: "#0d1d25",
+    BLUE_300: "#141d22",
+    BLUE_200: "#82f3ff",
 
     GRAY_900: "#7c7c8a",
     GRAY_800: "#666c6f",
