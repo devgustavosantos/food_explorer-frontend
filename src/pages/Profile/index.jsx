@@ -2,6 +2,7 @@ import { IoIosArrowBack } from "react-icons/io";
 
 import { Container, Form } from "./styles";
 
+import { Header } from "../../components/Header";
 import { ButtonText } from "../../components/ButtonText";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
@@ -10,6 +11,7 @@ import { Footer } from "../../components/Footer";
 export function Profile() {
   return (
     <Container>
+      <Header />
       <Form>
         <ButtonText title="voltar" icon={IoIosArrowBack} />
         <h1>Meu perfil</h1>
