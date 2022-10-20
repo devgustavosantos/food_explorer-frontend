@@ -3,6 +3,7 @@ import { Container, Form } from "./styles";
 import Logo from "../../assets/logo.svg";
 
 import { Input } from "../../components/Input";
+import { Button } from "../../components/Button";
 
 export function SignIn() {
   return (
@@ -19,6 +20,7 @@ export function SignIn() {
           type="password"
           placeholder="No mínimo 6 caracteres"
         />
+        <Button title="Entrar" type="button" isHighlighted />
       </Form>
     </Container>
   );
