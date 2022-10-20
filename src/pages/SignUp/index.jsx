@@ -6,7 +6,7 @@ import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { ButtonText } from "../../components/ButtonText";
 
-export function SignIn() {
+export function SignUp() {
   return (
     <Container>
       <Brand>
@@ -18,7 +18,12 @@ export function SignIn() {
           <img src={Logo} alt=" Logo do food explorer" />
           <h1>food explorer</h1>
         </div>
-        <h2>Faça seu login</h2>
+        <h2>Crie sua conta</h2>
+        <Input
+          title="Nome:"
+          type="text"
+          placeholder="Exemplo: Maria da Silva"
+        />
         <Input
           title="E-mail:"
           type="text"
@@ -29,8 +34,8 @@ export function SignIn() {
           type="password"
           placeholder="No mínimo 6 caracteres"
         />
-        <Button title="Entrar" type="button" isHighlighted />
-        <ButtonText title="Criar uma conta" />
+        <Button title="Cria conta" type="button" isHighlighted />
+        <ButtonText title="Já tenho uma conta" />
       </Form>
     </Container>
   );
