@@ -1,4 +1,4 @@
-import { Container, Form } from "./styles";
+import { Container, Brand, Form } from "./styles";
 
 import Logo from "../../assets/logo.svg";
 
@@ -9,6 +9,10 @@ import { ButtonText } from "../../components/ButtonText";
 export function SignIn() {
   return (
     <Container>
+      <Brand>
+        <img src={Logo} alt=" Logo do food explorer" />
+        <h1>food explorer</h1>
+      </Brand>
       <Form>
         <div className="top">
           <img src={Logo} alt=" Logo do food explorer" />
