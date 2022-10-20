@@ -4,6 +4,7 @@ import Logo from "../../assets/logo.svg";
 
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
+import { ButtonText } from "../../components/ButtonText";
 
 export function SignIn() {
   return (
@@ -21,6 +22,7 @@ export function SignIn() {
           placeholder="No mínimo 6 caracteres"
         />
         <Button title="Entrar" type="button" isHighlighted />
+        <ButtonText title="Criar uma conta" />
       </Form>
     </Container>
   );

@@ -11,6 +11,10 @@ const Form = styled.form`
   text-align: center;
   background-color: ${({ theme }) => theme.COLORS.BLUE_700};
 
+  @media (max-width: 700px) {
+    min-height: 100vh;
+  }
+
   > .top {
     display: flex;
     justify-content: center;
@@ -29,6 +33,10 @@ const Form = styled.form`
 
   h2 {
     margin: 40px auto;
+  }
+
+  > *:last-child {
+    margin-top: 40px;
   }
 `;
 
