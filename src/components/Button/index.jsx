@@ -5,10 +5,16 @@ export function Button({
   isHighlighted = true,
   icon: Icon,
   type,
+  disabled = false,
   ...rest
 }) {
   return (
-    <Container type={type} isHighlighted={isHighlighted} {...rest}>
+    <Container
+      type={type}
+      isHighlighted={isHighlighted}
+      disabled={disabled}
+      {...rest}
+    >
       {Icon && <Icon />}
       {title}
     </Container>

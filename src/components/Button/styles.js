@@ -14,6 +14,11 @@ const Container = styled.button`
   color: ${({ theme }) => theme.COLORS.WHITE};
   background-color: ${({ theme, isHighlighted }) =>
     isHighlighted ? `${theme.COLORS.RED_900}` : `${theme.COLORS.BLUE_200}`};
+
+  &:disabled {
+    filter: brightness(0.5);
+    cursor: not-allowed;
+  }
 `;
 
 export { Container };

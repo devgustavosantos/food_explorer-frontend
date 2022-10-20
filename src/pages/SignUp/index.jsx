@@ -20,7 +20,7 @@ export function SignUp() {
         </div>
         <h2>Crie sua conta</h2>
         <Input
-          title="Nome:"
+          title="Seu nome:"
           type="text"
           placeholder="Exemplo: Maria da Silva"
         />

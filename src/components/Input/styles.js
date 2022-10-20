@@ -8,6 +8,7 @@ const Container = styled.div`
   > input {
     margin-top: 10px;
     background-color: transparent;
+    color: ${({ theme }) => theme.COLORS.WHITE};
     outline: none;
     border: 1px solid ${({ theme }) => theme.COLORS.WHITE};
     border-radius: 5px;

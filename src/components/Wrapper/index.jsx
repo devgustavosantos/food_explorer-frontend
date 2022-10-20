@@ -1,5 +1,5 @@
 import { Container } from "./styles";
 
 export function Wrapper({ children }) {
-  return <Container>{children}</Container>;
+  return <Container className="my-wrapper">{children}</Container>;
 }
