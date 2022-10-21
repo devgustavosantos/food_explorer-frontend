@@ -7,6 +7,44 @@ const Container = styled.header`
   background-color: ${({ theme }) => theme.COLORS.BLUE_700};
 `;
 
+const Desktop = styled.div`
+  width: 100%;
+  display: flex;
+  gap: 20px;
+
+  @media (max-width: 780px) {
+    display: none;
+  }
+
+  nav {
+    flex-grow: 1;
+
+    ul {
+      flex-grow: 1;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    li:first-child {
+      flex-grow: 1;
+    }
+
+    li {
+      list-style: none;
+    }
+
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      color: ${({ theme }) => theme.COLORS.WHITE};
+      font-size: 2rem;
+    }
+  }
+`;
+
 const Mobile = styled.div`
   .top {
     display: flex;
@@ -14,6 +52,10 @@ const Mobile = styled.div`
 
     @media (min-width: 370px) {
       justify-content: space-between;
+    }
+
+    @media (min-width: 780px) {
+      display: none;
     }
   }
 `;
@@ -47,7 +89,7 @@ const HamburgerMenu = styled.button`
   border: none;
 
   color: ${({ theme }) => theme.COLORS.WHITE};
-  font-size: 4rem;
+  font-size: 3.5rem;
 `;
 
 const Navigation = styled.nav`
@@ -81,4 +123,4 @@ const Navigation = styled.nav`
   }
 `;
 
-export { Container, Mobile, Brand, HamburgerMenu, Navigation };
+export { Container, Desktop, Mobile, Brand, HamburgerMenu, Navigation };

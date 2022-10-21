@@ -1,6 +1,8 @@
 import { Container } from "./styles";
 
-export function SearchBar({ icon: Icon, ...rest }) {
+import { FiSearch } from "react-icons/fi";
+
+export function SearchBar({ ...rest }) {
   return (
     <Container>
       <input
@@ -8,11 +10,10 @@ export function SearchBar({ icon: Icon, ...rest }) {
         placeholder="Busque pelas opções de pratos"
         {...rest}
       />
-      {Icon && (
-        <button>
-          <Icon />
-        </button>
-      )}
+
+      <button>
+        <FiSearch />
+      </button>
     </Container>
   );
 }

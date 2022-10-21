@@ -10,7 +10,14 @@ import {
 } from "react-icons/fi";
 import { TfiReceipt } from "react-icons/tfi";
 
-import { Container, Mobile, Brand, HamburgerMenu, Navigation } from "./styles";
+import {
+  Container,
+  Desktop,
+  Mobile,
+  Brand,
+  HamburgerMenu,
+  Navigation,
+} from "./styles";
 import { Wrapper } from "../Wrapper";
 import { SearchBar } from "../SearchBar";
 import Logo from "../../assets/logo.svg";
@@ -25,6 +32,44 @@ export function Header() {
   return (
     <Container>
       <Wrapper>
+        <Desktop>
+          <Brand>
+            <img src={Logo} alt="Foto do logotipo food explorer" />
+            <h2>food explorer</h2>
+          </Brand>
+          <nav>
+            <ul>
+              <li>
+                <SearchBar />
+              </li>
+              <li>
+                <a href="#">
+                  <FiHeart />
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <FiShoppingCart />
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <TfiReceipt />
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <FiUser />
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <FiLogOut />
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </Desktop>
         <Mobile>
           <div className="top">
             <Brand>
@@ -39,7 +84,7 @@ export function Header() {
           <Navigation>
             <ul className={menuOpen ? "" : "hidden"}>
               <li>
-                <SearchBar icon={FiSearch} />
+                <SearchBar />
               </li>
               <li>
                 <a href="#">
