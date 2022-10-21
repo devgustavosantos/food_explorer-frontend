@@ -1,7 +1,4 @@
 import { useState } from "react";
-
-import { Container, Menu, Options } from "./styles";
-
 import {
   FiMenu,
   FiX,
@@ -11,14 +8,15 @@ import {
   FiUser,
   FiLogOut,
 } from "react-icons/fi";
-
 import { TfiReceipt } from "react-icons/tfi";
 
+import { Container, Mobile, Brand, HamburgerMenu, Navigation } from "./styles";
 import { Wrapper } from "../Wrapper";
+import { SearchBar } from "../SearchBar";
+import Logo from "../../assets/logo.svg";
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  console.log(menuOpen);
 
   function handleMenuOpen() {
     setMenuOpen(prevState => !prevState);
@@ -27,45 +25,55 @@ export function Header() {
   return (
     <Container>
       <Wrapper>
-        <Menu onClick={handleMenuOpen}>{menuOpen ? <FiX /> : <FiMenu />}</Menu>
-        <Options className={menuOpen ? "" : "hidden"}>
-          <li>
-            <a href="#">
-              <FiSearch />
-              Pesquisar
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <FiHeart />
-              Favoritos
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <FiShoppingCart />
-              Carrinho
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <TfiReceipt />
-              Pedidos
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <FiUser />
-              Perfil
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <FiLogOut />
-              Sair
-            </a>
-          </li>
-        </Options>
+        <Mobile>
+          <div className="top">
+            <Brand>
+              <img src={Logo} alt="Foto do logotipo food explorer" />
+              <h2>food explorer</h2>
+            </Brand>
+            <HamburgerMenu onClick={handleMenuOpen}>
+              {menuOpen ? <FiX /> : <FiMenu />}
+            </HamburgerMenu>
+          </div>
+
+          <Navigation>
+            <ul className={menuOpen ? "" : "hidden"}>
+              <li>
+                <SearchBar icon={FiSearch} />
+              </li>
+              <li>
+                <a href="#">
+                  <FiHeart />
+                  Favoritos
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <FiShoppingCart />
+                  Carrinho
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <TfiReceipt />
+                  Pedidos
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <FiUser />
+                  Perfil
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <FiLogOut />
+                  Sair
+                </a>
+              </li>
+            </ul>
+          </Navigation>
+        </Mobile>
       </Wrapper>
     </Container>
   );
