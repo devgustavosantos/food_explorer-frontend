@@ -2,7 +2,7 @@ import { useState } from "react";
 import {
   FiMenu,
   FiX,
-  FiSearch,
+  FiPlus,
   FiHeart,
   FiShoppingCart,
   FiUser,
@@ -27,6 +27,8 @@ export function Header() {
 
   const [userInfos, setUserInfos] = useState(null);
 
+  const [adm, setAdmin] = useState(false);
+
   function handleMenuOpen() {
     setMenuOpen(prevState => !prevState);
   }
@@ -44,16 +46,26 @@ export function Header() {
               <li>
                 <SearchBar />
               </li>
-              <li>
-                <a href="#">
-                  <FiHeart />
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <FiShoppingCart />
-                </a>
-              </li>
+              {adm ? (
+                <li>
+                  <a href="#">
+                    <FiPlus />
+                  </a>
+                </li>
+              ) : (
+                <li>
+                  <a href="#">
+                    <FiHeart />
+                  </a>
+                </li>
+              )}
+              {!adm && (
+                <li>
+                  <a href="#">
+                    <FiShoppingCart />
+                  </a>
+                </li>
+              )}
               <li>
                 <a href="#">
                   <TfiReceipt />
@@ -88,18 +100,29 @@ export function Header() {
               <li>
                 <SearchBar />
               </li>
-              <li>
-                <a href="#">
-                  <FiHeart />
-                  Favoritos
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <FiShoppingCart />
-                  Carrinho
-                </a>
-              </li>
+              {adm ? (
+                <li>
+                  <a href="#">
+                    <FiPlus />
+                    Adicionar
+                  </a>
+                </li>
+              ) : (
+                <li>
+                  <a href="#">
+                    <FiHeart />
+                    Favoritos
+                  </a>
+                </li>
+              )}
+              {!adm && (
+                <li>
+                  <a href="#">
+                    <FiShoppingCart />
+                    Carrinho
+                  </a>
+                </li>
+              )}
               <li>
                 <a href="#">
                   <TfiReceipt />
