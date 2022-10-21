@@ -51,13 +51,6 @@ const Content = styled.main`
     font-size: 4.5rem;
     font-family: "Roboto", sans-serif;
   }
-
-  .adm-buttons {
-    display: flex;
-    gap: 10px;
-
-    display: none;
-  }
 `;
 
 export { Container, Content };

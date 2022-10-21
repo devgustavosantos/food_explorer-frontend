@@ -11,6 +11,8 @@ import { Wrapper } from "../../components/Wrapper";
 import { ButtonText } from "../../components/ButtonText";
 import { Ingredient } from "../../components/Ingredient";
 import { Button } from "../../components/Button";
+import { AdmButtons } from "../../components/AdmButtons";
+import { ClientButtons } from "../../components/ClientButtons";
 
 export function Details() {
   const [ingredients, setINgredients] = useState([
@@ -45,6 +47,9 @@ export function Details() {
         "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/e966ed89-6ea6-4b5c-afe2-5da6c6563392/pngegg_%288%29_1.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221021%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221021T193800Z&X-Amz-Expires=86400&X-Amz-Signature=dee5bee95bb6fca0c71379acf55852c673b90663f974b3514ef8cc2e223553fe&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22pngegg%2520%288%29%25201.png%22&x-id=GetObject",
     },
   ]);
+
+  const [adm, setAdm] = useState(false);
+
   return (
     <Container>
       <Header />
@@ -73,14 +78,11 @@ export function Details() {
             R$ <span>32,55</span>
           </p>
           <div className="buttons">
-            <div className="adm-buttons">
-              <Button icon={FiEdit2} title="Editar" isHighlighted={false} />
-              <Button icon={FiTrash} title="Excluir" />
-            </div>
-            <div className="client-buttons">
-              <Button icon={FiEdit2} title="Editar" isHighlighted={false} />
-              <Button icon={FiTrash} title="Excluir" />
-            </div>
+            {adm ? (
+              <AdmButtons dishId={10} />
+            ) : (
+              <ClientButtons dishId={10} withIcon />
+            )}
           </div>
         </Content>
       </Wrapper>
