@@ -25,6 +25,8 @@ import Logo from "../../assets/logo.svg";
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const [userInfos, setUserInfos] = useState(null);
+
   function handleMenuOpen() {
     setMenuOpen(prevState => !prevState);
   }
@@ -113,7 +115,7 @@ export function Header() {
               <li>
                 <a href="#">
                   <FiLogOut />
-                  Sair
+                  {userInfos ? "Sair" : "Entrar"}
                 </a>
               </li>
             </ul>
