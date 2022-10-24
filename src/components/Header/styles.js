@@ -50,9 +50,7 @@ const Mobile = styled.div`
     display: flex;
     justify-content: flex-end;
 
-    @media (min-width: 371px) {
-      justify-content: space-between;
-    }
+    justify-content: space-between;
 
     @media (min-width: 780px) {
       display: none;
@@ -64,10 +62,6 @@ const Brand = styled.div`
   display: flex;
   gap: 10px;
   align-items: center;
-
-  @media (max-width: 370px) {
-    display: none;
-  }
 
   img {
     width: clamp(2.3rem, 5vw, 3.5rem);

@@ -13,7 +13,16 @@ const Container = styled.div`
 
 const Content = styled.div`
   width: 100%;
-  padding: clamp(20px, 6vw, 40px) 0;
+  padding: clamp(40px, 12.5vw, 80px) 0;
+
+  > a {
+    margin-bottom: 25px;
+  }
+
+  > h1 {
+    font-size: clamp(2.4rem, 7vw, 3.2rem);
+    margin-bottom: clamp(20px, 6vw, 30px);
+  }
 `;
 
 export { Container, Content };

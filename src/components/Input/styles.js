@@ -5,6 +5,10 @@ const Container = styled.div`
   margin-bottom: 20px;
   text-align: left;
 
+  p {
+    font-size: clamp(1.4rem, 4vw, 1.6rem);
+  }
+
   > input {
     margin-top: 10px;
     background-color: transparent;
@@ -14,6 +18,10 @@ const Container = styled.div`
     border-radius: 5px;
     padding: 15px;
     width: 100%;
+
+    &::placeholder {
+      font-size: clamp(1.4rem, 4vw, 1.6rem);
+    }
   }
 `;
 

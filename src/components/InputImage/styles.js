@@ -7,6 +7,10 @@ const Container = styled.div`
   gap: 10px;
   margin-bottom: 20px;
 
+  p {
+    font-size: clamp(1.4rem, 4vw, 1.6rem);
+  }
+
   label {
     display: flex;
     justify-content: center;
