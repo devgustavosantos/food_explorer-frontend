@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Container = styled.footer`
   width: 100%;
-  padding: 25px 0;
+  padding: clamp(17px, 5vw, 25px) 0;
   background-color: ${({ theme }) => theme.COLORS.BLUE_700};
 
   .my-wrapper {

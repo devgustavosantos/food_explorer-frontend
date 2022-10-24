@@ -19,6 +19,10 @@ const Container = styled.button`
     filter: brightness(0.5);
     cursor: not-allowed;
   }
+
+  svg {
+    font-size: 2.5rem;
+  }
 `;
 
 export { Container };

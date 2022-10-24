@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Container = styled.header`
   width: 100%;
 
-  padding: 20px 0;
+  padding: clamp(20px, 6vw, 30px) 0;
   background-color: ${({ theme }) => theme.COLORS.BLUE_700};
 `;
 

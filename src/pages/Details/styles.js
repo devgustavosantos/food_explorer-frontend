@@ -23,29 +23,31 @@ const Content = styled.main`
     display: grid;
     gap: 10px;
     grid-template-areas:
-      "b1 aa aa aa"
-      "A B B B"
-      "A C C C"
-      "A D D D"
-      "A E F G";
+      "A A A A"
+      "B C C C"
+      "B D D D"
+      "B E E E"
+      "B F G H";
     grid-template-columns: 1.5fr 1fr 1fr 0.5fr;
+    grid-template-columns: 3fr 170px 2fr 0.5fr;
 
+    align-items: center;
     text-align: left;
   }
 
   a {
     font-size: 2.4rem;
-    grid-area: b1;
+    grid-area: A;
     justify-self: flex-start;
     @media (min-width: 770px) {
-      margin-bottom: 40px;
+      margin-bottom: 30px;
     }
   }
 
   > img {
     width: 100%;
     border-radius: 50%;
-    grid-area: A;
+    grid-area: B;
     @media (min-width: 770px) {
       padding-right: 30px;
     }
@@ -55,14 +57,13 @@ const Content = styled.main`
     font-size: clamp(2.5rem, 8vw, 4rem);
     font-weight: 500;
     line-height: 100%;
-    grid-area: B;
-    margin-bottom: -15px;
+    grid-area: C;
   }
 
   > p {
     font-family: "Poppins", sans-serif;
     font-size: clamp(1.5rem, 4vw, 2.4rem);
-    grid-area: C;
+    grid-area: D;
   }
 
   .ingredients {
@@ -70,10 +71,11 @@ const Content = styled.main`
     justify-content: center;
     flex-wrap: wrap;
     gap: 15px;
-    grid-area: D;
+    grid-area: E;
 
     @media (min-width: 770px) {
       justify-content: flex-start;
+      margin-bottom: clamp(25px, 4vw, 40px);
     }
   }
 
@@ -81,14 +83,11 @@ const Content = styled.main`
     color: ${({ theme }) => theme.COLORS.BLUE_100};
     font-size: clamp(2.8rem, 6vw, 3.2rem);
     font-family: "Roboto", sans-serif;
-    grid-area: E;
+    grid-area: F;
   }
 
   .buttons {
-    grid-area: F;
-    @media (min-width: 770px) {
-      /* margin-left: 5vw; */
-    }
+    grid-area: G;
   }
 `;
 
