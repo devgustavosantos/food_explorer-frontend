@@ -50,7 +50,7 @@ const Mobile = styled.div`
     display: flex;
     justify-content: flex-end;
 
-    @media (min-width: 370px) {
+    @media (min-width: 371px) {
       justify-content: space-between;
     }
 
@@ -70,13 +70,13 @@ const Brand = styled.div`
   }
 
   img {
-    width: 35px;
-    height: 35px;
+    width: clamp(2.3rem, 5vw, 3.5rem);
+    height: clamp(2.3rem, 5vw, 3.5rem);
   }
 
   h2 {
     font-family: "Roboto", sans-serif;
-    font-size: 2.5rem;
+    font-size: clamp(1.6rem, 4vw, 2.5rem);
   }
 `;
 
@@ -123,7 +123,7 @@ const Navigation = styled.nav`
     align-items: center;
     gap: 10px;
     color: ${({ theme }) => theme.COLORS.WHITE};
-    font-size: 2rem;
+    font-size: clamp(1.4rem, 4vw, 1.6rem);
   }
 `;
 

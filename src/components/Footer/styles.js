@@ -18,7 +18,17 @@ const Container = styled.footer`
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: clamp(7px, 2.2vw, 10px);
+
+    img {
+      width: clamp(2rem, 6vw, 3rem);
+      height: clamp(2rem, 6vw, 3rem);
+    }
+
+    h3 {
+      color: ${({ theme }) => theme.COLORS.GRAY_800};
+      font-size: clamp(1.7rem, 5vw, 2.5rem);
+    }
 
     @media (max-width: 545px) {
       flex-grow: 1;
@@ -28,6 +38,7 @@ const Container = styled.footer`
   p {
     font-family: "DM Sans", sans-serif;
     text-align: center;
+    font-size: clamp(1.2rem, 3vw, 1.4rem);
 
     @media (max-width: 545px) {
       flex-grow: 1;
