@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-import { FiEdit2, FiTrash } from "react-icons/fi";
 import { IoIosArrowBack } from "react-icons/io";
 
 import { Container, Content } from "./styles";
