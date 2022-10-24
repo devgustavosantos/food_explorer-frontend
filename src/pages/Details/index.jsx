@@ -14,37 +14,35 @@ import { Button } from "../../components/Button";
 import { AdmButtons } from "../../components/AdmButtons";
 import { ClientButtons } from "../../components/ClientButtons";
 
+const ingredientImage =
+  "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/8de12504-9b82-4b94-9b25-d78d6ccf2808/pngegg_%288%29_1.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221024%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221024T111342Z&X-Amz-Expires=86400&X-Amz-Signature=b02a5bc08182bd013ef9a614060b2e72ca65074c93960fd3cc06d1878a2b8838&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22pngegg%2520%288%29%25201.png%22&x-id=GetObject";
+
 export function Details() {
   const [ingredients, setINgredients] = useState([
     {
       id: 2,
       name: "sal",
-      image:
-        "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/e966ed89-6ea6-4b5c-afe2-5da6c6563392/pngegg_%288%29_1.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221021%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221021T193800Z&X-Amz-Expires=86400&X-Amz-Signature=dee5bee95bb6fca0c71379acf55852c673b90663f974b3514ef8cc2e223553fe&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22pngegg%2520%288%29%25201.png%22&x-id=GetObject",
+      image: ingredientImage,
     },
     {
       id: 3,
       name: "açucar",
-      image:
-        "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/e966ed89-6ea6-4b5c-afe2-5da6c6563392/pngegg_%288%29_1.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221021%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221021T193800Z&X-Amz-Expires=86400&X-Amz-Signature=dee5bee95bb6fca0c71379acf55852c673b90663f974b3514ef8cc2e223553fe&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22pngegg%2520%288%29%25201.png%22&x-id=GetObject",
+      image: ingredientImage,
     },
     {
       id: 1,
       name: "Farinha",
-      image:
-        "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/e966ed89-6ea6-4b5c-afe2-5da6c6563392/pngegg_%288%29_1.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221021%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221021T193800Z&X-Amz-Expires=86400&X-Amz-Signature=dee5bee95bb6fca0c71379acf55852c673b90663f974b3514ef8cc2e223553fe&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22pngegg%2520%288%29%25201.png%22&x-id=GetObject",
+      image: ingredientImage,
     },
     {
       id: 10,
       name: "Farinha",
-      image:
-        "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/e966ed89-6ea6-4b5c-afe2-5da6c6563392/pngegg_%288%29_1.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221021%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221021T193800Z&X-Amz-Expires=86400&X-Amz-Signature=dee5bee95bb6fca0c71379acf55852c673b90663f974b3514ef8cc2e223553fe&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22pngegg%2520%288%29%25201.png%22&x-id=GetObject",
+      image: ingredientImage,
     },
     {
       id: 15,
       name: "Farinha",
-      image:
-        "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/e966ed89-6ea6-4b5c-afe2-5da6c6563392/pngegg_%288%29_1.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221021%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221021T193800Z&X-Amz-Expires=86400&X-Amz-Signature=dee5bee95bb6fca0c71379acf55852c673b90663f974b3514ef8cc2e223553fe&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22pngegg%2520%288%29%25201.png%22&x-id=GetObject",
+      image: ingredientImage,
     },
   ]);
 
@@ -57,7 +55,7 @@ export function Details() {
         <Content>
           <ButtonText title="voltar" icon={IoIosArrowBack} />
           <img
-            src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/ffd85c1c-f542-42c7-a37b-b09159048457/Mask_group.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221021%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221021T193957Z&X-Amz-Expires=86400&X-Amz-Signature=e36b3e83ef5eb09d82b0ba0f715960589c477b9a016ae0305dbbb82db78875c9&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Mask%2520group.png%22&x-id=GetObject"
+            src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/ffd85c1c-f542-42c7-a37b-b09159048457/Mask_group.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221024%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221024T111215Z&X-Amz-Expires=86400&X-Amz-Signature=6acfe9a4fe070738208f73d1602ff549720565b5c8ae4dfb2c177f5f9cd5935a&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Mask%2520group.png%22&x-id=GetObject"
             alt="Foto do Prato"
           />
           <h1>Nome do prato</h1>

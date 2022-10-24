@@ -14,13 +14,14 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 20px;
     font-size: 2rem;
 
     button {
       border: none;
       background-color: transparent;
       color: ${({ theme }) => theme.COLORS.WHITE};
-      font-size: 2.5rem;
+      font-size: 2rem;
     }
   }
 `;

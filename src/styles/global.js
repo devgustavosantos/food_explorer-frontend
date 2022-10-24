@@ -11,6 +11,7 @@ export default createGlobalStyle`
 
   :root {
     font-size: 62.5%;
+
   }
 
   body, input, textarea {

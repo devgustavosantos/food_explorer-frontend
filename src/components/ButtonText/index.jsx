@@ -4,7 +4,7 @@ export function ButtonText({ title, icon: Icon }) {
   return (
     <Container>
       {Icon && <Icon />}
-      {title}
+      <p>{title}</p>
     </Container>
   );
 }
