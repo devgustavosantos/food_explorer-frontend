@@ -4,7 +4,7 @@ export function Button({
   title,
   isHighlighted = true,
   icon: Icon,
-  type,
+  type = "button",
   disabled = false,
   ...rest
 }) {

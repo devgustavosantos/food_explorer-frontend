@@ -8,7 +8,7 @@ const Container = styled.div`
   border: ${({ theme, isNew }) =>
     isNew ? `1px dashed ${theme.COLORS.GRAY_900}` : "none"};
   border-radius: 10px;
-  padding: 10px 15px;
+  padding: 6.5px 15px;
 
   background-color: ${({ theme, isNew }) =>
     isNew ? "transparent" : `${theme.COLORS.BLUE_200}`};

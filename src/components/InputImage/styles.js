@@ -6,6 +6,7 @@ const Container = styled.div`
   flex-direction: column;
   gap: 10px;
   margin-bottom: 20px;
+  grid-area: C;
 
   p {
     font-size: clamp(1.4rem, 4vw, 1.6rem);
