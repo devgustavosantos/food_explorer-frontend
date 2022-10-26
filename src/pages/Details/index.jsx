@@ -14,7 +14,7 @@ import { AdmButtons } from "../../components/AdmButtons";
 import { ClientButtons } from "../../components/ClientButtons";
 
 const ingredientImage =
-  "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/8de12504-9b82-4b94-9b25-d78d6ccf2808/pngegg_%288%29_1.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221024%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221024T111342Z&X-Amz-Expires=86400&X-Amz-Signature=b02a5bc08182bd013ef9a614060b2e72ca65074c93960fd3cc06d1878a2b8838&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22pngegg%2520%288%29%25201.png%22&x-id=GetObject";
+  "https://www.foodbusinessnews.net/ext/resources/TopicLandingPages/Product-Development-Ingredient-Applications.jpg?1519144948";
 
 export function Details() {
   const [ingredients, setINgredients] = useState([
@@ -54,7 +54,7 @@ export function Details() {
         <Content>
           <ButtonText title="voltar" icon={IoIosArrowBack} />
           <img
-            src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/ffd85c1c-f542-42c7-a37b-b09159048457/Mask_group.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221024%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221024T111215Z&X-Amz-Expires=86400&X-Amz-Signature=6acfe9a4fe070738208f73d1602ff549720565b5c8ae4dfb2c177f5f9cd5935a&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Mask%2520group.png%22&x-id=GetObject"
+            src="https://assets-global.website-files.com/5d03b4e13011831ae4624b37/6354dfed1f4727b5f0191ef0_production-meal-image-e4122aa8-0fe7-4854-b6f5-e27e0c5be918.jpeg"
             alt="Foto do Prato"
           />
           <h1>Nome do prato</h1>

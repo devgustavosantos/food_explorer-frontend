@@ -15,7 +15,7 @@ const Form = styled.form`
   width: 100%;
   padding: clamp(40px, 12.5vw, 80px) 0;
 
-  @media (min-width: 770px) {
+  @media (min-width: 780px) {
     display: grid;
     grid-template-areas:
       "A A A A"
@@ -71,7 +71,7 @@ const Ingredients = styled.div`
   margin-bottom: 20px;
   grid-area: F;
 
-  @media (min-width: 800px) {
+  @media (min-width: 780px) {
     margin-bottom: 0px;
   }
 
@@ -116,8 +116,7 @@ const Description = styled.div`
 
 const Modal = styled.div`
   overflow: hidden;
-  min-height: 100vh;
-  position: sticky;
+  position: fixed;
   bottom: 0;
 
   background-color: #000000bf;
@@ -125,15 +124,19 @@ const Modal = styled.div`
   padding: clamp(20px, 6vw, 80px);
 
   &.open {
+    overflow: scroll;
     width: 100%;
+    height: 100vh;
     opacity: 1;
     transition: width 0.1s ease, opacity 0.5s ease 0.2s;
   }
 
   &.close {
     width: 0;
+    height: 0;
     opacity: 0;
-    transition: width 0.1s ease 1.1s, opacity 0.4s ease 0.2s;
+    transition: width 0.1s ease 1.1s, height 0.1s ease 1.1s,
+      opacity 0.4s ease 0.2s;
   }
 
   .alert {

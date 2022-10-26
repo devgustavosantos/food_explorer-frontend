@@ -19,7 +19,7 @@ const Content = styled.main`
   gap: 20px;
   text-align: center;
 
-  @media (min-width: 770px) {
+  @media (min-width: 780px) {
     display: grid;
     gap: 10px;
     grid-template-areas:
@@ -39,7 +39,7 @@ const Content = styled.main`
     font-size: 2.4rem;
     grid-area: A;
     justify-self: flex-start;
-    @media (min-width: 770px) {
+    @media (min-width: 780px) {
       margin-bottom: 30px;
     }
   }
@@ -47,9 +47,10 @@ const Content = styled.main`
   > img {
     width: 100%;
     border-radius: 50%;
+    aspect-ratio: 1;
     grid-area: B;
-    @media (min-width: 770px) {
-      padding-right: 30px;
+    @media (min-width: 780px) {
+      width: 90%;
     }
   }
 
@@ -73,7 +74,7 @@ const Content = styled.main`
     gap: 15px;
     grid-area: E;
 
-    @media (min-width: 770px) {
+    @media (min-width: 780px) {
       justify-content: flex-start;
       margin-bottom: clamp(25px, 4vw, 40px);
     }

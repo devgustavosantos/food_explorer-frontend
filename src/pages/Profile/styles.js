@@ -6,14 +6,16 @@ const Container = styled.div`
 
   display: flex;
   flex-direction: column;
+
+  > .my-wrapper {
+    flex-grow: 1;
+  }
 `;
 
 const Form = styled.form`
-  flex-grow: 1;
   width: 100%;
   max-width: 420px;
   margin: 40px auto;
-  padding: 0 40px;
   text-align: center;
 
   a {

@@ -36,7 +36,7 @@ const Form = styled.form`
   max-width: 540px;
   min-height: 100vh;
   margin: auto;
-  padding: 80px 40px;
+  padding: 80px clamp(15px, 4vw, 40px);
   text-align: center;
   background-color: ${({ theme }) => theme.COLORS.BLUE_700};
 
