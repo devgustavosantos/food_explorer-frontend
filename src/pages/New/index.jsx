@@ -1,6 +1,9 @@
-import { Container, Form, Ingredients, Description } from "./styles";
+import { useState } from "react";
+
+import { Container, Form, Ingredients, Description, Modal } from "./styles";
 
 import { IoIosArrowBack } from "react-icons/io";
+import { FiX } from "react-icons/fi";
 
 import { Header } from "../../components/Header";
 import { Wrapper } from "../../components/Wrapper";
@@ -12,6 +15,12 @@ import { Button } from "../../components/Button";
 import { Footer } from "../../components/Footer";
 
 export function New() {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  function handleModal() {
+    setModalOpen(prevState => !prevState);
+  }
+
   return (
     <Container>
       <Header />
@@ -41,6 +50,22 @@ export function New() {
         </Form>
       </Wrapper>
       <Footer />
+      <Modal className={modalOpen ? "open" : "close"}>
+        <div className="alert">
+          <button type="button" onClick={handleModal}>
+            <FiX />
+          </button>
+          <h2>Ingrediente Novo!</h2>
+          <p>
+            Identificamos que você adicionou um Ingrediente novo. Gostaria de
+            adicionar uma foto à ele?
+          </p>
+          <Input title="Nome" placeholder="Ex.: Sal" />
+          <InputImage />
+          <Button title="Cadastrar sem foto" isHighlighted={false} />
+          <Button title="Cadastrar com foto" />
+        </div>
+      </Modal>
     </Container>
   );
 }

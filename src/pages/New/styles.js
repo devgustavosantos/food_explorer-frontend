@@ -114,4 +114,70 @@ const Description = styled.div`
   }
 `;
 
-export { Container, Form, Ingredients, Description };
+const Modal = styled.div`
+  overflow: hidden;
+  min-height: 100vh;
+  position: sticky;
+  bottom: 0;
+
+  background-color: #000000bf;
+
+  padding: clamp(20px, 6vw, 80px);
+
+  &.open {
+    width: 100%;
+    opacity: 1;
+    transition: width 0.1s ease, opacity 0.5s ease 0.2s;
+  }
+
+  &.close {
+    width: 0;
+    opacity: 0;
+    transition: width 0.1s ease 1.1s, opacity 0.4s ease 0.2s;
+  }
+
+  .alert {
+    max-width: 500px;
+    margin: auto;
+    background-color: ${({ theme }) => theme.COLORS.BLUE_700};
+    padding: clamp(15px, 4vw, 40px);
+    border-radius: 10px;
+    box-shadow: 0 0 20px 15px black;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    h2,
+    > p {
+      text-align: center;
+      font-family: "Poppins", sans-serif;
+    }
+
+    h2 {
+      font-size: 3.2rem;
+      font-family: "Poppins", sans-serif;
+      line-height: 130%;
+    }
+
+    p {
+      font-size: 1.4rem;
+      line-height: 150%;
+    }
+
+    button {
+      align-self: flex-end;
+
+      svg {
+        color: ${({ theme }) => theme.COLORS.WHITE};
+        font-size: 4rem;
+      }
+    }
+
+    > div:nth-child(4) {
+      margin-bottom: 0;
+    }
+  }
+`;
+
+export { Container, Form, Ingredients, Description, Modal };

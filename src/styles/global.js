@@ -39,6 +39,11 @@ export default createGlobalStyle`
   button:hover, a:hover {
     filter: brightness(0.7);
   }
+
+  button {
+    border: none;
+    background-color: transparent;
+  }
   
   a {
     text-decoration: none;
