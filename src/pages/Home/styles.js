@@ -9,12 +9,16 @@ const Container = styled.div`
   > .my-wrapper {
     flex-grow: 1;
   }
+
+  main {
+    padding: clamp(30px, 8vw, 60px) 0;
+  }
 `;
 
 const Top = styled.div`
   width: 100%;
   padding: 30px 10px;
-  margin: clamp(30px, 8vw, 60px) 0;
+  margin-bottom: clamp(30px, 8vw, 60px);
   border-radius: 10px;
   position: relative;
   overflow: hidden;
@@ -41,14 +45,14 @@ const Top = styled.div`
   h1 {
     font-family: "Poppins", sans-serif;
     font-weight: 500;
-    font-size: 3.6rem;
+    font-size: clamp(3.2rem, 8vw, 4rem);
     line-height: 100%;
     margin-bottom: 15px;
   }
 
   h3 {
     font-family: "Poppins", sans-serif;
-    font-size: 1.5rem;
+    font-size: clamp(1.4rem, 4vw, 1.6rem);
     font-weight: 400;
   }
 `;
