@@ -36,10 +36,23 @@ const Container = styled.section`
 
   .carousel-meals {
     display: flex;
-    gap: 25px;
     width: 100%;
+
     overflow: hidden;
     scroll-behavior: smooth;
+
+    .my-card {
+      flex: none;
+      margin-right: 25px;
+    }
+
+    .my-card:first-child {
+      margin-left: 40px;
+    }
+
+    .my-card:last-child {
+      margin-right: 40px;
+    }
   }
 `;
 

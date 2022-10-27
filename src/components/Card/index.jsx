@@ -9,7 +9,7 @@ export function Card({ title, description, price, image }) {
   const [isAdm, setIsAdm] = useState(false);
 
   return (
-    <Container>
+    <Container className="my-card">
       <img
         src={`https://images.pexels.com/${image}`}
         alt={`Foto do prato ${title}`}

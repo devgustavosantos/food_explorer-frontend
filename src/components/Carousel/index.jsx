@@ -6,14 +6,35 @@ import { Container } from "./styles";
 export function Carousel({ title, meals }) {
   const carousel = useRef(null);
 
+  function getCardWidth() {
+    const card = carousel.current.querySelectorAll(".my-card")[1];
+
+    const cardWidth = card.offsetWidth;
+
+    const cardMargin = Number(
+      window
+        .getComputedStyle(card, null)
+        .getPropertyValue("margin-right")
+        .split("px")[0]
+    );
+
+    return cardWidth + cardMargin;
+  }
+
   function handleCarouselRight(e) {
     e.preventDefault();
-    carousel.current.scrollLeft += carousel.current.offsetWidth;
+
+    const size = getCardWidth();
+
+    carousel.current.scrollLeft += size;
   }
 
   function handleCarouselLeft(e) {
     e.preventDefault();
-    carousel.current.scrollLeft -= carousel.current.offsetWidth;
+
+    const size = getCardWidth();
+
+    carousel.current.scrollLeft -= size;
   }
 
   return (
