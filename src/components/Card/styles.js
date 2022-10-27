@@ -4,7 +4,7 @@ const Container = styled.section`
   width: 100%;
   max-width: 300px;
   margin: auto;
-  padding: 55px 20px 35px;
+  padding: 20px 20px 35px;
   background-color: ${({ theme }) => theme.COLORS.BLUE_900};
   border: 1px solid black;
   border-radius: 10px;
@@ -14,6 +14,12 @@ const Container = styled.section`
   gap: 15px;
 
   margin-bottom: 25px;
+
+  > button:first-child {
+    color: ${({ theme }) => theme.COLORS.WHITE};
+    font-size: clamp(2rem, 6vw, 2.4rem);
+    align-self: flex-end;
+  }
 
   > img {
     width: 175px;

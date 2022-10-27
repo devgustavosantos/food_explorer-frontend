@@ -44,15 +44,20 @@ export function Carousel({ title, meals }) {
         <button onClick={handleCarouselLeft}>{"<"}</button>
         <button onClick={handleCarouselRight}>{">"}</button>
         <div className="carousel-meals" ref={carousel}>
-          {meals.map(meal => (
-            <Card
-              key={String(meal.id)}
-              title={meal.title}
-              description={meal.description}
-              image={meal.image}
-              price={meal.price}
-            />
-          ))}
+          {meals.map(meal => {
+            const { id, title, description, image, price } = meal;
+
+            return (
+              <Card
+                key={String(id)}
+                meal_id={id}
+                title={title}
+                description={description}
+                image={image}
+                price={price}
+              />
+            );
+          })}
         </div>
       </div>
     </Container>
