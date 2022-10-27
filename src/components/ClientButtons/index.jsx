@@ -5,7 +5,7 @@ import { TfiReceipt } from "react-icons/tfi";
 
 export function ClientButtons({ dishId, withIcon = false }) {
   return (
-    <Container>
+    <Container className="client-buttons">
       <div className="amount-buttons">
         <button>-</button>
         <span>01</span>

@@ -34,6 +34,11 @@ const Container = styled.section`
     font-size: 3.2rem;
     color: ${({ theme }) => theme.COLORS.BLUE_100};
   }
+
+  > .client-buttons {
+    width: 100%;
+    padding: 0 15px;
+  }
 `;
 
 export { Container };
