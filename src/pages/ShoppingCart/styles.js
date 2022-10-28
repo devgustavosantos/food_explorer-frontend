@@ -24,6 +24,19 @@ const Content = styled.main`
   display: flex;
   flex-direction: column;
   gap: clamp(40px, 8vw, 75px);
+
+  @media (min-width: 780px) {
+    flex-direction: row;
+
+    > * {
+      flex-grow: 1;
+      width: 100%;
+    }
+  }
+
+  > h1 {
+    text-align: center;
+  }
 `;
 
 const Cart = styled.section`
@@ -80,11 +93,16 @@ const Payment = styled.section`
   }
 
   .payment-option {
+    margin: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: clamp(15px, 5vw, 45px);
     padding: clamp(20px, 5vw, 50px);
+
+    @media (min-width: 780px) {
+      width: clamp(310px, 5vw, 400px);
+    }
 
     /* escrever daqui para cima */
 
