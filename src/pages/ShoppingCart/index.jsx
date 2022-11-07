@@ -16,33 +16,6 @@ import qrCodeImg from "../../assets/qrcode.svg";
 import pixImg from "../../assets/pix.svg";
 
 export function ShoppingCart() {
-  // const mealsAdd = [
-  //   {
-  //     id: 1,
-  //     title: "Pizza",
-  //     price: 32.59,
-  //     image:
-  //       "photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-  //     meal_amount: 2,
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "Macarrão",
-  //     price: 32.05,
-  //     image:
-  //       "photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-  //     meal_amount: 1,
-  //   },
-  //   {
-  //     id: 5,
-  //     title: "Macarrão 6",
-  //     price: 32.05,
-  //     image:
-  //       "photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-  //     meal_amount: 3,
-  //   },
-  // ];
-
   const [mealsAdd, setMealsAdd] = useState([
     {
       id: 1,
