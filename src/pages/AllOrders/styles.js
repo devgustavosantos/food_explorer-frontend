@@ -17,24 +17,60 @@ const Content = styled.main`
 
   h1 {
     font-weight: 500;
+    margin-bottom: clamp(20px, 6vw, 35px);
   }
 `;
 
-const Table = styled.table`
-  text-align: left;
-  border-collapse: collapse;
+const Table = styled.div`
+  width: 100%;
+  border-radius: 10px;
+  overflow-x: auto;
+  border: ${({ theme }) => `2px solid ${theme.COLORS.BLUE_200}`};
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
 
   th,
   td {
-    border: ${({ theme }) => `2px solid ${theme.COLORS.GRAY_700}`};
+    border: ${({ theme }) => `2px solid ${theme.COLORS.BLUE_200}`};
   }
 
   th {
-    padding: 25px;
+    padding: clamp(10px, 3vw, 20px) clamp(15px, 4vw, 25px);
   }
 
   td {
-    padding: 30px 25px;
+    padding: clamp(10px, 3vw, 30px) clamp(10px, 3vw, 25px);
+    font-size: clamp(14px, 4vw, 16px);
+  }
+
+  thead tr th {
+    border-top: none;
+  }
+
+  thead tr th:first-child,
+  tbody tr td:first-child {
+    border-left: none;
+  }
+
+  thead tr th:last-child,
+  tbody tr td:last-child {
+    border-right: none;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  thead tr th:last-child {
+    min-width: 140px;
+  }
+
+  a {
+    color: ${({ theme }) => theme.COLORS.WHITE};
   }
 `;
 

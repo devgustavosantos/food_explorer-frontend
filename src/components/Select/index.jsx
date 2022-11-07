@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Container } from "./styles";
 
-export function Select({ order_id, status }) {
+export function Select({ order_id, status, disabled }) {
   const [currentStatus, setCurrentStatus] = useState(status);
 
   function handleStatus(e) {
@@ -9,7 +9,7 @@ export function Select({ order_id, status }) {
   }
 
   return (
-    <Container>
+    <Container disabled={disabled}>
       <div className="circles">
         <div className={currentStatus === "pending" ? "red" : "hidden"}></div>
         <div
@@ -19,7 +19,7 @@ export function Select({ order_id, status }) {
           className={currentStatus === "delivered" ? "green" : "hidden"}
         ></div>
       </div>
-      <select onChange={handleStatus} value={currentStatus} id="">
+      <select onChange={handleStatus} value={currentStatus} disabled={disabled}>
         <option value="pending">Pendente</option>
         <option value="preparing">Preparando</option>
         <option value="delivered">Entregue</option>

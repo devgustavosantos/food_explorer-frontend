@@ -5,6 +5,7 @@ const Container = styled.label`
   border: ${({ theme }) => `1px solid ${theme.COLORS.WHITE}`};
   border-radius: 5px;
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 10px;
 
@@ -36,6 +37,8 @@ const Container = styled.label`
     background-color: transparent;
     border: none;
     color: ${({ theme }) => theme.COLORS.WHITE};
+
+    -webkit-appearance: ${({ disabled }) => disabled && "none"};
 
     option {
       background-color: ${({ theme }) => theme.COLORS.BLUE_800};

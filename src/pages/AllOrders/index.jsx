@@ -77,6 +77,8 @@ export function AllOrders() {
     },
   ]);
 
+  const [isAdm, setIsAdm] = useState(false);
+
   function formatDateTime(datetime) {
     const [date, time] = datetime.split(" ");
 
@@ -84,7 +86,7 @@ export function AllOrders() {
 
     const [hour, minutes] = time.split(":");
 
-    const formattedDateAndTime = `${day}/${mouth} ${hour - 3}h${minutes}`;
+    const formattedDateAndTime = `${day}/${mouth} ás ${hour - 3}h${minutes}`;
 
     return formattedDateAndTime;
   }
@@ -95,37 +97,47 @@ export function AllOrders() {
         <Content>
           <h1>Pedidos</h1>
           <Table>
-            <thead>
-              <tr>
-                <th>Status</th>
-                <th>Código</th>
-                <th>Detalhamento</th>
-                <th>Data e hora</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orders.map(order => (
-                <tr key={String(order.id)}>
-                  <td>
-                    {<Select order_id={order.id} status={order.status} />}
-                  </td>
-                  <td>{String(order.id).padStart(8, "0")}</td>
-                  <td>
-                    {order.meals.map((meal, index) => {
-                      const lastItemInArray = index == order.meals.length - 1;
-
-                      return (
-                        <Fragment key={meal.order_meal_id}>
-                          {meal.meal_amount}x {meal.title}
-                          {lastItemInArray ? "" : ", "}
-                        </Fragment>
-                      );
-                    })}
-                  </td>
-                  <td>{formatDateTime(order.created_at)}</td>
+            <table>
+              <thead>
+                <tr>
+                  <th>Status</th>
+                  <th>Código</th>
+                  <th>Detalhamento</th>
+                  <th>Data e hora</th>
                 </tr>
-              ))}
-            </tbody>
+              </thead>
+              <tbody>
+                {orders.map(order => (
+                  <tr key={String(order.id)}>
+                    <td>
+                      {
+                        <Select
+                          order_id={order.id}
+                          status={order.status}
+                          disabled={!isAdm}
+                        />
+                      }
+                    </td>
+                    <td>
+                      <a href="#">{String(order.id).padStart(8, "0")}</a>
+                    </td>
+                    <td>
+                      {order.meals.map((meal, index) => {
+                        const lastItemInArray = index == order.meals.length - 1;
+
+                        return (
+                          <Fragment key={meal.order_meal_id}>
+                            {meal.meal_amount}x {meal.title}
+                            {lastItemInArray ? "" : ", "}
+                          </Fragment>
+                        );
+                      })}
+                    </td>
+                    <td>{formatDateTime(order.created_at)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </Table>
         </Content>
       </Wrapper>
