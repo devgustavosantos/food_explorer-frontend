@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
-
 import { TfiReceipt } from "react-icons/tfi";
 import { FiCreditCard } from "react-icons/fi";
 
 import { Cart, Container, Content, Payment } from "./styles";
-
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { Meal } from "../../components/Meal";
 import { Wrapper } from "../../components/Wrapper";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
-
 import qrCodeImg from "../../assets/qrcode.svg";
 import pixImg from "../../assets/pix.svg";
+import { useAuth } from "../../hooks/auth";
 
 export function ShoppingCart() {
+  const { userInfos } = useAuth();
+
   const [mealsAdd, setMealsAdd] = useState([
     {
       id: 1,
@@ -55,6 +55,25 @@ export function ShoppingCart() {
     const mealsFiltered = mealsAdd.filter(meal => meal.id !== meal_id);
 
     setMealsAdd(mealsFiltered);
+  }
+
+  function handleFinalizePurchase() {
+    if (!userInfos) {
+      const response = confirm(`
+        Para utilizar esse recurso você precisa estar logado.
+        Deseja se logar agora?
+      `);
+
+      if (response) {
+        navigate("/login");
+      }
+    }
+
+    if (userInfos) {
+      alert(
+        "Pedido feito com sucesso! Agora aguarde a confirmação do pagamento."
+      );
+    }
   }
 
   useEffect(() => {
@@ -137,7 +156,11 @@ export function ShoppingCart() {
                         <Input title="CVC" placeholder="000" type="number" />
                       </div>
                     </form>
-                    <Button title="Finalizar Pagamento" icon={TfiReceipt} />
+                    <Button
+                      title="Finalizar Pagamento"
+                      icon={TfiReceipt}
+                      onClick={handleFinalizePurchase}
+                    />
                   </div>
                 </div>
               </Payment>

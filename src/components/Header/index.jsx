@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   FiMenu,
   FiX,
@@ -21,16 +21,15 @@ import {
 } from "./styles";
 import { Wrapper } from "../Wrapper";
 import { SearchBar } from "../SearchBar";
-import { ModalUnauthorized } from "../ModalUnauthorized";
 import Logo from "../../assets/logo.svg";
 import { useAuth } from "../../hooks/auth";
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const [adm, setAdmin] = useState(false);
-
   const { userInfos } = useAuth();
+
+  const navigate = useNavigate();
 
   function renderButtonsDesktop() {
     if (!userInfos || !userInfos.isAdm) {
@@ -40,9 +39,9 @@ export function Header() {
             <SearchBar />
           </li>
           <li>
-            <Link to="/favorites">
+            <button type="button" onClick={() => handleGoToPage("/favorites")}>
               <FiHeart />
-            </Link>
+            </button>
           </li>
           <li>
             <Link to="/cart">
@@ -50,14 +49,14 @@ export function Header() {
             </Link>
           </li>
           <li>
-            <Link to="/all-orders">
+            <button type="button" onClick={() => handleGoToPage("/all-orders")}>
               <TfiReceipt />
-            </Link>
+            </button>
           </li>
           <li>
-            <Link to="/profile">
+            <button type="button" onClick={() => handleGoToPage("/profile")}>
               <FiUser />
-            </Link>
+            </button>
           </li>
           <li>
             <Link to="/login">
@@ -107,10 +106,10 @@ export function Header() {
             <SearchBar />
           </li>
           <li>
-            <Link to="/favorites">
+            <button type="button" onClick={() => handleGoToPage("/favorites")}>
               <FiHeart />
               Favoritos
-            </Link>
+            </button>
           </li>
           <li>
             <Link to="/cart">
@@ -119,16 +118,16 @@ export function Header() {
             </Link>
           </li>
           <li>
-            <Link to="/all-orders">
+            <button type="button" onClick={() => handleGoToPage("/all-orders")}>
               <TfiReceipt />
               Pedidos
-            </Link>
+            </button>
           </li>
           <li>
-            <Link to="/profile">
+            <button type="button" onClick={() => handleGoToPage("/profile")}>
               <FiUser />
               Perfil
-            </Link>
+            </button>
           </li>
           <li>
             <Link to="/login">
@@ -175,7 +174,22 @@ export function Header() {
     }
   }
 
-  function handleGoFavorites() {}
+  function handleGoToPage(page) {
+    if (!userInfos) {
+      const response = confirm(`
+        Para utilizar esse recurso você precisa estar logado.
+        Deseja se logar agora?
+      `);
+
+      if (response) {
+        navigate("/login");
+      }
+    }
+
+    if (userInfos) {
+      navigate(page);
+    }
+  }
 
   function handleMenuOpen() {
     setMenuOpen(prevState => !prevState);
@@ -189,49 +203,7 @@ export function Header() {
             <img src={Logo} alt="Foto do logotipo food explorer" />
             <h2>food explorer</h2>
           </Brand>
-          <nav>
-            {/* <ul>
-              <li>
-                <SearchBar />
-              </li>
-              {adm ? (
-                <li>
-                  <Link to="/new">
-                    <FiPlus />
-                  </Link>
-                </li>
-              ) : (
-                <li>
-                  <Link to="/favorites">
-                    <FiHeart />
-                  </Link>
-                </li>
-              )}
-              {!adm && (
-                <li>
-                  <Link to="/cart">
-                    <FiShoppingCart />
-                  </Link>
-                </li>
-              )}
-              <li>
-                <Link to="/all-orders">
-                  <TfiReceipt />
-                </Link>
-              </li>
-              <li>
-                <Link to="/profile">
-                  <FiUser />
-                </Link>
-              </li>
-              <li>
-                <Link to="/login">
-                  <FiLogOut />
-                </Link>
-              </li>
-            </ul> */}
-            {renderButtonsDesktop()}
-          </nav>
+          <nav>{renderButtonsDesktop()}</nav>
         </Desktop>
         <Mobile>
           <div className="top">
@@ -243,59 +215,9 @@ export function Header() {
               {menuOpen ? <FiX /> : <FiMenu />}
             </HamburgerMenu>
           </div>
-
-          <Navigation>
-            {/* <ul className={menuOpen ? "" : "hidden"}>
-              <li>
-                <SearchBar />
-              </li>
-              {adm ? (
-                <li>
-                  <Link to="/new">
-                    <FiPlus />
-                    Adicionar
-                  </Link>
-                </li>
-              ) : (
-                <li>
-                  <Link to="/favorites">
-                    <FiHeart />
-                    Favoritos
-                  </Link>
-                </li>
-              )}
-              {!adm && (
-                <li>
-                  <Link to="/cart">
-                    <FiShoppingCart />
-                    Carrinho
-                  </Link>
-                </li>
-              )}
-              <li>
-                <Link to="/all-orders">
-                  <TfiReceipt />
-                  Pedidos
-                </Link>
-              </li>
-              <li>
-                <Link to="/profile">
-                  <FiUser />
-                  Perfil
-                </Link>
-              </li>
-              <li>
-                <Link to="/login">
-                  <FiLogOut />
-                  {userInfos ? "Sair" : "Entrar"}
-                </Link>
-              </li>
-            </ul> */}
-            {renderButtonsMobile()}
-          </Navigation>
+          <Navigation>{renderButtonsMobile()}</Navigation>
         </Mobile>
       </Wrapper>
-      {/* <ModalUnauthorized /> */}
     </Container>
   );
 }

@@ -6,7 +6,7 @@ function AuthProvider({ children }) {
   let userInfos = {
     name: "Gustavo",
     email: "gustavo@email.com",
-    isAdm: true,
+    isAdm: false,
   };
 
   userInfos = null;

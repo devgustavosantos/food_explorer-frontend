@@ -36,7 +36,8 @@ const Desktop = styled.div`
       list-style: none;
     }
 
-    a {
+    a,
+    svg {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -115,7 +116,8 @@ const Navigation = styled.nav`
     list-style: none;
   }
 
-  a {
+  a,
+  button {
     display: flex;
     align-items: center;
     gap: 10px;
