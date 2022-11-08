@@ -15,12 +15,13 @@ import { SignUp } from "./pages/SignUp";
 import { ShoppingCart } from "./pages/ShoppingCart";
 import { Order } from "./pages/Order";
 import { AllOrders } from "./pages/AllOrders";
+import { Favorites } from "./pages/Favorites";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <AllOrders />
+      <Favorites />
     </ThemeProvider>
   </React.StrictMode>
 );
