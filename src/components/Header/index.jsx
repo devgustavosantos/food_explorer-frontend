@@ -21,14 +21,161 @@ import {
 } from "./styles";
 import { Wrapper } from "../Wrapper";
 import { SearchBar } from "../SearchBar";
+import { ModalUnauthorized } from "../ModalUnauthorized";
 import Logo from "../../assets/logo.svg";
+import { useAuth } from "../../hooks/auth";
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const [userInfos, setUserInfos] = useState(null);
-
   const [adm, setAdmin] = useState(false);
+
+  const { userInfos } = useAuth();
+
+  function renderButtonsDesktop() {
+    if (!userInfos || !userInfos.isAdm) {
+      return (
+        <ul>
+          <li>
+            <SearchBar />
+          </li>
+          <li>
+            <Link to="/favorites">
+              <FiHeart />
+            </Link>
+          </li>
+          <li>
+            <Link to="/cart">
+              <FiShoppingCart />
+            </Link>
+          </li>
+          <li>
+            <Link to="/all-orders">
+              <TfiReceipt />
+            </Link>
+          </li>
+          <li>
+            <Link to="/profile">
+              <FiUser />
+            </Link>
+          </li>
+          <li>
+            <Link to="/login">
+              <FiLogOut />
+            </Link>
+          </li>
+        </ul>
+      );
+    }
+
+    if (userInfos.isAdm) {
+      return (
+        <ul>
+          <li>
+            <SearchBar />
+          </li>
+          <li>
+            <Link to="/new">
+              <FiPlus />
+            </Link>
+          </li>
+          <li>
+            <Link to="/all-orders">
+              <TfiReceipt />
+            </Link>
+          </li>
+          <li>
+            <Link to="/profile">
+              <FiUser />
+            </Link>
+          </li>
+          <li>
+            <Link to="/login">
+              <FiLogOut />
+            </Link>
+          </li>
+        </ul>
+      );
+    }
+  }
+
+  function renderButtonsMobile() {
+    if (!userInfos || !userInfos.isAdm) {
+      return (
+        <ul className={menuOpen ? "" : "hidden"}>
+          <li>
+            <SearchBar />
+          </li>
+          <li>
+            <Link to="/favorites">
+              <FiHeart />
+              Favoritos
+            </Link>
+          </li>
+          <li>
+            <Link to="/cart">
+              <FiShoppingCart />
+              Carrinho
+            </Link>
+          </li>
+          <li>
+            <Link to="/all-orders">
+              <TfiReceipt />
+              Pedidos
+            </Link>
+          </li>
+          <li>
+            <Link to="/profile">
+              <FiUser />
+              Perfil
+            </Link>
+          </li>
+          <li>
+            <Link to="/login">
+              <FiLogOut />
+              {userInfos ? "Sair" : "Entrar"}
+            </Link>
+          </li>
+        </ul>
+      );
+    }
+
+    if (userInfos.isAdm) {
+      return (
+        <ul className={menuOpen ? "" : "hidden"}>
+          <li>
+            <SearchBar />
+          </li>
+          <li>
+            <Link to="/new">
+              <FiPlus />
+              Adicionar
+            </Link>
+          </li>
+          <li>
+            <Link to="/all-orders">
+              <TfiReceipt />
+              Pedidos
+            </Link>
+          </li>
+          <li>
+            <Link to="/profile">
+              <FiUser />
+              Perfil
+            </Link>
+          </li>
+          <li>
+            <Link to="/login">
+              <FiLogOut />
+              {userInfos ? "Sair" : "Entrar"}
+            </Link>
+          </li>
+        </ul>
+      );
+    }
+  }
+
+  function handleGoFavorites() {}
 
   function handleMenuOpen() {
     setMenuOpen(prevState => !prevState);
@@ -43,7 +190,7 @@ export function Header() {
             <h2>food explorer</h2>
           </Brand>
           <nav>
-            <ul>
+            {/* <ul>
               <li>
                 <SearchBar />
               </li>
@@ -82,7 +229,8 @@ export function Header() {
                   <FiLogOut />
                 </Link>
               </li>
-            </ul>
+            </ul> */}
+            {renderButtonsDesktop()}
           </nav>
         </Desktop>
         <Mobile>
@@ -97,7 +245,7 @@ export function Header() {
           </div>
 
           <Navigation>
-            <ul className={menuOpen ? "" : "hidden"}>
+            {/* <ul className={menuOpen ? "" : "hidden"}>
               <li>
                 <SearchBar />
               </li>
@@ -142,10 +290,12 @@ export function Header() {
                   {userInfos ? "Sair" : "Entrar"}
                 </Link>
               </li>
-            </ul>
+            </ul> */}
+            {renderButtonsMobile()}
           </Navigation>
         </Mobile>
       </Wrapper>
+      {/* <ModalUnauthorized /> */}
     </Container>
   );
 }
