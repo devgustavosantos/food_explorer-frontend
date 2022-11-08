@@ -18,8 +18,6 @@ export function Profile() {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
-  const navigate = useNavigate();
-
   return (
     <Container>
       <Header />
