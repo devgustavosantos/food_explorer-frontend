@@ -1,14 +1,11 @@
 import styled from "styled-components";
 
-import { Link } from "react-router-dom";
-
-const Container = styled(Link)`
+const Container = styled.div`
   width: 100%;
   max-width: 300px;
-  margin: auto;
+  margin: 0 auto 25px;
   padding: 20px 20px 35px;
   background-color: ${({ theme }) => theme.COLORS.BLUE_900};
-  color: ${({ theme }) => theme.COLORS.WHITE};
   border: 1px solid black;
   border-radius: 10px;
   display: flex;
@@ -16,12 +13,15 @@ const Container = styled(Link)`
   align-items: center;
   gap: 15px;
 
-  margin-bottom: 25px;
-
   > button:first-child {
     color: ${({ theme }) => theme.COLORS.WHITE};
     font-size: clamp(2rem, 6vw, 2.4rem);
     align-self: flex-end;
+  }
+
+  > img:hover,
+  > h2:hover {
+    cursor: pointer;
   }
 
   > img {
