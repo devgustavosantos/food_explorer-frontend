@@ -28,7 +28,7 @@ export function Header() {
 
   const [userInfos, setUserInfos] = useState(null);
 
-  const [adm, setAdmin] = useState(true);
+  const [adm, setAdmin] = useState(false);
 
   function handleMenuOpen() {
     setMenuOpen(prevState => !prevState);
@@ -55,9 +55,9 @@ export function Header() {
                 </li>
               ) : (
                 <li>
-                  <a href="#">
+                  <Link to="/favorites">
                     <FiHeart />
-                  </a>
+                  </Link>
                 </li>
               )}
               {!adm && (
@@ -110,10 +110,10 @@ export function Header() {
                 </li>
               ) : (
                 <li>
-                  <a href="#">
+                  <Link to="/favorites">
                     <FiHeart />
                     Favoritos
-                  </a>
+                  </Link>
                 </li>
               )}
               {!adm && (

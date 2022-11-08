@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 
 import { Home } from "../pages/Home";
+import { Favorites } from "../pages/Favorites";
 import { Profile } from "../pages/Profile";
 import { Details } from "../pages/Details";
 import { ShoppingCart } from "../pages/ShoppingCart";
@@ -12,6 +13,7 @@ export function ClientRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/favorites" element={<Favorites />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/details/:id" element={<Details />} />
       <Route path="/cart" element={<ShoppingCart />} />
