@@ -28,7 +28,7 @@ export function Header() {
 
   const [userInfos, setUserInfos] = useState(null);
 
-  const [adm, setAdmin] = useState(false);
+  const [adm, setAdmin] = useState(true);
 
   function handleMenuOpen() {
     setMenuOpen(prevState => !prevState);
@@ -38,7 +38,7 @@ export function Header() {
     <Container>
       <Wrapper>
         <Desktop>
-          <Brand>
+          <Brand to="/">
             <img src={Logo} alt="Foto do logotipo food explorer" />
             <h2>food explorer</h2>
           </Brand>
@@ -49,9 +49,9 @@ export function Header() {
               </li>
               {adm ? (
                 <li>
-                  <a href="#">
+                  <Link to="/new">
                     <FiPlus />
-                  </a>
+                  </Link>
                 </li>
               ) : (
                 <li>
@@ -68,14 +68,14 @@ export function Header() {
                 </li>
               )}
               <li>
-                <a href="#">
+                <Link to="/all-orders">
                   <TfiReceipt />
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#">
+                <Link to="/profile">
                   <FiUser />
-                </a>
+                </Link>
               </li>
               <li>
                 <Link to="/login">
@@ -87,7 +87,7 @@ export function Header() {
         </Desktop>
         <Mobile>
           <div className="top">
-            <Brand>
+            <Brand to="/">
               <img src={Logo} alt="Foto do logotipo food explorer" />
               <h2>food explorer</h2>
             </Brand>
@@ -103,10 +103,10 @@ export function Header() {
               </li>
               {adm ? (
                 <li>
-                  <a href="#">
+                  <Link to="/new">
                     <FiPlus />
                     Adicionar
-                  </a>
+                  </Link>
                 </li>
               ) : (
                 <li>
@@ -125,16 +125,16 @@ export function Header() {
                 </li>
               )}
               <li>
-                <a href="#">
+                <Link to="/all-orders">
                   <TfiReceipt />
                   Pedidos
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#">
+                <Link to="/profile">
                   <FiUser />
                   Perfil
-                </a>
+                </Link>
               </li>
               <li>
                 <Link to="/login">

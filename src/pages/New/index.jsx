@@ -26,7 +26,7 @@ export function New() {
       <Header />
       <Wrapper>
         <Form>
-          <ButtonText title="voltar" icon={IoIosArrowBack} />
+          <ButtonText title="voltar" icon={IoIosArrowBack} to="/" />
           <h1>Adicionar Prato</h1>
           <InputImage />
           <Input title="Nome" placeholder="Ex.: Salada Ceasar" />

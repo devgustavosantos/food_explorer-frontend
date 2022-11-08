@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { Link } from "react-router-dom";
+
 const Container = styled.header`
   width: 100%;
 
@@ -58,10 +60,11 @@ const Mobile = styled.div`
   }
 `;
 
-const Brand = styled.div`
+const Brand = styled(Link)`
   display: flex;
   gap: 10px;
   align-items: center;
+  color: ${({ theme }) => theme.COLORS.WHITE};
 
   img {
     width: clamp(2.3rem, 5vw, 3.5rem);

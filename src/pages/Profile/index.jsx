@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { IoIosArrowBack } from "react-icons/io";
 
@@ -17,12 +18,14 @@ export function Profile() {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
+  const navigate = useNavigate();
+
   return (
     <Container>
       <Header />
       <Wrapper>
         <Form>
-          <ButtonText title="voltar" icon={IoIosArrowBack} />
+          <ButtonText title="voltar" icon={IoIosArrowBack} to="/" />
           <h1>Meu perfil</h1>
           <Input title="Nome:" type="text" placeholder={name} value={name} />
           <Input

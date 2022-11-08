@@ -1,4 +1,5 @@
 import { Fragment, useState } from "react";
+import { Link } from "react-router-dom";
 
 import { Container, Content, Table } from "./styles";
 
@@ -107,35 +108,41 @@ export function AllOrders() {
                 </tr>
               </thead>
               <tbody>
-                {orders.map(order => (
-                  <tr key={String(order.id)}>
-                    <td>
-                      {
-                        <Select
-                          order_id={order.id}
-                          status={order.status}
-                          disabled={!isAdm}
-                        />
-                      }
-                    </td>
-                    <td>
-                      <a href="#">{String(order.id).padStart(8, "0")}</a>
-                    </td>
-                    <td>
-                      {order.meals.map((meal, index) => {
-                        const lastItemInArray = index == order.meals.length - 1;
+                {orders.map(order => {
+                  const { id, status, meals, created_at } = order;
 
-                        return (
-                          <Fragment key={meal.order_meal_id}>
-                            {meal.meal_amount}x {meal.title}
-                            {lastItemInArray ? "" : ", "}
-                          </Fragment>
-                        );
-                      })}
-                    </td>
-                    <td>{formatDateTime(order.created_at)}</td>
-                  </tr>
-                ))}
+                  return (
+                    <tr key={String(id)}>
+                      <td>
+                        {
+                          <Select
+                            order_id={id}
+                            status={status}
+                            disabled={!isAdm}
+                          />
+                        }
+                      </td>
+                      <td>
+                        <Link to={`/order/${id}`}>
+                          {String(id).padStart(8, "0")}
+                        </Link>
+                      </td>
+                      <td>
+                        {meals.map((meal, index) => {
+                          const lastItemInArray = index == meals.length - 1;
+
+                          return (
+                            <Fragment key={meal.order_meal_id}>
+                              {meal.meal_amount}x {meal.title}
+                              {lastItemInArray ? "" : ", "}
+                            </Fragment>
+                          );
+                        })}
+                      </td>
+                      <td>{formatDateTime(created_at)}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </Table>
