@@ -1,8 +1,8 @@
 import { Container } from "./styles";
 
-export function ButtonText({ title, icon: Icon }) {
+export function ButtonText({ title, icon: Icon, to }) {
   return (
-    <Container>
+    <Container to={to}>
       {Icon && <Icon />}
       <p>{title}</p>
     </Container>

@@ -11,7 +11,7 @@ export function Card({ meal_id, title, description, price, image }) {
   const [isAdm, setIsAdm] = useState(false);
 
   return (
-    <Container className="my-card">
+    <Container className="my-card" to={`/details/${meal_id}`}>
       {!isAdm && (
         <button type="button">
           <FiHeart />

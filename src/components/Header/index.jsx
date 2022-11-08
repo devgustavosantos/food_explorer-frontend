@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   FiMenu,
   FiX,
@@ -61,9 +62,9 @@ export function Header() {
               )}
               {!adm && (
                 <li>
-                  <a href="#">
+                  <Link to="/cart">
                     <FiShoppingCart />
-                  </a>
+                  </Link>
                 </li>
               )}
               <li>
@@ -77,9 +78,9 @@ export function Header() {
                 </a>
               </li>
               <li>
-                <a href="#">
+                <Link to="/login">
                   <FiLogOut />
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>
@@ -117,10 +118,10 @@ export function Header() {
               )}
               {!adm && (
                 <li>
-                  <a href="#">
+                  <Link to="/cart">
                     <FiShoppingCart />
                     Carrinho
-                  </a>
+                  </Link>
                 </li>
               )}
               <li>
@@ -136,10 +137,10 @@ export function Header() {
                 </a>
               </li>
               <li>
-                <a href="#">
+                <Link to="/login">
                   <FiLogOut />
                   {userInfos ? "Sair" : "Entrar"}
-                </a>
+                </Link>
               </li>
             </ul>
           </Navigation>

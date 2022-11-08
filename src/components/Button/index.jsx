@@ -2,6 +2,7 @@ import { Container } from "./styles";
 
 export function Button({
   title,
+  onClick,
   isHighlighted = true,
   icon: Icon,
   type = "button",
@@ -10,6 +11,7 @@ export function Button({
 }) {
   return (
     <Container
+      onClick={onClick}
       type={type}
       isHighlighted={isHighlighted}
       disabled={disabled}
