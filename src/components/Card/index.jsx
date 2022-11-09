@@ -6,6 +6,7 @@ import { ClientButtons } from "../ClientButtons";
 import { AdmButtons } from "../AdmButtons";
 import { useAuth } from "../../hooks/auth";
 import { useNavigate } from "react-router-dom";
+import { api } from "../../services/api";
 
 export function Card({ meal_id, title, description, price, image }) {
   const [isAdm, setIsAdm] = useState(false);
@@ -60,7 +61,7 @@ export function Card({ meal_id, title, description, price, image }) {
     <Container className="my-card">
       {renderButtonFav()}
       <img
-        src={`https://images.pexels.com/${image}`}
+        src={`${api.defaults.baseURL}/files/meals/${image}`}
         alt={`Foto do prato ${title}`}
         onClick={handleGoToDetails}
       />

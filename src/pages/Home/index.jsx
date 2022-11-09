@@ -1,16 +1,109 @@
-import { Container, Desktop, Mobile } from "./styles";
+import { useState } from "react";
 
+import { Container, Desktop, Mobile } from "./styles";
 import { Header } from "../../components/Header";
 import { Wrapper } from "../../components/Wrapper";
 import { SectionMeals } from "../../components/SectionMeals";
-import { Card } from "../../components/Card";
-import { Button } from "../../components/Button";
 import { Footer } from "../../components/Footer";
-
-import Food from "../../assets/food.png";
 import { Carousel } from "../../components/Carousel";
+import Food from "../../assets/food.png";
+import { api } from "../../services/api";
+import { useEffect } from "react";
 
 export function Home() {
+  const [meals, setMeals] = useState();
+
+  console.log({ meals });
+
+  const [categories, setCategories] = useState();
+
+  function renderCardsDesktop() {
+    if (!meals || !categories) return null;
+
+    return categories.map(category => {
+      const mealsFiltered = meals.filter(meal => meal.category == category);
+
+      return (
+        <Carousel
+          title={category}
+          meals={mealsFiltered}
+          key={String(category)}
+        />
+      );
+    });
+  }
+
+  function renderCardsMobile() {
+    if (!meals || !categories) return null;
+
+    return categories.map(category => {
+      const mealsFiltered = meals.filter(meal => meal.category == category);
+
+      return (
+        <SectionMeals
+          title={category}
+          meals={mealsFiltered}
+          key={String(category)}
+        />
+      );
+    });
+  }
+
+  function formatMeals(meals) {
+    const mealsFormatted = meals.map(meal => {
+      return {
+        ...meal,
+        category: meal.category == null ? "Sem categoria" : meal.category,
+      };
+    });
+
+    return mealsFormatted;
+  }
+
+  useEffect(() => {
+    function formatCategories() {
+      if (!meals) return;
+
+      const onlyCategories = meals.map(meal => {
+        return meal.category;
+      });
+
+      const categoriesUnique = [...new Set(onlyCategories)];
+
+      const categoriesFiltered = categoriesUnique.filter(
+        category => category !== "Sem categoria"
+      );
+
+      const categoriesOrdered = categoriesFiltered.sort();
+
+      const categoriesFormatted = [...categoriesOrdered, "Sem categoria"];
+
+      setCategories(categoriesFormatted);
+    }
+
+    formatCategories();
+  }, [meals]);
+
+  useEffect(() => {
+    async function fetchMeals() {
+      try {
+        const response = await api.get("/meals");
+
+        const mealsFormatted = formatMeals(response.data);
+        setMeals(mealsFormatted);
+      } catch (error) {
+        if (error.response) {
+          alert(error.response.data.message);
+        } else {
+          alert("Não foi possível carregar os pratos.");
+          console.log(error);
+        }
+      }
+    }
+
+    fetchMeals();
+  }, []);
+
   return (
     <Container>
       <Header />
@@ -21,71 +114,7 @@ export function Home() {
             <h1>Sabores inigualáveis</h1>
             <h3>Sinta o cuidado do preparo com ingredientes selecionados</h3>
           </div>
-          <SectionMeals
-            title="Pratos principais"
-            meals={[
-              {
-                id: 1,
-                title: "Pizza",
-                description: "Uma obra de arte italiana.",
-                price: 32.59,
-                image:
-                  "photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                created_at: "2022-10-11 14:44:41",
-                updated_at: "2022-10-18 16:46:45",
-              },
-              {
-                id: 2,
-                title: "Macarrão",
-                description: "Um prato italiano",
-                price: 32.05,
-                image:
-                  "photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                created_at: "2022-10-13 11:15:09",
-                updated_at: "2022-10-13 11:15:09",
-              },
-              {
-                id: 3,
-                title: "Macarrão 4",
-                description: "Um prato italiano",
-                price: 32.05,
-                image:
-                  "photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                created_at: "2022-10-13 11:34:29",
-                updated_at: "2022-10-13 11:34:29",
-              },
-              {
-                id: 41,
-                title: "Pizza",
-                description: "Uma obra de arte italiana.",
-                price: 32.59,
-                image:
-                  "photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                created_at: "2022-10-11 14:44:41",
-                updated_at: "2022-10-18 16:46:45",
-              },
-              {
-                id: 42,
-                title: "Macarrão",
-                description: "Um prato italiano",
-                price: 32.05,
-                image:
-                  "photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                created_at: "2022-10-13 11:15:09",
-                updated_at: "2022-10-13 11:15:09",
-              },
-              {
-                id: 43,
-                title: "Macarrão 4",
-                description: "Um prato italiano",
-                price: 32.05,
-                image:
-                  "photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                created_at: "2022-10-13 11:34:29",
-                updated_at: "2022-10-13 11:34:29",
-              },
-            ]}
-          />
+          {renderCardsMobile()}
         </Mobile>
         <Desktop>
           <div className="top-desktop">
@@ -93,91 +122,7 @@ export function Home() {
             <h1>Sabores inigualáveis</h1>
             <h3>Sinta o cuidado do preparo com ingredientes selecionados</h3>
           </div>
-          <Carousel
-            title="Pratos principais"
-            meals={[
-              {
-                id: 1,
-                title: "Pizza",
-                description: "Uma obra de arte italiana.",
-                price: 32.59,
-                image:
-                  "photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                created_at: "2022-10-11 14:44:41",
-                updated_at: "2022-10-18 16:46:45",
-              },
-              {
-                id: 2,
-                title: "Macarrão",
-                description: "Um prato italiano",
-                price: 32.05,
-                image:
-                  "photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                created_at: "2022-10-13 11:15:09",
-                updated_at: "2022-10-13 11:15:09",
-              },
-              {
-                id: 3,
-                title: "Macarrão 4",
-                description: "Um prato italiano",
-                price: 32.05,
-                image:
-                  "photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                created_at: "2022-10-13 11:34:29",
-                updated_at: "2022-10-13 11:34:29",
-              },
-              {
-                id: 4,
-                title: "Macarrão 4",
-                description: "Um prato italiano",
-                price: 32.05,
-                image:
-                  "photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                created_at: "2022-10-13 11:34:29",
-                updated_at: "2022-10-13 11:34:29",
-              },
-              {
-                id: 11,
-                title: "Pizza",
-                description: "Uma obra de arte italiana.",
-                price: 32.59,
-                image:
-                  "photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                created_at: "2022-10-11 14:44:41",
-                updated_at: "2022-10-18 16:46:45",
-              },
-              {
-                id: 41,
-                title: "Macarrão",
-                description: "Um prato italiano",
-                price: 32.05,
-                image:
-                  "photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                created_at: "2022-10-13 11:15:09",
-                updated_at: "2022-10-13 11:15:09",
-              },
-              {
-                id: 5,
-                title: "Macarrão 4",
-                description: "Um prato italiano",
-                price: 32.05,
-                image:
-                  "photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                created_at: "2022-10-13 11:34:29",
-                updated_at: "2022-10-13 11:34:29",
-              },
-              {
-                id: 6,
-                title: "Macarrão 4",
-                description: "Um prato italiano",
-                price: 32.05,
-                image:
-                  "photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                created_at: "2022-10-13 11:34:29",
-                updated_at: "2022-10-13 11:34:29",
-              },
-            ]}
-          />
+          {renderCardsDesktop()}
         </Desktop>
       </Wrapper>
       <Footer />

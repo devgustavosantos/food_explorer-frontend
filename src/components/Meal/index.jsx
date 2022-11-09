@@ -1,3 +1,4 @@
+import { api } from "../../services/api";
 import { Container } from "./styles";
 
 export function Meal({
@@ -12,10 +13,7 @@ export function Meal({
 }) {
   return (
     <Container {...rest}>
-      <img
-        src={`https://images.pexels.com/${image}`}
-        alt={`Foto do prato ${title}`}
-      />
+      <img src={`${api}/files/meals/${image}`} alt={`Foto do prato ${title}`} />
       <p>{`${meal_amount}x ${title}`}</p>
       <p>{`R$ ${price}`}</p>
       {isNew && (
