@@ -6,6 +6,7 @@ import { Wrapper } from "../../components/Wrapper";
 import { SectionMeals } from "../../components/SectionMeals";
 import { Footer } from "../../components/Footer";
 import { Carousel } from "../../components/Carousel";
+import { Loading } from "../../components/Loading";
 import Food from "../../assets/food.png";
 import { api } from "../../services/api";
 import { useEffect } from "react";
@@ -124,6 +125,7 @@ export function Home() {
         </Desktop>
       </Wrapper>
       <Footer />
+      {!meals && <Loading />}
     </Container>
   );
 }

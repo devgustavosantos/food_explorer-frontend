@@ -43,7 +43,7 @@ const Container = styled.section`
 
     .my-card {
       flex: none;
-      margin: 0 25px 0 0;
+      margin: 0 25px 25px 0;
     }
 
     .my-card:first-child {

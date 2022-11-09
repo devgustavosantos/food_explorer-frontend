@@ -25,9 +25,9 @@ const Container = styled.div`
   }
 
   > p:nth-of-type(2) {
-    grid-area: C;
-    font-size: clamp(1.4rem, 4vw, 1.6rem);
     color: ${({ theme }) => theme.COLORS.GRAY_900};
+    font-size: clamp(1.4rem, 4vw, 1.6rem);
+    grid-area: C;
   }
 
   > button {
