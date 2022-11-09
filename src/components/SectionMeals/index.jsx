@@ -31,7 +31,7 @@ export function SectionMeals({ title, meals }) {
   function getTheHeightOfSomeCards() {
     const size = getTheHeightOfACard();
 
-    const visibleCards = 3;
+    const visibleCards = meals.length >= 3 ? 3 : meals.length;
 
     let totalHeight = 0;
 
@@ -57,6 +57,16 @@ export function SectionMeals({ title, meals }) {
       setShowAllCards(prevState => !prevState);
     } else {
       setShowAllCards(prevState => !prevState);
+    }
+  }
+
+  function renderButtons() {
+    if (meals.length < 3) return null;
+
+    if (showAllCards) {
+      return <Button title="Mostrar menos" onClick={handleVisibleCards} />;
+    } else {
+      return <Button title="Mostrar mais" onClick={handleVisibleCards} />;
     }
   }
 
@@ -94,11 +104,12 @@ export function SectionMeals({ title, meals }) {
           );
         })}
       </div>
-      {showAllCards ? (
+      {/* {showAllCards ? (
         <Button title="Mostrar menos" onClick={handleVisibleCards} />
       ) : (
         <Button title="Mostrar mais" onClick={handleVisibleCards} />
-      )}
+      )} */}
+      {renderButtons()}
     </Container>
   );
 }

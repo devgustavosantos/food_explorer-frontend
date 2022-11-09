@@ -13,7 +13,6 @@ import { useEffect } from "react";
 export function Home() {
   const [meals, setMeals] = useState();
 
-  console.log({ meals });
 
   const [categories, setCategories] = useState();
 

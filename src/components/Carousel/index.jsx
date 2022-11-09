@@ -9,6 +9,8 @@ export function Carousel({ title, meals }) {
   function getCardWidth() {
     const card = carousel.current.querySelectorAll(".my-card")[1];
 
+    console.log({ card, carousel });
+
     const cardWidth = card.offsetWidth;
 
     const cardMargin = Number(
@@ -41,8 +43,12 @@ export function Carousel({ title, meals }) {
     <Container>
       <h2>{title}</h2>
       <div className="carousel-window">
-        <button onClick={handleCarouselLeft}>{"<"}</button>
-        <button onClick={handleCarouselRight}>{">"}</button>
+        {meals.length > 2 && (
+          <>
+            <button onClick={handleCarouselLeft}>{"<"}</button>
+            <button onClick={handleCarouselRight}>{">"}</button>
+          </>
+        )}
         <div className="carousel-meals" ref={carousel}>
           {meals.map(meal => {
             const { id, title, description, image, price } = meal;
