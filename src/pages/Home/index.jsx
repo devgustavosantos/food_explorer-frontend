@@ -13,7 +13,6 @@ import { useEffect } from "react";
 export function Home() {
   const [meals, setMeals] = useState();
 
-
   const [categories, setCategories] = useState();
 
   function renderCardsDesktop() {
