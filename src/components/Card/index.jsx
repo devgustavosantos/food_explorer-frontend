@@ -14,11 +14,18 @@ export function Card({ meal_id, title, description, price, image }) {
 
   const navigate = useNavigate();
 
-  function renderButtons() {
+  function renderManipulationButtons() {
     if (!userInfos || !userInfos.isAdm) {
-      return <ClientButtons />;
+      return (
+        <ClientButtons
+          meal_id={meal_id}
+          title={title}
+          price={price}
+          image={image}
+        />
+      );
     } else {
-      return <AdmButtons />;
+      return <AdmButtons meal_id={meal_id} />;
     }
   }
 
@@ -60,7 +67,7 @@ export function Card({ meal_id, title, description, price, image }) {
       <h2 onClick={handleGoToDetails}>{`${title} >`}</h2>
       <p>{description}</p>
       <p>R$ {price}</p>
-      {renderButtons()}
+      {renderManipulationButtons()}
     </Container>
   );
 }

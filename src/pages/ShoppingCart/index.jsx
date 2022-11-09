@@ -12,9 +12,11 @@ import { Input } from "../../components/Input";
 import qrCodeImg from "../../assets/qrcode.svg";
 import pixImg from "../../assets/pix.svg";
 import { useAuth } from "../../hooks/auth";
+import { useCart } from "../../hooks/cart";
 
 export function ShoppingCart() {
   const { userInfos } = useAuth();
+  const { mealsInCart, handleRemoveMeal } = useCart();
 
   const [mealsAdd, setMealsAdd] = useState([
     {
@@ -51,11 +53,11 @@ export function ShoppingCart() {
     withCard ? setCardPayment(true) : setCardPayment(false);
   }
 
-  function handleMealAdd(meal_id) {
-    const mealsFiltered = mealsAdd.filter(meal => meal.id !== meal_id);
+  // function handleMealAdd(meal_id) {
+  //   const mealsFiltered = mealsAdd.filter(meal => meal.id !== meal_id);
 
-    setMealsAdd(mealsFiltered);
-  }
+  //   setMealsAdd(mealsFiltered);
+  // }
 
   function handleFinalizePurchase() {
     if (!userInfos) {
@@ -75,37 +77,40 @@ export function ShoppingCart() {
   }
 
   useEffect(() => {
-    const calculatedPrice = mealsAdd.reduce((previousValue, currentValue) => {
-      return previousValue + currentValue.price * currentValue.meal_amount;
-    }, 0);
+    const calculatedPrice = mealsInCart.reduce(
+      (previousValue, currentValue) => {
+        return previousValue + currentValue.price * currentValue.amount;
+      },
+      0
+    );
 
     const formattedPrice = calculatedPrice.toFixed(2);
 
     setTotalPrice(formattedPrice);
-  }, [mealsAdd]);
+  }, [mealsInCart]);
 
   return (
     <Container>
       <Header />
       <Wrapper>
         <Content>
-          {!mealsAdd.length ? (
+          {!mealsInCart.length ? (
             <h1>Nenhum prato foi adicionado ainda!</h1>
           ) : (
             <>
               <Cart>
                 <h1>Carrinho</h1>
-                {mealsAdd.map(meal => {
-                  const { id, title, price, image, meal_amount } = meal;
+                {mealsInCart.map(meal => {
+                  const { meal_id, title, price, image, amount } = meal;
                   return (
                     <Meal
-                      key={String(id)}
-                      id={id}
+                      key={String(meal_id)}
+                      id={meal_id}
                       title={title}
-                      price={Number(price * meal_amount).toFixed(2)}
+                      price={Number(price * amount).toFixed(2)}
                       image={image}
-                      meal_amount={meal_amount}
-                      onClick={() => handleMealAdd(id)}
+                      meal_amount={amount}
+                      onClick={() => handleRemoveMeal(meal_id)}
                       isNew
                     />
                   );
