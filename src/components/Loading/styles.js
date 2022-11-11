@@ -25,9 +25,32 @@ const Container = styled.div`
     width: 50px;
   }
 
+  .loading {
+    animation: fade-out 1s 30s forwards;
+  }
+
+  .just-moment {
+    animation: fade-in 1s 30s forwards;
+    opacity: 0;
+  }
+
   @keyframes rotating {
     to {
       transform: rotate(1turn);
+    }
+  }
+
+  @keyframes fade-in {
+    to {
+      transform: translateY(-150%);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-out {
+    to {
+      transform: translateY(50%);
+      opacity: 0;
     }
   }
 `;

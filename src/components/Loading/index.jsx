@@ -4,7 +4,8 @@ export function Loading() {
   return (
     <Container>
       <div className="circle"></div>
-      <p>Carregando</p>
+      <p className="loading">Carregando...</p>
+      <p className="just-moment">Só mais um momento...</p>
     </Container>
   );
 }
