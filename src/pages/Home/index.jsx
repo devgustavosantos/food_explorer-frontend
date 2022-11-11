@@ -74,13 +74,19 @@ export function Home() {
 
       const categoriesUnique = [...new Set(onlyCategories)];
 
-      const categoriesFiltered = categoriesUnique.filter(
-        category => category !== "Sem categoria"
+      const categoriesOrdered = categoriesUnique.sort();
+
+      const someUncategorized = categoriesOrdered.find(
+        category => category == "Sem categoria"
       );
 
-      const categoriesOrdered = categoriesFiltered.sort();
+      const categoriesFiltered =
+        someUncategorized &&
+        categoriesUnique.filter(category => category !== "Sem categoria");
 
-      const categoriesFormatted = [...categoriesOrdered, "Sem categoria"];
+      const categoriesFormatted = someUncategorized
+        ? [...categoriesFiltered, "Sem categoria"]
+        : categoriesUnique;
 
       setCategories(categoriesFormatted);
     }
