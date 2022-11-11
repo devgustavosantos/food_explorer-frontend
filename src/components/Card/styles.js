@@ -37,6 +37,7 @@ const Container = styled.div`
 
   p:nth-of-type(1) {
     font-size: 1.4rem;
+    text-align: center;
   }
 
   p:nth-of-type(2) {

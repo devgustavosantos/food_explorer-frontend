@@ -45,12 +45,14 @@ const Content = styled.main`
   }
 
   > img {
-    width: 100%;
+    width: 75%;
+    margin: auto;
     border-radius: 50%;
     aspect-ratio: 1;
     grid-area: B;
     @media (min-width: 780px) {
       width: 90%;
+      margin: 0;
     }
   }
 

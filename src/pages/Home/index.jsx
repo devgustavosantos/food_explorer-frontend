@@ -114,26 +114,29 @@ export function Home() {
   return (
     <Container>
       <Header />
-      <Wrapper>
-        <Mobile>
-          <div className="top-mobile">
-            <img src={Food} alt="Imagem de comida" />
-            <h1>Sabores inigualáveis</h1>
-            <h3>Sinta o cuidado do preparo com ingredientes selecionados</h3>
-          </div>
-          {renderCardsMobile()}
-        </Mobile>
-        <Desktop>
-          <div className="top-desktop">
-            <img src={Food} alt="Imagem de comida" />
-            <h1>Sabores inigualáveis</h1>
-            <h3>Sinta o cuidado do preparo com ingredientes selecionados</h3>
-          </div>
-          {renderCardsDesktop()}
-        </Desktop>
-      </Wrapper>
+      {meals ? (
+        <Wrapper>
+          <Mobile>
+            <div className="top-mobile">
+              <img src={Food} alt="Imagem de comida" />
+              <h1>Sabores inigualáveis</h1>
+              <h3>Sinta o cuidado do preparo com ingredientes selecionados</h3>
+            </div>
+            {renderCardsMobile()}
+          </Mobile>
+          <Desktop>
+            <div className="top-desktop">
+              <img src={Food} alt="Imagem de comida" />
+              <h1>Sabores inigualáveis</h1>
+              <h3>Sinta o cuidado do preparo com ingredientes selecionados</h3>
+            </div>
+            {renderCardsDesktop()}
+          </Desktop>
+        </Wrapper>
+      ) : (
+        <Loading />
+      )}
       <Footer />
-      {!meals && <Loading />}
     </Container>
   );
 }
