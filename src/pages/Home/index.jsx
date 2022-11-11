@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { Container, Desktop, Mobile } from "./styles";
 import { Header } from "../../components/Header";
@@ -9,12 +10,16 @@ import { Carousel } from "../../components/Carousel";
 import { Loading } from "../../components/Loading";
 import Food from "../../assets/food.png";
 import { api } from "../../services/api";
-import { useEffect } from "react";
+import { useRequest } from "../../hooks/request";
 
 export function Home() {
   const [meals, setMeals] = useState();
 
   const [categories, setCategories] = useState();
+
+  const navigate = useNavigate();
+
+  const { manageRequests } = useRequest();
 
   function renderCardsDesktop() {
     if (!meals || !categories) return null;
@@ -85,19 +90,16 @@ export function Home() {
 
   useEffect(() => {
     async function fetchMeals() {
-      try {
-        const response = await api.get("/meals");
+      const response = await manageRequests("get", "/meals");
 
-        const mealsFormatted = formatMeals(response.data);
-        setMeals(mealsFormatted);
-      } catch (error) {
-        if (error.response) {
-          alert(error.response.data.message);
-        } else {
-          alert("Não foi possível carregar os pratos.");
-          console.log(error);
-        }
+      console.log({ response });
+
+      if (response instanceof Error) {
+        return navigate("/off-air");
       }
+
+      const mealsFormatted = formatMeals(response);
+      setMeals(mealsFormatted);
     }
 
     fetchMeals();

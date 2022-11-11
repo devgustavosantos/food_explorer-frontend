@@ -17,7 +17,7 @@ const Container = styled.div`
   flex-direction: column;
 
   .circle {
-    animation: rotating 1.5s infinite;
+    animation: rotating 1s infinite;
     border-radius: 50%;
     border: ${({ theme }) => `5px solid ${theme.COLORS.BLUE_700}`};
     border-top-color: ${({ theme }) => `${theme.COLORS.BLUE_100}`};

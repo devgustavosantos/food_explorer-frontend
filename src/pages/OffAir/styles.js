@@ -19,6 +19,7 @@ const Container = styled.div`
 
     div {
       font-size: clamp(8rem, 20vw, 16rem);
+      font-family: sans-serif;
     }
 
     h1 {
