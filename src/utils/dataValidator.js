@@ -6,10 +6,8 @@ function validateEmail(email) {
 
 function validateData({ name, email, password, isNameRequired = false }) {
   if (!isNameRequired) {
-    name = "name";
+    name = "user";
   }
-
-  console.log({ name, email, password });
 
   const missingData = !name || !email || !password;
 

@@ -21,12 +21,9 @@ function RequestProvider({ children }) {
       post: () =>
         new Promise(async (resolve, reject) => {
           try {
-            console.log("entrou aqui");
             const response = await api.post(resource, infos);
 
-            const { data } = response;
-
-            resolve(data);
+            resolve(response);
           } catch (error) {
             reject(error);
           }

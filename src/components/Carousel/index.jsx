@@ -9,8 +9,6 @@ export function Carousel({ title, meals }) {
   function getCardWidth() {
     const card = carousel.current.querySelectorAll(".my-card")[1];
 
-    console.log({ card, carousel });
-
     const cardWidth = card.offsetWidth;
 
     const cardMargin = Number(

@@ -44,13 +44,21 @@ export function SignUp() {
       return navigate("/off-air");
     }
 
-    const hasAnyError = response.status == 400;
+    console.log({ response });
 
-    if (hasAnyError) {
-      return alert(response.message);
+    const theResultWasASuccess = response.status === 201;
+
+    if (!theResultWasASuccess) {
+      if (response.data) {
+        alert(response.data.message);
+      } else {
+        alert("Não foi possível logar. Por favor tente novamente mais tarde.");
+      }
+
+      return;
     }
 
-    alert("Usuário cadastrado com sucesso! Agora você pode se logar");
+    alert("Usuário cadastrado com sucesso! Agora você pode se logar.");
     navigate("/login");
   }
 
