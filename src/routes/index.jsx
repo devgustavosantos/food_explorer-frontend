@@ -24,9 +24,5 @@ export function Routes() {
     }
   }
 
-  useEffect(() => {
-    console.log({ userInfos });
-  }, []);
-
   return <BrowserRouter>{rederRoutes()}</BrowserRouter>;
 }
