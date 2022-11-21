@@ -4,13 +4,25 @@ import { api } from "../services/api";
 const Request = createContext();
 
 function RequestProvider({ children }) {
-  async function manageRequests(type, resource) {
+  async function manageRequests(type, resource, infos = null) {
     const availableRequests = {
       get: () =>
         new Promise(async (resolve, reject) => {
           try {
-            console.log("entrou no availableRequests");
             const response = await api.get(resource);
+
+            const { data } = response;
+
+            resolve(data);
+          } catch (error) {
+            reject(error);
+          }
+        }),
+      post: () =>
+        new Promise(async (resolve, reject) => {
+          try {
+            console.log("entrou aqui");
+            const response = await api.post(resource, infos);
 
             const { data } = response;
 

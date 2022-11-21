@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Logo from "../../assets/logo.svg";
 import { Container, Brand, Form } from "./styles";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { ButtonText } from "../../components/ButtonText";
+import { Loading } from "../../components/Loading";
 import { useRequest } from "../../hooks/request";
 
 export function SignUp() {
@@ -12,7 +14,10 @@ export function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [showLoadingScreen, setShowLoadingScreen] = useState(false);
+
   const { manageRequests } = useRequest();
+  const navigate = useNavigate();
 
   function validateEmail() {
     const requiredAttributes = /\S+@\S+\.\S+/;
@@ -45,7 +50,28 @@ export function SignUp() {
 
     if (!allDataIsValid) return;
 
-    const response = await manageRequests("post", "users");
+    setShowLoadingScreen(prevState => !prevState);
+
+    const response = await manageRequests("post", "users", {
+      name,
+      email,
+      password,
+    });
+
+    setShowLoadingScreen(prevState => !prevState);
+
+    if (response instanceof Error) {
+      return navigate("/off-air");
+    }
+
+    const hasAnyError = response.status == 400;
+
+    if (hasAnyError) {
+      return alert(response.message);
+    }
+
+    alert("Usuário cadastrado com sucesso! Agora você pode se logar");
+    navigate("/login");
   }
 
   return (
@@ -89,6 +115,7 @@ export function SignUp() {
         />
         <ButtonText title="Já tenho uma conta" to="/login" />
       </Form>
+      {showLoadingScreen && <Loading />}
     </Container>
   );
 }
