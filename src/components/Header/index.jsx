@@ -27,7 +27,7 @@ import { useAuth } from "../../hooks/auth";
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const { userInfos } = useAuth();
+  const { userInfos, deauthenticateUser } = useAuth();
 
   const navigate = useNavigate();
 
@@ -59,9 +59,9 @@ export function Header() {
             </button>
           </li>
           <li>
-            <Link to="/login">
+            <button onClick={handleSignInSignOut}>
               <FiLogOut />
-            </Link>
+            </button>
           </li>
         </ul>
       );
@@ -130,10 +130,10 @@ export function Header() {
             </button>
           </li>
           <li>
-            <Link to="/login">
+            <button onClick={handleSignInSignOut}>
               <FiLogOut />
               {userInfos ? "Sair" : "Entrar"}
-            </Link>
+            </button>
           </li>
         </ul>
       );
@@ -193,6 +193,16 @@ export function Header() {
 
   function handleMenuOpen() {
     setMenuOpen(prevState => !prevState);
+  }
+
+  function handleSignInSignOut() {
+    if (userInfos) {
+      navigate("/");
+
+      deauthenticateUser();
+    } else {
+      navigate("/login");
+    }
   }
 
   return (

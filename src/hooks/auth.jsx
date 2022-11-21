@@ -17,6 +17,13 @@ function AuthProvider({ children }) {
     localStorage.setItem("@food_explorer:token", token);
   }
 
+  function deauthenticateUser() {
+    setUserInfos(null);
+
+    localStorage.removeItem("@food_explorer:user");
+    localStorage.removeItem("@food_explorer:token");
+  }
+
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("@food_explorer:user"));
     const token = localStorage.getItem("@food_explorer:token");
@@ -28,7 +35,9 @@ function AuthProvider({ children }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ userInfos, authenticateUser }}>
+    <AuthContext.Provider
+      value={{ userInfos, authenticateUser, deauthenticateUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
