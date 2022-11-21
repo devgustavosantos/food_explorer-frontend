@@ -1,18 +1,21 @@
-import { useContext, createContext } from "react";
+import { useContext, createContext, useState } from "react";
+import { api } from "../services/api";
 
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
-  let userInfos = {
-    name: "Gustavo",
-    email: "gustavo@email.com",
-    isAdm: true,
-  };
+  const [userInfos, setUserInfos] = useState(null);
 
-  userInfos = null;
+  function authenticateUser({ user, token }) {
+    setUserInfos(user);
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+    localStorage.setItem("@food_explorer:user", JSON.stringify(user));
+    localStorage.setItem("@food_explorer:token", token);
+  }
 
   return (
-    <AuthContext.Provider value={{ userInfos }}>
+    <AuthContext.Provider value={{ userInfos, authenticateUser }}>
       {children}
     </AuthContext.Provider>
   );
