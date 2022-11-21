@@ -42,6 +42,16 @@ export function SignUp() {
       return false;
     }
 
+    const thePasswordHasTheMinimumLength = password.length >= 6;
+
+    if (!thePasswordHasTheMinimumLength) {
+      alert(
+        "A senha deve ter no mínimo 6 caracteres! Verifique e tente novamente."
+      );
+
+      return false;
+    }
+
     return true;
   }
 
