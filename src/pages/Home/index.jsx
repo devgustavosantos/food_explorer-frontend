@@ -98,8 +98,6 @@ export function Home() {
     async function fetchMeals() {
       const response = await manageRequests("get", "/meals");
 
-      console.log({ response });
-
       if (response instanceof Error) {
         return navigate("/off-air");
       }

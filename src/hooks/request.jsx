@@ -6,37 +6,40 @@ const Request = createContext();
 function RequestProvider({ children }) {
   async function manageRequests(type, resource) {
     const availableRequests = {
-      get: new Promise(async (resolve, reject) => {
-        try {
-          const response = await api.get(resource);
+      get: () =>
+        new Promise(async (resolve, reject) => {
+          try {
+            console.log("entrou no availableRequests");
+            const response = await api.get(resource);
 
-          const { data } = response;
+            const { data } = response;
 
-          resolve(data);
-        } catch (error) {
-          reject(error);
-        }
-      }),
+            resolve(data);
+          } catch (error) {
+            reject(error);
+          }
+        }),
     };
 
-    const manageResponseTime = new Promise((resolve, reject) => {
-      const limitTime = 60 * 1000;
+    const manageResponseTime = () =>
+      new Promise((resolve, reject) => {
+        const limitTime = 60 * 1000;
 
-      setTimeout(() => {
-        const maximumTimeExceeded = new Error(
-          "Maximum response time has been exceeded!"
-        );
+        setTimeout(() => {
+          const maximumTimeExceeded = new Error(
+            "Maximum response time has been exceeded!"
+          );
 
-        resolve(maximumTimeExceeded);
-      }, limitTime);
-    });
+          resolve(maximumTimeExceeded);
+        }, limitTime);
+      });
 
     const requisitionExecuted = availableRequests[type];
 
     if (requisitionExecuted) {
       const resultOfRequest = await Promise.race([
-        requisitionExecuted,
-        manageResponseTime,
+        requisitionExecuted(),
+        manageResponseTime(),
       ]);
 
       return resultOfRequest;

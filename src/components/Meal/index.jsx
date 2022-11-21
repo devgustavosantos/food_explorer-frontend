@@ -13,7 +13,10 @@ export function Meal({
 }) {
   return (
     <Container {...rest}>
-      <img src={`${api}/files/meals/${image}`} alt={`Foto do prato ${title}`} />
+      <img
+        src={`${api.defaults.baseURL}/files/meals/${image}`}
+        alt={`Foto do prato ${title}`}
+      />
       <p>{`${meal_amount}x ${title}`}</p>
       <p>{`R$ ${price}`}</p>
       {isNew && (

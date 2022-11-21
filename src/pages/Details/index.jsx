@@ -28,36 +28,6 @@ export function Details() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [ingredients, setINgredients] = useState([
-    {
-      id: 2,
-      name: "sal",
-      image: ingredientImage,
-    },
-    {
-      id: 3,
-      name: "açucar",
-      image: ingredientImage,
-    },
-    {
-      id: 1,
-      name: "Farinha",
-      image: ingredientImage,
-    },
-    {
-      id: 10,
-      name: "Farinha",
-      image: ingredientImage,
-    },
-    {
-      id: 15,
-      name: "Farinha",
-      image: ingredientImage,
-    },
-  ]);
-
-  console.log({ mealInfos });
-
   function renderIngredients() {
     return mealInfos.ingredients.map(ingredient => {
       const { id, name, image } = ingredient;
@@ -76,6 +46,7 @@ export function Details() {
           title={title}
           price={price}
           image={image}
+          withIcon
         />
       );
     } else {
