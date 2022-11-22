@@ -28,6 +28,16 @@ function RequestProvider({ children }) {
             reject(error);
           }
         }),
+      put: () =>
+        new Promise(async (resolve, reject) => {
+          try {
+            const response = await api.put(resource, infos);
+
+            resolve(response);
+          } catch (error) {
+            reject(error);
+          }
+        }),
     };
 
     const manageResponseTime = () =>
