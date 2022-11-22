@@ -4,8 +4,6 @@ import { Card } from "../Card";
 import { Container } from "./styles";
 
 export function Carousel({ title, meals }) {
-  console.log({ meals });
-
   const carousel = useRef(null);
 
   function getCardWidth() {
