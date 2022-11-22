@@ -197,9 +197,13 @@ export function Header() {
 
   function handleSignInSignOut() {
     if (userInfos) {
-      navigate("/");
+      const confirmation = confirm("Tem certeza que deseja sair?");
 
-      deauthenticateUser();
+      if (confirmation) {
+        navigate("/");
+
+        deauthenticateUser();
+      }
     } else {
       navigate("/login");
     }
