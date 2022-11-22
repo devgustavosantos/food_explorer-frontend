@@ -38,6 +38,16 @@ function RequestProvider({ children }) {
             reject(error);
           }
         }),
+      delete: () =>
+        new Promise(async (resolve, reject) => {
+          try {
+            const response = await api.delete(resource);
+
+            resolve(response);
+          } catch (error) {
+            reject(error);
+          }
+        }),
     };
 
     const manageResponseTime = () =>

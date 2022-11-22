@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FiHeart } from "react-icons/fi";
+import { FaHeart } from "react-icons/fa";
 
 import { Container } from "./styles";
 import { ClientButtons } from "../ClientButtons";
@@ -7,13 +8,17 @@ import { AdmButtons } from "../AdmButtons";
 import { useAuth } from "../../hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
+import { useRequest } from "../../hooks/request";
 
-export function Card({ meal_id, title, description, price, image }) {
+export function Card({ meal_id, title, description, price, image, isFav }) {
   const [isAdm, setIsAdm] = useState(false);
+  const [favoriteMeal, setFavoriteMeal] = useState(isFav);
 
   const { userInfos } = useAuth();
 
   const navigate = useNavigate();
+
+  const { manageRequests } = useRequest();
 
   function renderManipulationButtons() {
     if (!userInfos || !userInfos.isAdm) {
@@ -34,13 +39,13 @@ export function Card({ meal_id, title, description, price, image }) {
     if (!userInfos || !userInfos.isAdm) {
       return (
         <button type="button" onClick={handleAddToFavorite}>
-          <FiHeart />
+          {favoriteMeal ? <FaHeart /> : <FiHeart />}
         </button>
       );
     }
   }
 
-  function handleAddToFavorite() {
+  async function handleAddToFavorite() {
     if (!userInfos) {
       const response = confirm(`
         Para utilizar esse recurso você precisa estar logado.
@@ -50,7 +55,21 @@ export function Card({ meal_id, title, description, price, image }) {
       if (response) {
         navigate("/login");
       }
+
+      return;
     }
+
+    setFavoriteMeal(prevState => !prevState);
+
+    let response;
+
+    if (favoriteMeal) {
+      response = await manageRequests("delete", `/favorites/${meal_id}`);
+    } else {
+      response = await manageRequests("post", `/favorites/${meal_id}`);
+    }
+
+    console.log({ response });
   }
 
   function handleGoToDetails() {
