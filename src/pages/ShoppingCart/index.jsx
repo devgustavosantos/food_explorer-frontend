@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { TfiReceipt } from "react-icons/tfi";
 import { FiCreditCard } from "react-icons/fi";
 
@@ -13,12 +14,14 @@ import qrCodeImg from "../../assets/qrcode.svg";
 import pixImg from "../../assets/pix.svg";
 import { useAuth } from "../../hooks/auth";
 import { useCart } from "../../hooks/cart";
-import { api } from "../../services/api";
+import { useRequest } from "../../hooks/request";
 
 export function ShoppingCart() {
   const { userInfos } = useAuth();
+  const { mealsInCart, handleRemoveMeal, emptyTheCart } = useCart();
+  const { manageRequests } = useRequest();
 
-  const { mealsInCart, handleRemoveMeal } = useCart();
+  const navigate = useNavigate();
 
   const [cardPayment, setCardPayment] = useState(false);
 
@@ -28,7 +31,7 @@ export function ShoppingCart() {
     withCard ? setCardPayment(true) : setCardPayment(false);
   }
 
-  function handleFinalizePurchase() {
+  async function handleFinalizePurchase() {
     if (!userInfos) {
       const response = confirm(`
         Para utilizar esse recurso você precisa estar logado.
@@ -38,9 +41,38 @@ export function ShoppingCart() {
       if (response) {
         navigate("/login");
       }
-    } else {
+
+      return;
+    }
+
+    const reduceMeals = mealsInCart.map(meal => {
+      return {
+        meal_id: meal.meal_id,
+        amount: meal.amount,
+      };
+    });
+
+    const response = await manageRequests("post", "/orders", reduceMeals);
+
+    const wasTheRequestSuccessfullyMade = response.status === 201;
+
+    if (wasTheRequestSuccessfullyMade) {
+      emptyTheCart();
+
       alert(
         "Pedido feito com sucesso! Agora aguarde a confirmação do pagamento."
+      );
+
+      navigate("/all-orders");
+
+      return;
+    }
+
+    if (response.data) {
+      return alert(response.data.message);
+    } else {
+      return alert(
+        "Não foi possível concluir a compra! Por favor tente novamente mais tarde."
       );
     }
   }

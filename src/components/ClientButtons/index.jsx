@@ -42,7 +42,14 @@ export function ClientButtons({
         </button>
       </div>
       {withIcon ? (
-        <Button icon={TfiReceipt} title="incluir" />
+        <Button
+          icon={TfiReceipt}
+          title="incluir"
+          onClick={() => {
+            handleAddMeal({ meal_id, title, price, image, amount });
+            setAmount(1);
+          }}
+        />
       ) : (
         <Button
           title="incluir"
