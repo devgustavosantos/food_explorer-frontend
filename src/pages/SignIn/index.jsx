@@ -6,7 +6,7 @@ import { Container, Brand, Form } from "./styles";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { ButtonText } from "../../components/ButtonText";
-import { validateData } from "../../utils/dataValidator";
+import { validateDataToSignIn } from "../../utils/dataValidator";
 import { useRequest } from "../../hooks/request";
 import { useAuth } from "../../hooks/auth";
 
@@ -19,7 +19,7 @@ export function SignIn() {
   const { authenticateUser } = useAuth();
 
   async function handleSignIn() {
-    const allInputIsValid = validateData({ email, password });
+    const allInputIsValid = validateDataToSignIn({ email, password });
 
     if (!allInputIsValid) {
       return;
@@ -28,6 +28,7 @@ export function SignIn() {
     const response = await manageRequests("post", "sessions", {
       email,
       password,
+      isPasswordRequired: true,
     });
 
     if (response instanceof Error) {

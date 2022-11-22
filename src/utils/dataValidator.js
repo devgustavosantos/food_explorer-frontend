@@ -4,15 +4,25 @@ function validateEmail(email) {
   return requiredAttributes.test(email);
 }
 
-function validateData({ name, email, password, isNameRequired = false }) {
-  if (!isNameRequired) {
-    name = "user";
+function validatePasswordLength(password) {
+  const itHasTheMinimumSize = password.length >= 6;
+
+  return itHasTheMinimumSize;
+}
+
+function validateDataToProfile({ name, email, newPassword, oldPassword }) {
+  if (!name) {
+    alert(
+      "O campo com o nome não pode ficar vazio! Verifique e tente novamente."
+    );
+
+    return false;
   }
 
-  const missingData = !name || !email || !password;
-
-  if (missingData) {
-    alert("Faltam dados! Verifique e tente novamente.");
+  if (!email) {
+    alert(
+      "O campo com o e-mail não pode ficar vazio! Verifique e tente novamente."
+    );
 
     return false;
   }
@@ -20,16 +30,24 @@ function validateData({ name, email, password, isNameRequired = false }) {
   const isAValidEmail = validateEmail(email);
 
   if (!isAValidEmail) {
-    alert("E-mail inválido! Verifique e tente novamente.");
+    alert("O e-mail informada é inválido! Verifique e tente novamente.");
 
     return false;
   }
 
-  const thePasswordHasTheMinimumLength = password.length >= 6;
-
-  if (!thePasswordHasTheMinimumLength) {
+  if (newPassword && !oldPassword) {
     alert(
-      "A senha deve ter no mínimo 6 caracteres! Verifique e tente novamente."
+      "Para atualizar a senha, é necessário informar a senha antiga! Verifique e tente novamente."
+    );
+
+    return false;
+  }
+
+  const isAValidPassword = validatePasswordLength(newPassword);
+
+  if (!isAValidPassword) {
+    alert(
+      "A nova senha deve ter no mínimo 6 caracteres! Verifique e tente novamente."
     );
 
     return false;
@@ -38,4 +56,88 @@ function validateData({ name, email, password, isNameRequired = false }) {
   return true;
 }
 
-export { validateData };
+function validateDataToSignUp({ name, email, password }) {
+  if (!name) {
+    alert(
+      "O campo com o nome não pode ficar vazio! Verifique e tente novamente."
+    );
+
+    return false;
+  }
+
+  if (!email) {
+    alert(
+      "O campo com o e-mail não pode ficar vazio! Verifique e tente novamente."
+    );
+
+    return false;
+  }
+
+  const isAValidEmail = validateEmail(email);
+
+  if (!isAValidEmail) {
+    alert("O e-mail informada é inválido! Verifique e tente novamente.");
+
+    return false;
+  }
+
+  if (!password) {
+    alert(
+      "O campo com a senha não pode ficar vazio! Verifique e tente novamente."
+    );
+
+    return false;
+  }
+
+  const isAValidPassword = validatePasswordLength(password);
+
+  if (!isAValidPassword) {
+    alert(
+      "A nova senha deve ter no mínimo 6 caracteres! Verifique e tente novamente."
+    );
+
+    return false;
+  }
+
+  return true;
+}
+
+function validateDataToSignIn({ email, password }) {
+  if (!email) {
+    alert(
+      "O campo com o e-mail não pode ficar vazio! Verifique e tente novamente."
+    );
+
+    return false;
+  }
+
+  const isAValidEmail = validateEmail(email);
+
+  if (!isAValidEmail) {
+    alert("O e-mail informada é inválido! Verifique e tente novamente.");
+
+    return false;
+  }
+
+  if (!password) {
+    alert(
+      "O campo com a senha não pode ficar vazio! Verifique e tente novamente."
+    );
+
+    return false;
+  }
+
+  const isAValidPassword = validatePasswordLength(password);
+
+  if (!isAValidPassword) {
+    alert(
+      "A nova senha deve ter no mínimo 6 caracteres! Verifique e tente novamente."
+    );
+
+    return false;
+  }
+
+  return true;
+}
+
+export { validateDataToProfile, validateDataToSignIn, validateDataToSignUp };

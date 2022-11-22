@@ -7,7 +7,7 @@ import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { ButtonText } from "../../components/ButtonText";
 import { Loading } from "../../components/Loading";
-import { validateData } from "../../utils/dataValidator";
+import { validateDataToSignUp } from "../../utils/dataValidator";
 import { useRequest } from "../../hooks/request";
 
 export function SignUp() {
@@ -21,11 +21,10 @@ export function SignUp() {
   const navigate = useNavigate();
 
   async function handleSignUp() {
-    const allInputIsValid = validateData({
+    const allInputIsValid = validateDataToSignUp({
       name,
       email,
       password,
-      isNameRequired: true,
     });
 
     if (!allInputIsValid) return;
