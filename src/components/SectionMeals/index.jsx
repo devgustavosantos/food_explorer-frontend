@@ -90,7 +90,7 @@ export function SectionMeals({ title, meals }) {
         ref={mealsContainer}
       >
         {meals.map(meal => {
-          const { id, title, description, image, price } = meal;
+          const { id, title, description, image, price, favorite } = meal;
 
           return (
             <Card
@@ -100,15 +100,11 @@ export function SectionMeals({ title, meals }) {
               description={description}
               image={image}
               price={price}
+              isFav={favorite}
             />
           );
         })}
       </div>
-      {/* {showAllCards ? (
-        <Button title="Mostrar menos" onClick={handleVisibleCards} />
-      ) : (
-        <Button title="Mostrar mais" onClick={handleVisibleCards} />
-      )} */}
       {renderButtons()}
     </Container>
   );

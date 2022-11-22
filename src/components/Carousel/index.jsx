@@ -4,6 +4,8 @@ import { Card } from "../Card";
 import { Container } from "./styles";
 
 export function Carousel({ title, meals }) {
+  console.log({ meals });
+
   const carousel = useRef(null);
 
   function getCardWidth() {
@@ -49,7 +51,7 @@ export function Carousel({ title, meals }) {
         )}
         <div className="carousel-meals" ref={carousel}>
           {meals.map(meal => {
-            const { id, title, description, image, price } = meal;
+            const { id, title, description, image, price, favorite } = meal;
 
             return (
               <Card
@@ -59,6 +61,7 @@ export function Carousel({ title, meals }) {
                 description={description}
                 image={image}
                 price={price}
+                isFav={favorite}
               />
             );
           })}

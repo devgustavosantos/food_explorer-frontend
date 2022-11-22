@@ -68,8 +68,6 @@ export function Card({ meal_id, title, description, price, image, isFav }) {
     } else {
       response = await manageRequests("post", `/favorites/${meal_id}`);
     }
-
-    console.log({ response });
   }
 
   function handleGoToDetails() {

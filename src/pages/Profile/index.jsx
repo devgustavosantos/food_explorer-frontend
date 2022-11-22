@@ -46,8 +46,6 @@ export function Profile() {
 
     setShowLoadingScreen(prevState => !prevState);
 
-    console.log({ response });
-
     const updatedSuccessfully = response.status === 201;
 
     if (updatedSuccessfully) {

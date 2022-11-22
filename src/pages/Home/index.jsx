@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+import Food from "../../assets/food.png";
 import { Container, Desktop, Mobile } from "./styles";
 import { Header } from "../../components/Header";
 import { Wrapper } from "../../components/Wrapper";
@@ -8,9 +9,8 @@ import { SectionMeals } from "../../components/SectionMeals";
 import { Footer } from "../../components/Footer";
 import { Carousel } from "../../components/Carousel";
 import { Loading } from "../../components/Loading";
-import Food from "../../assets/food.png";
-import { api } from "../../services/api";
 import { useRequest } from "../../hooks/request";
+import { useAuth } from "../../hooks/auth";
 
 export function Home() {
   const [meals, setMeals] = useState();
@@ -20,6 +20,8 @@ export function Home() {
   const navigate = useNavigate();
 
   const { manageRequests } = useRequest();
+
+  const { userInfos } = useAuth();
 
   function renderCardsDesktop() {
     if (!meals || !categories) return null;
@@ -53,15 +55,26 @@ export function Home() {
     });
   }
 
-  function formatMeals(meals) {
-    const mealsFormatted = meals.map(meal => {
+  function formatMeals({ meals, favorites }) {
+    const mealsWithCategory = meals.map(meal => {
       return {
         ...meal,
         category: meal.category == null ? "Sem categoria" : meal.category,
       };
     });
 
-    return mealsFormatted;
+    const mealsWithFavorites = mealsWithCategory.map(meal => {
+      const isThisMealInFavorites = favorites.find(
+        favorite => meal.id === favorite.id
+      );
+
+      return {
+        ...meal,
+        favorite: isThisMealInFavorites ? true : false,
+      };
+    });
+
+    return mealsWithFavorites;
   }
 
   useEffect(() => {
@@ -102,7 +115,15 @@ export function Home() {
         return navigate("/off-air");
       }
 
-      const mealsFormatted = formatMeals(response);
+      let favorites;
+
+      if (userInfos) {
+        favorites = await manageRequests("get", "/favorites");
+      } else {
+        favorites = [];
+      }
+
+      const mealsFormatted = formatMeals({ meals: response, favorites });
       setMeals(mealsFormatted);
     }
 

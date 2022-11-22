@@ -43,8 +43,6 @@ export function SignUp() {
       return navigate("/off-air");
     }
 
-    console.log({ response });
-
     const theResultWasASuccess = response.status === 201;
 
     if (!theResultWasASuccess) {
