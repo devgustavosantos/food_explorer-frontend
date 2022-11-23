@@ -7,8 +7,6 @@ const AuthContext = createContext();
 function AuthProvider({ children }) {
   const [userInfos, setUserInfos] = useState(null);
 
-  console.log({ userInfos });
-
   function authenticateUser({ user, token }) {
     setUserInfos(user);
     api.defaults.headers.common["Authorization"] = `Bearer ${token}`;

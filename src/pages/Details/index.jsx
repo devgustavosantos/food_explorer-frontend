@@ -59,10 +59,24 @@ export function Details() {
       const response = await manageRequests("get", `/meals/${id}`);
 
       if (response instanceof Error) {
-        return navigate("/off-air");
+        return navigate("/");
       }
 
-      setMealInfos(response);
+      const theRequestWasSuccessful = response.status === 201;
+
+      if (theRequestWasSuccessful) {
+        return setMealInfos(response.data);
+      }
+
+      if (response.data) {
+        alert(response.data.message);
+      } else {
+        alert(
+          "Não foi possível carregar as informações! Por favor tente novamente mais tarde."
+        );
+      }
+
+      return navigate("/");
     }
 
     fetchMealInfos();

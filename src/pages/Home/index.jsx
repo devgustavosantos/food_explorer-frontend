@@ -14,7 +14,6 @@ import { useAuth } from "../../hooks/auth";
 
 export function Home() {
   const [meals, setMeals] = useState();
-
   const [categories, setCategories] = useState();
 
   const navigate = useNavigate();
@@ -56,6 +55,8 @@ export function Home() {
   }
 
   function formatMeals({ meals, favorites }) {
+    if (!meals || !favorites) return;
+
     const mealsWithCategory = meals.map(meal => {
       return {
         ...meal,
@@ -109,22 +110,31 @@ export function Home() {
 
   useEffect(() => {
     async function fetchMeals() {
-      const response = await manageRequests("get", "/meals");
+      const mealsResponse = await manageRequests("get", "/meals");
 
-      if (response instanceof Error) {
+      if (mealsResponse instanceof Error) {
         return navigate("/off-air");
       }
 
-      let favorites;
+      let favoritesResponse;
 
       if (userInfos) {
-        favorites = await manageRequests("get", "/favorites");
+        favoritesResponse = await manageRequests("get", "/favorites");
       } else {
-        favorites = [];
+        favoritesResponse = [];
       }
 
-      const mealsFormatted = formatMeals({ meals: response, favorites });
-      setMeals(mealsFormatted);
+      const allOfRequestsWasSuccessful =
+        Array.isArray(mealsResponse.data) &&
+        Array.isArray(favoritesResponse.data);
+
+      if (allOfRequestsWasSuccessful) {
+        const mealsFormatted = formatMeals({
+          meals: mealsResponse.data,
+          favorites: favoritesResponse.data,
+        });
+        setMeals(mealsFormatted);
+      }
     }
 
     fetchMeals();

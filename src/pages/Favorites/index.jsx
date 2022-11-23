@@ -11,15 +11,31 @@ import { useRequest } from "../../hooks/request";
 export function Favorites() {
   const [favorites, setFavorites] = useState();
 
-  console.log({ favorites });
-
   const { manageRequests } = useRequest();
 
   useEffect(() => {
     async function fetchFavorites() {
       const response = await manageRequests("get", "/favorites");
 
-      setFavorites(response);
+      if (response instanceof Error) {
+        return navigate("/");
+      }
+
+      const theRequestWasSuccessful = Array.isArray(response.data);
+
+      if (theRequestWasSuccessful) {
+        return setFavorites(response.data);
+      }
+
+      if (response.data) {
+        alert(response.data.message);
+      } else {
+        alert(
+          "Não foi possível carregar as informações! Por favor tente novamente mais tarde."
+        );
+      }
+
+      return navigate("/");
     }
 
     fetchFavorites();

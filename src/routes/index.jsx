@@ -10,6 +10,8 @@ import { useAuth } from "../hooks/auth";
 export function Routes() {
   const { userInfos } = useAuth();
 
+  console.log({ userInfos });
+
   function rederRoutes() {
     if (!userInfos) {
       return <PublicRoutes />;
