@@ -6,6 +6,7 @@ import { Container, Brand, Form } from "./styles";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { ButtonText } from "../../components/ButtonText";
+import { Loading } from "../../components/Loading";
 import { validateDataToSignIn } from "../../utils/dataValidator";
 import { useRequest } from "../../hooks/request";
 import { useAuth } from "../../hooks/auth";
@@ -13,6 +14,7 @@ import { useAuth } from "../../hooks/auth";
 export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showLoadingScreen, setShowLoadingScreen] = useState(false);
 
   const { manageRequests } = useRequest();
   const navigate = useNavigate();
@@ -25,11 +27,15 @@ export function SignIn() {
       return;
     }
 
+    setShowLoadingScreen(prevState => !prevState);
+
     const response = await manageRequests("post", "sessions", {
       email,
       password,
       isPasswordRequired: true,
     });
+
+    setShowLoadingScreen(prevState => !prevState);
 
     if (response instanceof Error) {
       return navigate("/off-air");
@@ -87,6 +93,7 @@ export function SignIn() {
         />
         <ButtonText title="Criar uma conta" to="/register" />
       </Form>
+      {showLoadingScreen && <Loading />}
     </Container>
   );
 }

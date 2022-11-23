@@ -18,7 +18,7 @@ export function Input({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        onKeyPress
+        onKeyPress={onKeyPress}
         {...rest}
       />
     </Container>

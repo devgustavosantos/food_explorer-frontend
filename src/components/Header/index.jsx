@@ -207,15 +207,21 @@ export function Header() {
     setMenuOpen(prevState => !prevState);
   }
 
+  function logOutTheUser() {
+    const confirmation = confirm("Tem certeza que deseja sair?");
+
+    if (confirmation) {
+      navigate("/");
+
+      deauthenticateUser();
+
+      return window.location.reload();
+    }
+  }
+
   function handleSignInSignOut() {
     if (userInfos) {
-      const confirmation = confirm("Tem certeza que deseja sair?");
-
-      if (confirmation) {
-        navigate("/");
-
-        deauthenticateUser();
-      }
+      logOutTheUser();
     } else {
       navigate("/login");
     }
