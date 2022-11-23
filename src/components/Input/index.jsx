@@ -1,6 +1,14 @@
 import { Container } from "./styles";
 
-export function Input({ title, type, placeholder, value, onChange, ...rest }) {
+export function Input({
+  title,
+  type,
+  placeholder,
+  value,
+  onChange,
+  onKeyPress,
+  ...rest
+}) {
   return (
     <Container className="my-input">
       <p>{title}</p>
@@ -10,6 +18,7 @@ export function Input({ title, type, placeholder, value, onChange, ...rest }) {
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        onKeyPress
         {...rest}
       />
     </Container>

@@ -42,6 +42,7 @@ export function Header() {
               value={search}
               onChange={e => setSearch(e.target.value)}
               onClick={handleSearchByTitle}
+              onKeyPress={activateSearchByEnter}
             />
           </li>
           <li>
@@ -77,7 +78,12 @@ export function Header() {
       return (
         <ul>
           <li>
-            <SearchBar />
+            <SearchBar
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              onClick={handleSearchByTitle}
+              onKeyPress={activateSearchByEnter}
+            />
           </li>
           <li>
             <Link to="/new">
@@ -217,6 +223,12 @@ export function Header() {
 
   function handleSearchByTitle() {
     navigate(`/?title=${search}`);
+  }
+
+  function activateSearchByEnter(e) {
+    if (e.key === "Enter") {
+      handleSearchByTitle();
+    }
   }
 
   return (
