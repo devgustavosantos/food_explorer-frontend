@@ -11,6 +11,7 @@ import {
 } from "react-icons/fi";
 import { TfiReceipt } from "react-icons/tfi";
 
+import Logo from "../../assets/logo.svg";
 import {
   Container,
   Desktop,
@@ -21,13 +22,14 @@ import {
 } from "./styles";
 import { Wrapper } from "../Wrapper";
 import { SearchBar } from "../SearchBar";
-import Logo from "../../assets/logo.svg";
 import { useAuth } from "../../hooks/auth";
+import { useSearch } from "../../hooks/search";
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const { userInfos, deauthenticateUser } = useAuth();
+  const { search, setSearch } = useSearch();
 
   const navigate = useNavigate();
 
@@ -36,7 +38,11 @@ export function Header() {
       return (
         <ul>
           <li>
-            <SearchBar />
+            <SearchBar
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              onClick={handleSearchByTitle}
+            />
           </li>
           <li>
             <button type="button" onClick={() => handleGoToPage("/favorites")}>
@@ -207,6 +213,10 @@ export function Header() {
     } else {
       navigate("/login");
     }
+  }
+
+  function handleSearchByTitle() {
+    navigate(`/?title=${search}`);
   }
 
   return (

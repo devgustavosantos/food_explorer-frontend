@@ -12,8 +12,6 @@ import { useRequest } from "../../hooks/request";
 export function Favorites() {
   const [favorites, setFavorites] = useState();
 
-  console.log({ favorites });
-
   const { manageRequests } = useRequest();
 
   useEffect(() => {

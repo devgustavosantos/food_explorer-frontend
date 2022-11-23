@@ -10,6 +10,7 @@ import { Routes } from "./routes/index";
 import { AuthProvider } from "./hooks/auth";
 import { CartProvider } from "./hooks/cart";
 import { RequestProvider } from "./hooks/request";
+import { SearchProvider } from "./hooks/search";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -18,7 +19,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <RequestProvider>
         <AuthProvider>
           <CartProvider>
-            <Routes />
+            <SearchProvider>
+              <Routes />
+            </SearchProvider>
           </CartProvider>
         </AuthProvider>
       </RequestProvider>

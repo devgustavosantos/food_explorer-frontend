@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import Food from "../../assets/food.png";
 import { Container, Desktop, Mobile } from "./styles";
@@ -11,16 +11,20 @@ import { Carousel } from "../../components/Carousel";
 import { Loading } from "../../components/Loading";
 import { useRequest } from "../../hooks/request";
 import { useAuth } from "../../hooks/auth";
+import { useSearch } from "../../hooks/search";
 
 export function Home() {
   const [meals, setMeals] = useState();
   const [categories, setCategories] = useState();
 
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const title = searchParams.get("title");
 
   const { manageRequests } = useRequest();
-
   const { userInfos } = useAuth();
+  const { search, setSearch } = useSearch();
 
   function renderCardsDesktop() {
     if (!meals || !categories) return null;
@@ -110,7 +114,10 @@ export function Home() {
 
   useEffect(() => {
     async function fetchMeals() {
-      const mealsResponse = await manageRequests("get", "/meals");
+      const mealsResponse = await manageRequests(
+        "get",
+        `/meals?title=${search}`
+      );
 
       if (mealsResponse instanceof Error) {
         return navigate("/off-air");
@@ -138,6 +145,14 @@ export function Home() {
     }
 
     fetchMeals();
+  }, [search]);
+
+  useEffect(() => {
+    function loadTheSearch() {
+      setSearch(title);
+    }
+
+    loadTheSearch();
   }, []);
 
   return (
