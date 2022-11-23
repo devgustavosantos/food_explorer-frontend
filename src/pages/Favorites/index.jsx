@@ -20,14 +20,16 @@ export function Favorites() {
     async function fetchFavorites() {
       const response = await manageRequests("get", "/favorites");
 
-      if (response instanceof Error) {
-        return navigate("/");
-      }
-
       const theRequestWasSuccessful = Array.isArray(response.data);
 
       if (theRequestWasSuccessful) {
         return setFavorites(response.data);
+      }
+
+      if (response instanceof Error) {
+        alert(
+          "Não foi possível carregar as informações! Por favor tente novamente mais tarde."
+        );
       }
 
       if (response.data) {
