@@ -97,8 +97,8 @@ const Payment = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: clamp(15px, 5vw, 45px);
-    padding: clamp(20px, 5vw, 50px);
+    gap: 25px;
+    padding: clamp(20px, 5vw, 50px) clamp(35px, 10vw, 50px);
 
     @media (min-width: 780px) {
       width: clamp(310px, 5vw, 400px);

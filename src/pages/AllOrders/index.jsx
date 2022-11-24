@@ -13,8 +13,6 @@ import { useRequest } from "../../hooks/request";
 export function AllOrders() {
   const [orders, setOrders] = useState();
 
-  console.log({ orders });
-
   const [isAdm, setIsAdm] = useState(false);
 
   const { manageRequests } = useRequest();
