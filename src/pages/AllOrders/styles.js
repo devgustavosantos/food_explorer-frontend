@@ -19,6 +19,10 @@ const Content = styled.main`
     font-weight: 500;
     margin-bottom: clamp(20px, 6vw, 35px);
   }
+
+  > p {
+    text-align: center;
+  }
 `;
 
 const Table = styled.div`

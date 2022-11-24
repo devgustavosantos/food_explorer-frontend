@@ -13,6 +13,8 @@ import { useRequest } from "../../hooks/request";
 export function AllOrders() {
   const [orders, setOrders] = useState();
 
+  console.log({ orders });
+
   const [isAdm, setIsAdm] = useState(false);
 
   const { manageRequests } = useRequest();
@@ -60,11 +62,11 @@ export function AllOrders() {
     <Container>
       <Header />
       <Wrapper>
-        {!orders ? (
-          <Loading />
-        ) : (
-          <Content>
-            <h1>Pedidos</h1>
+        <Content>
+          <h1>Pedidos</h1>
+          {orders.length == 0 ? (
+            <p>Você ainda não possui nenhum pedido.</p>
+          ) : (
             <Table>
               <table>
                 <thead>
@@ -114,9 +116,10 @@ export function AllOrders() {
                 </tbody>
               </table>
             </Table>
-          </Content>
-        )}
+          )}
+        </Content>
       </Wrapper>
+      {!orders && <Loading />}
       <Footer />
     </Container>
   );
