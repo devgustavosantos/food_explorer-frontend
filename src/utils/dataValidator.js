@@ -11,6 +11,8 @@ function validatePasswordLength(password) {
 }
 
 function validateDataToProfile({ name, email, newPassword, oldPassword }) {
+  console.log({ name, email, newPassword, oldPassword });
+
   if (!name) {
     alert(
       "O campo com o nome não pode ficar vazio! Verifique e tente novamente."
@@ -43,14 +45,16 @@ function validateDataToProfile({ name, email, newPassword, oldPassword }) {
     return false;
   }
 
-  const isAValidPassword = validatePasswordLength(newPassword);
+  if (newPassword && oldPassword) {
+    const isAValidPassword = validatePasswordLength(newPassword);
 
-  if (!isAValidPassword) {
-    alert(
-      "A nova senha deve ter no mínimo 6 caracteres! Verifique e tente novamente."
-    );
+    if (!isAValidPassword) {
+      alert(
+        "A nova senha deve ter no mínimo 6 caracteres! Verifique e tente novamente."
+      );
 
-    return false;
+      return false;
+    }
   }
 
   return true;
