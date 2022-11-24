@@ -84,7 +84,7 @@ export function Order() {
         ) : (
           <Content>
             <Cart>
-              <h1>Carrinho</h1>
+              <h1>Pedido {String(orderInfos.id).padStart(6, "0")}</h1>
               {orderInfos.meals.map(meal => {
                 const { id, title, price, image, meal_amount } = meal;
                 return (
