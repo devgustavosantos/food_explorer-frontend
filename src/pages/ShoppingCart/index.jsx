@@ -204,7 +204,8 @@ export function ShoppingCart() {
                       <Input
                         title="Número do Cartão"
                         placeholder="0000 0000 0000 0000"
-                        type="number"
+                        type="text"
+                        mask="0000 0000 0000 0000"
                         value={cardNumber}
                         onChange={e => setCardNumber(e.target.value)}
                       />
@@ -213,13 +214,15 @@ export function ShoppingCart() {
                           title="Validade"
                           placeholder="04/25"
                           type="text"
+                          mask="00/00"
                           value={cardExpiringDate}
                           onChange={e => setCardExpiringDate(e.target.value)}
                         />
                         <Input
                           title="CVC"
                           placeholder="000"
-                          type="number"
+                          type="text"
+                          mask="000"
                           value={cardSecurityCode}
                           onChange={e => setCardSecurityCode(e.target.value)}
                         />

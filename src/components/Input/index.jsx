@@ -1,4 +1,5 @@
 import { Container } from "./styles";
+import { IMaskInput } from "react-imask";
 
 export function Input({
   title,
@@ -13,7 +14,7 @@ export function Input({
     <Container className="my-input">
       <p>{title}</p>
 
-      <input
+      <IMaskInput
         type={type}
         placeholder={placeholder}
         value={value}
