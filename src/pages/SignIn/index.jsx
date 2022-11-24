@@ -54,6 +54,7 @@ export function SignIn() {
     }
 
     const { user, token } = response.data;
+
     navigate("/");
 
     authenticateUser({ user, token });

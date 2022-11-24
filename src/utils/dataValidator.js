@@ -11,8 +11,6 @@ function validatePasswordLength(password) {
 }
 
 function validateDataToProfile({ name, email, newPassword, oldPassword }) {
-  console.log({ name, email, newPassword, oldPassword });
-
   if (!name) {
     alert(
       "O campo com o nome não pode ficar vazio! Verifique e tente novamente."

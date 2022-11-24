@@ -51,8 +51,8 @@ export function ShoppingCart() {
 
   function validateThatTheSizeOfTheInputsIsRight() {
     const allIsCorrect =
-      cardNumber.length === 16 &&
-      cardExpiringDate.length === 4 &&
+      cardNumber.length === 19 &&
+      cardExpiringDate.length === 5 &&
       cardSecurityCode.length === 3;
 
     return allIsCorrect;

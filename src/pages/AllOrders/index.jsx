@@ -9,13 +9,13 @@ import { Wrapper } from "../../components/Wrapper";
 import { Select } from "../../components/Select";
 import { Loading } from "../../components/Loading";
 import { useRequest } from "../../hooks/request";
+import { useAuth } from "../../hooks/auth";
 
 export function AllOrders() {
   const [orders, setOrders] = useState();
 
-  const [isAdm, setIsAdm] = useState(false);
-
   const { manageRequests } = useRequest();
+  const { userInfos } = useAuth();
 
   const navigate = useNavigate();
 
@@ -89,7 +89,7 @@ export function AllOrders() {
                               <Select
                                 order_id={id}
                                 status={status}
-                                disabled={!isAdm}
+                                disabled={!userInfos.isAdm}
                               />
                             }
                           </td>
