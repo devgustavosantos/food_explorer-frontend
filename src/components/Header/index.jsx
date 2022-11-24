@@ -115,7 +115,12 @@ export function Header() {
       return (
         <ul className={menuOpen ? "" : "hidden"}>
           <li>
-            <SearchBar />
+            <SearchBar
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              onClick={handleSearchByTitle}
+              onKeyPress={activateSearchByEnter}
+            />
           </li>
           <li>
             <button type="button" onClick={() => handleGoToPage("/favorites")}>
@@ -155,7 +160,12 @@ export function Header() {
       return (
         <ul className={menuOpen ? "" : "hidden"}>
           <li>
-            <SearchBar />
+            <SearchBar
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              onClick={handleSearchByTitle}
+              onKeyPress={activateSearchByEnter}
+            />
           </li>
           <li>
             <Link to="/new">
@@ -215,7 +225,7 @@ export function Header() {
 
       deauthenticateUser();
 
-      return window.location.reload();
+      window.location.reload();
     }
   }
 

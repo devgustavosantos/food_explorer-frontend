@@ -1,17 +1,18 @@
 import { useState, useRef, useEffect } from "react";
 
 import { Container } from "./styles";
-
 import { Button } from "../Button";
 import { Card } from "../Card";
+import { useSearch } from "../../hooks/search";
 
 export function SectionMeals({ title, meals }) {
-  const [showAllCards, setShowAllCards] = useState(false);
+  const [showAFewCards, setShowAFewCards] = useState(true);
 
   const [heightOfFewCards, setHeightOfFewCards] = useState(0);
-  const [heightOfAllCards, setHeightOfAllCards] = useState(0);
 
   const mealsContainer = useRef();
+
+  const { search } = useSearch();
 
   function getTheHeightOfACard() {
     const card = mealsContainer.current.querySelector(".my-card");
@@ -42,53 +43,46 @@ export function SectionMeals({ title, meals }) {
     return totalHeight;
   }
 
-  function getTheHeightOfAllCards() {
-    const size = getTheHeightOfACard();
-
-    let totalHeight = 0;
-
-    meals.forEach(meal => (totalHeight += size));
-
-    return totalHeight;
-  }
-
   function handleVisibleCards() {
-    if (showAllCards) {
-      setShowAllCards(prevState => !prevState);
+    if (showAFewCards) {
+      setShowAFewCards(prevState => !prevState);
     } else {
-      setShowAllCards(prevState => !prevState);
+      setShowAFewCards(prevState => !prevState);
     }
   }
 
   function renderButtons() {
     if (meals.length < 3) return null;
 
-    if (showAllCards) {
-      return <Button title="Mostrar menos" onClick={handleVisibleCards} />;
-    } else {
+    if (search) return null;
+
+    if (showAFewCards) {
       return <Button title="Mostrar mais" onClick={handleVisibleCards} />;
+    } else {
+      return <Button title="Mostrar menos" onClick={handleVisibleCards} />;
     }
   }
 
   useEffect(() => {
-    const fewCards = getTheHeightOfSomeCards();
-    const allCards = getTheHeightOfAllCards();
+    if (search) {
+      setShowAFewCards(false);
+    }
+  }, [search]);
 
-    setHeightOfFewCards(fewCards);
-    setHeightOfAllCards(allCards);
+  useEffect(() => {
+    function showAllCardsDuringASearch() {
+      const fewCards = getTheHeightOfSomeCards();
+
+      setHeightOfFewCards(fewCards);
+    }
+
+    showAllCardsDuringASearch();
   }, []);
 
   return (
-    <Container
-      className="my-section-meals"
-      heightOfFewCards={heightOfFewCards}
-      heightOfAllCards={heightOfAllCards}
-    >
+    <Container className="my-section-meals" heightOfFewCards={heightOfFewCards}>
       <h2>{title}</h2>
-      <div
-        className={showAllCards ? "show-all" : "show-few"}
-        ref={mealsContainer}
-      >
+      <div className={showAFewCards ? "show-few" : ""} ref={mealsContainer}>
         {meals.map(meal => {
           const { id, title, description, image, price, favorite } = meal;
 

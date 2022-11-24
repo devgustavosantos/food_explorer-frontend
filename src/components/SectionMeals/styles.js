@@ -11,15 +11,9 @@ const Container = styled.section`
     margin-bottom: clamp(20px, 6vw, 40px);
   }
 
-  .show-all {
-    height: ${({ heightOfAllCards }) => `${heightOfAllCards}px`};
-    transition: height 1s;
-  }
-
   .show-few {
     height: ${({ heightOfFewCards }) => `${heightOfFewCards}px`};
     overflow: hidden;
-    transition: height 1s;
   }
 `;
 
