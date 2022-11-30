@@ -63,12 +63,10 @@ export function Card({ meal_id, title, description, price, image, isFav }) {
 
     setFavoriteMeal(prevState => !prevState);
 
-    let response;
-
     if (favoriteMeal) {
-      response = await manageRequests('delete', `/favorites/${meal_id}`);
+      await manageRequests('delete', `/favorites/${meal_id}`);
     } else {
-      response = await manageRequests('post', `/favorites/${meal_id}`);
+      await manageRequests('post', `/favorites/${meal_id}`);
     }
   }
 

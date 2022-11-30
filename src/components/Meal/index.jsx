@@ -2,7 +2,6 @@ import { api } from '../../services/api';
 import { Container } from './styles';
 
 export function Meal({
-  id,
   title,
   price,
   image,
