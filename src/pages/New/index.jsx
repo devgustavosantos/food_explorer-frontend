@@ -1,10 +1,9 @@
-import { useState } from "react";
-
-import { Container, Form, Ingredients, Description, Modal } from "./styles";
-
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { FiX } from "react-icons/fi";
 
+import { Container, Form, Ingredients, Description, Modal } from "./styles";
 import { Header } from "../../components/Header";
 import { Wrapper } from "../../components/Wrapper";
 import { ButtonText } from "../../components/ButtonText";
@@ -13,42 +12,142 @@ import { Input } from "../../components/Input";
 import { NewIngredient } from "../../components/NewIngredient";
 import { Button } from "../../components/Button";
 import { Footer } from "../../components/Footer";
+import { Loading } from "../../components/Loading";
+import { useRequest } from "../../hooks/request";
 
 export function New() {
   const [modalOpen, setModalOpen] = useState(false);
 
+  const [name, setName] = useState("");
+  const [category, setCategory] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+  const [newIngredient, setNewIngredient] = useState("");
+  const [ingredientsOfThisMeal, setIngredientsOfThisMeal] = useState([]);
+  const [ingredientsRegisteredInDB, setIngredientsRegisteredInDB] = useState();
+
+  const navigate = useNavigate();
+
+  const { manageRequests } = useRequest();
+
   function handleModal() {
-    setModalOpen(prevState => !prevState);
+    setModalOpen((prevState) => !prevState);
   }
+
+  function checkIfTheInputIsEmpty(inputValue) {
+    return inputValue ? true : false;
+  }
+
+  function handleAddNewIngredient() {
+    console.log("oi");
+  }
+
+  function handleRegisterMeal() {
+    console.log({ name, category, ingredientsRegistered, price, description });
+  }
+
+  async function fetchIngredients() {
+    const response = await manageRequests("get", "/ingredients");
+
+    return response;
+  }
+
+  function validateTheResponse(response) {
+    const isAValidResponse = Array.isArray(response.data);
+
+    return isAValidResponse;
+  }
+
+  function showMessageIfThereIsAnError(withoutErros) {
+    if (!withoutErros) {
+      alert(
+        "Não foi possível carregar os dados! Por favor, tente novamente mais tarde."
+      );
+    }
+  }
+
+  function checkIfThisPageWillBeRendered(hadNoProblem) {
+    if (hadNoProblem) return;
+
+    navigate("/");
+  }
+
+  async function loadData() {
+    const response = await fetchIngredients();
+    const responseChecked = validateTheResponse(response);
+    showMessageIfThereIsAnError(responseChecked);
+
+    checkIfThisPageWillBeRendered(responseChecked);
+
+    setIngredientsRegisteredInDB(response.data);
+  }
+
+  useEffect(() => {
+    loadData();
+  }, []);
 
   return (
     <Container>
       <Header />
-      <Wrapper>
-        <Form>
-          <ButtonText title="voltar" icon={IoIosArrowBack} to="/" />
-          <h1>Adicionar Prato</h1>
-          <InputImage />
-          <Input title="Nome" placeholder="Ex.: Salada Ceasar" />
-          <Input title="Categoria" placeholder="Ex.: Prato Principal" />
-          <Ingredients>
-            <p>Ingredientes</p>
-            <div className="new-ingredients">
-              <NewIngredient value="sal" />
-              <NewIngredient value="açúcar" />
-              <NewIngredient value="fermento americano" />
-              <NewIngredient isNew />
-            </div>
-          </Ingredients>
+      {!ingredientsRegisteredInDB ? (
+        <Loading />
+      ) : (
+        <Wrapper>
+          <Form>
+            <ButtonText title="voltar" icon={IoIosArrowBack} to="/" />
+            <h1>Adicionar Prato</h1>
+            <InputImage />
+            <Input
+              title="Nome"
+              placeholder="Ex.: Salada Ceasar"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <Input
+              title="Categoria"
+              placeholder="Ex.: Prato Principal"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            />
+            <Ingredients>
+              <p>Ingredientes</p>
+              <div className="new-ingredients">
+                <NewIngredient value="sal" />
+                <NewIngredient value="açúcar" />
+                <NewIngredient value="fermento americano" />
+                <NewIngredient
+                  isNew
+                  value={newIngredient}
+                  onChange={(e) => setNewIngredient(e.target.value)}
+                  onClick={handleAddNewIngredient}
+                />
+              </div>
+            </Ingredients>
 
-          <Input title="Preço" placeholder="R$ 00,00" type="number" />
-          <Description>
-            <p>Descrição</p>
-            <textarea placeholder="Fale brevemente sobre o prato, seus ingredientes e composição..."></textarea>
-          </Description>
-          <Button title="Adicionar prato" isHighlighted={false} />
-        </Form>
-      </Wrapper>
+            <Input
+              title="Preço"
+              placeholder="R$ 00,00"
+              type="text"
+              mask="R$ 00,00"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+            <Description>
+              <p>Descrição</p>
+              <textarea
+                placeholder="Fale brevemente sobre o prato, seus ingredientes e composição..."
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              ></textarea>
+            </Description>
+            <Button
+              title="Adicionar prato"
+              isHighlighted={false}
+              onClick={handleRegisterMeal}
+            />
+          </Form>
+        </Wrapper>
+      )}
       <Footer />
       <Modal className={modalOpen ? "open" : "close"}>
         <div className="alert">
