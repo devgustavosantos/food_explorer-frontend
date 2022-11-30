@@ -1,5 +1,6 @@
-import { Container } from "./styles";
-import { IMaskInput } from "react-imask";
+import { IMaskInput } from 'react-imask';
+
+import { Container } from './styles';
 
 export function Input({
   title,

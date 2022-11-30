@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Container = styled.div`
   width: 100%;
@@ -41,7 +41,7 @@ const Content = styled.main`
 
 const Cart = styled.section`
   .total-price {
-    font-family: "Poppins", sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: clamp(1.6rem, 5vw, 2rem);
     margin-top: 30px;
   }
@@ -70,7 +70,7 @@ const Payment = styled.section`
       gap: 10px;
       padding: 15px 0;
       font-size: clamp(1.4rem, 4vw, 1.6rem);
-      font-family: "Roboto", sans-serif;
+      font-family: 'Roboto', sans-serif;
       color: ${({ theme }) => theme.COLORS.WHITE};
     }
 

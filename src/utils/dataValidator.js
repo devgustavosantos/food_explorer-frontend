@@ -13,7 +13,7 @@ function validatePasswordLength(password) {
 function validateDataToProfile({ name, email, newPassword, oldPassword }) {
   if (!name) {
     alert(
-      "O campo com o nome não pode ficar vazio! Verifique e tente novamente."
+      'O campo com o nome não pode ficar vazio! Verifique e tente novamente.'
     );
 
     return false;
@@ -21,7 +21,7 @@ function validateDataToProfile({ name, email, newPassword, oldPassword }) {
 
   if (!email) {
     alert(
-      "O campo com o e-mail não pode ficar vazio! Verifique e tente novamente."
+      'O campo com o e-mail não pode ficar vazio! Verifique e tente novamente.'
     );
 
     return false;
@@ -30,14 +30,14 @@ function validateDataToProfile({ name, email, newPassword, oldPassword }) {
   const isAValidEmail = validateEmail(email);
 
   if (!isAValidEmail) {
-    alert("O e-mail informada é inválido! Verifique e tente novamente.");
+    alert('O e-mail informada é inválido! Verifique e tente novamente.');
 
     return false;
   }
 
   if (newPassword && !oldPassword) {
     alert(
-      "Para atualizar a senha, é necessário informar a senha antiga! Verifique e tente novamente."
+      'Para atualizar a senha, é necessário informar a senha antiga! Verifique e tente novamente.'
     );
 
     return false;
@@ -48,7 +48,7 @@ function validateDataToProfile({ name, email, newPassword, oldPassword }) {
 
     if (!isAValidPassword) {
       alert(
-        "A nova senha deve ter no mínimo 6 caracteres! Verifique e tente novamente."
+        'A nova senha deve ter no mínimo 6 caracteres! Verifique e tente novamente.'
       );
 
       return false;
@@ -61,7 +61,7 @@ function validateDataToProfile({ name, email, newPassword, oldPassword }) {
 function validateDataToSignUp({ name, email, password }) {
   if (!name) {
     alert(
-      "O campo com o nome não pode ficar vazio! Verifique e tente novamente."
+      'O campo com o nome não pode ficar vazio! Verifique e tente novamente.'
     );
 
     return false;
@@ -69,7 +69,7 @@ function validateDataToSignUp({ name, email, password }) {
 
   if (!email) {
     alert(
-      "O campo com o e-mail não pode ficar vazio! Verifique e tente novamente."
+      'O campo com o e-mail não pode ficar vazio! Verifique e tente novamente.'
     );
 
     return false;
@@ -78,14 +78,14 @@ function validateDataToSignUp({ name, email, password }) {
   const isAValidEmail = validateEmail(email);
 
   if (!isAValidEmail) {
-    alert("O e-mail informada é inválido! Verifique e tente novamente.");
+    alert('O e-mail informada é inválido! Verifique e tente novamente.');
 
     return false;
   }
 
   if (!password) {
     alert(
-      "O campo com a senha não pode ficar vazio! Verifique e tente novamente."
+      'O campo com a senha não pode ficar vazio! Verifique e tente novamente.'
     );
 
     return false;
@@ -95,7 +95,7 @@ function validateDataToSignUp({ name, email, password }) {
 
   if (!isAValidPassword) {
     alert(
-      "A nova senha deve ter no mínimo 6 caracteres! Verifique e tente novamente."
+      'A nova senha deve ter no mínimo 6 caracteres! Verifique e tente novamente.'
     );
 
     return false;
@@ -107,7 +107,7 @@ function validateDataToSignUp({ name, email, password }) {
 function validateDataToSignIn({ email, password }) {
   if (!email) {
     alert(
-      "O campo com o e-mail não pode ficar vazio! Verifique e tente novamente."
+      'O campo com o e-mail não pode ficar vazio! Verifique e tente novamente.'
     );
 
     return false;
@@ -116,14 +116,14 @@ function validateDataToSignIn({ email, password }) {
   const isAValidEmail = validateEmail(email);
 
   if (!isAValidEmail) {
-    alert("O e-mail informada é inválido! Verifique e tente novamente.");
+    alert('O e-mail informada é inválido! Verifique e tente novamente.');
 
     return false;
   }
 
   if (!password) {
     alert(
-      "O campo com a senha não pode ficar vazio! Verifique e tente novamente."
+      'O campo com a senha não pode ficar vazio! Verifique e tente novamente.'
     );
 
     return false;
@@ -133,7 +133,7 @@ function validateDataToSignIn({ email, password }) {
 
   if (!isAValidPassword) {
     alert(
-      "A nova senha deve ter no mínimo 6 caracteres! Verifique e tente novamente."
+      'A nova senha deve ter no mínimo 6 caracteres! Verifique e tente novamente.'
     );
 
     return false;

@@ -1,5 +1,5 @@
-import { api } from "../../services/api";
-import { Container } from "./styles";
+import { api } from '../../services/api';
+import { Container } from './styles';
 
 export function Meal({
   id,
@@ -20,7 +20,10 @@ export function Meal({
       <p>{`${meal_amount}x ${title}`}</p>
       <p>{`R$ ${price}`}</p>
       {isNew && (
-        <button type="button" onClick={onClick}>
+        <button
+          type="button"
+          onClick={onClick}
+        >
           Excluir
         </button>
       )}

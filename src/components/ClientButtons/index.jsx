@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { TfiReceipt } from "react-icons/tfi";
+import { useState } from 'react';
+import { TfiReceipt } from 'react-icons/tfi';
 
-import { Container } from "./styles";
-import { Button } from "../Button";
-import { useCart } from "../../hooks/cart";
+import { useCart } from '../../hooks/cart';
+import { Button } from '../Button';
+import { Container } from './styles';
 
 export function ClientButtons({
   withIcon = false,
@@ -21,7 +21,7 @@ export function ClientButtons({
       if (amount < 10) {
         setAmount(prevState => prevState + 1);
       } else {
-        alert("Cada prato possui um limite de 10 unidades por pedido.");
+        alert('Cada prato possui um limite de 10 unidades por pedido.');
       }
     } else {
       if (amount > 1) {
@@ -33,11 +33,17 @@ export function ClientButtons({
   return (
     <Container className="client-buttons">
       <div className="amount-buttons">
-        <button type="button" onClick={() => handleAmount(false)}>
+        <button
+          type="button"
+          onClick={() => handleAmount(false)}
+        >
           -
         </button>
-        <span>{String(amount).padStart(2, "0")}</span>
-        <button type="button" onClick={() => handleAmount(true)}>
+        <span>{String(amount).padStart(2, '0')}</span>
+        <button
+          type="button"
+          onClick={() => handleAmount(true)}
+        >
           +
         </button>
       </div>

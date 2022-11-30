@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Container = styled.div`
   width: 100%;
@@ -18,12 +18,12 @@ const Form = styled.form`
   @media (min-width: 780px) {
     display: grid;
     grid-template-areas:
-      "A A A A"
-      "B B B B"
-      "C D E E"
-      "F F F G"
-      "H H H H"
-      "I I J J";
+      'A A A A'
+      'B B B B'
+      'C D E E'
+      'F F F G'
+      'H H H H'
+      'I I J J';
 
     align-items: center;
     gap: 30px;
@@ -154,12 +154,12 @@ const Modal = styled.div`
     h2,
     > p {
       text-align: center;
-      font-family: "Poppins", sans-serif;
+      font-family: 'Poppins', sans-serif;
     }
 
     h2 {
       font-size: 3.2rem;
-      font-family: "Poppins", sans-serif;
+      font-family: 'Poppins', sans-serif;
       line-height: 130%;
     }
 

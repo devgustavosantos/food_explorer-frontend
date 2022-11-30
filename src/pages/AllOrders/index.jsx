@@ -1,15 +1,14 @@
-import { Fragment, useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Fragment, useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
-import { Container, Content, Table } from "./styles";
-
-import { Footer } from "../../components/Footer";
-import { Header } from "../../components/Header";
-import { Wrapper } from "../../components/Wrapper";
-import { Select } from "../../components/Select";
-import { Loading } from "../../components/Loading";
-import { useRequest } from "../../hooks/request";
-import { useAuth } from "../../hooks/auth";
+import { Footer } from '../../components/Footer';
+import { Header } from '../../components/Header';
+import { Loading } from '../../components/Loading';
+import { Select } from '../../components/Select';
+import { Wrapper } from '../../components/Wrapper';
+import { useAuth } from '../../hooks/auth';
+import { useRequest } from '../../hooks/request';
+import { Container, Content, Table } from './styles';
 
 export function AllOrders() {
   const [orders, setOrders] = useState();
@@ -20,11 +19,11 @@ export function AllOrders() {
   const navigate = useNavigate();
 
   function formatDateTime(datetime) {
-    const [date, time] = datetime.split(" ");
+    const [date, time] = datetime.split(' ');
 
-    const [, mouth, day] = date.split("-");
+    const [, mouth, day] = date.split('-');
 
-    const [hour, minutes] = time.split(":");
+    const [hour, minutes] = time.split(':');
 
     const formattedDateAndTime = `${day}/${mouth} ás ${hour - 3}h${minutes}`;
 
@@ -33,7 +32,7 @@ export function AllOrders() {
 
   useEffect(() => {
     async function fetchOrders() {
-      const response = await manageRequests("get", "/orders");
+      const response = await manageRequests('get', '/orders');
 
       const theRequestWasSuccessful = Array.isArray(response.data);
 
@@ -47,10 +46,10 @@ export function AllOrders() {
         alert(response.data.message);
       } else {
         alert(
-          "Não foi possível carregar os pedidos! Por favor tente novamente mais tarde."
+          'Não foi possível carregar os pedidos! Por favor tente novamente mais tarde.'
         );
       }
-      return navigate("/");
+      return navigate('/');
     }
 
     fetchOrders();
@@ -95,7 +94,7 @@ export function AllOrders() {
                           </td>
                           <td>
                             <Link to={`/order/${id}`}>
-                              {String(id).padStart(8, "0")}
+                              {String(id).padStart(8, '0')}
                             </Link>
                           </td>
                           <td>
@@ -105,7 +104,7 @@ export function AllOrders() {
                               return (
                                 <Fragment key={meal.order_meal_id}>
                                   {meal.meal_amount}x {meal.title}
-                                  {lastItemInArray ? "" : ", "}
+                                  {lastItemInArray ? '' : ', '}
                                 </Fragment>
                               );
                             })}

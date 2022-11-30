@@ -1,18 +1,16 @@
-import { useNavigate } from "react-router-dom";
+import { FiHome } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 
-import { FiHome } from "react-icons/fi";
-
-import { Container } from "./styles";
-
-import { Header } from "../../components/Header";
-import { Footer } from "../../components/Footer";
-import { Button } from "../../components/Button";
+import { Button } from '../../components/Button';
+import { Footer } from '../../components/Footer';
+import { Header } from '../../components/Header';
+import { Container } from './styles';
 
 export function NotFound() {
   const navigate = useNavigate();
 
   function handleBack() {
-    navigate("/");
+    navigate('/');
   }
 
   return (

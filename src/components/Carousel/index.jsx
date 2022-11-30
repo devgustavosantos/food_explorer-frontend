@@ -1,21 +1,21 @@
-import { useRef } from "react";
+import { useRef } from 'react';
 
-import { Card } from "../Card";
-import { Container } from "./styles";
+import { Card } from '../Card';
+import { Container } from './styles';
 
 export function Carousel({ title, meals }) {
   const carousel = useRef(null);
 
   function getCardWidth() {
-    const card = carousel.current.querySelectorAll(".my-card")[1];
+    const card = carousel.current.querySelectorAll('.my-card')[1];
 
     const cardWidth = card.offsetWidth;
 
     const cardMargin = Number(
       window
         .getComputedStyle(card, null)
-        .getPropertyValue("margin-right")
-        .split("px")[0]
+        .getPropertyValue('margin-right')
+        .split('px')[0]
     );
 
     return cardWidth + cardMargin;
@@ -43,11 +43,14 @@ export function Carousel({ title, meals }) {
       <div className="carousel-window">
         {meals.length > 2 && (
           <>
-            <button onClick={handleCarouselLeft}>{"<"}</button>
-            <button onClick={handleCarouselRight}>{">"}</button>
+            <button onClick={handleCarouselLeft}>{'<'}</button>
+            <button onClick={handleCarouselRight}>{'>'}</button>
           </>
         )}
-        <div className="carousel-meals" ref={carousel}>
+        <div
+          className="carousel-meals"
+          ref={carousel}
+        >
           {meals.map(meal => {
             const { id, title, description, image, price, favorite } = meal;
 

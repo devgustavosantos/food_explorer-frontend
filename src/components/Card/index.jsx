@@ -1,14 +1,14 @@
-import { useState } from "react";
-import { FiHeart } from "react-icons/fi";
-import { FaHeart } from "react-icons/fa";
+import { useState } from 'react';
+import { FaHeart } from 'react-icons/fa';
+import { FiHeart } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 
-import { Container } from "./styles";
-import { ClientButtons } from "../ClientButtons";
-import { AdmButtons } from "../AdmButtons";
-import { useAuth } from "../../hooks/auth";
-import { useNavigate } from "react-router-dom";
-import { api } from "../../services/api";
-import { useRequest } from "../../hooks/request";
+import { useAuth } from '../../hooks/auth';
+import { useRequest } from '../../hooks/request';
+import { api } from '../../services/api';
+import { AdmButtons } from '../AdmButtons';
+import { ClientButtons } from '../ClientButtons';
+import { Container } from './styles';
 
 export function Card({ meal_id, title, description, price, image, isFav }) {
   const [favoriteMeal, setFavoriteMeal] = useState(isFav);
@@ -37,7 +37,10 @@ export function Card({ meal_id, title, description, price, image, isFav }) {
   function renderButtonFav() {
     if (!userInfos || !userInfos.isAdm) {
       return (
-        <button type="button" onClick={handleAddToFavorite}>
+        <button
+          type="button"
+          onClick={handleAddToFavorite}
+        >
           {favoriteMeal ? <FaHeart /> : <FiHeart />}
         </button>
       );
@@ -52,7 +55,7 @@ export function Card({ meal_id, title, description, price, image, isFav }) {
       `);
 
       if (response) {
-        navigate("/login");
+        navigate('/login');
       }
 
       return;
@@ -63,9 +66,9 @@ export function Card({ meal_id, title, description, price, image, isFav }) {
     let response;
 
     if (favoriteMeal) {
-      response = await manageRequests("delete", `/favorites/${meal_id}`);
+      response = await manageRequests('delete', `/favorites/${meal_id}`);
     } else {
-      response = await manageRequests("post", `/favorites/${meal_id}`);
+      response = await manageRequests('post', `/favorites/${meal_id}`);
     }
   }
 

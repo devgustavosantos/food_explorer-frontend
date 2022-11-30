@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Container = styled.div`
   width: 100%;
@@ -23,11 +23,11 @@ const Content = styled.main`
     display: grid;
     gap: 10px;
     grid-template-areas:
-      "A A A A"
-      "B C C C"
-      "B D D D"
-      "B E E E"
-      "B F G H";
+      'A A A A'
+      'B C C C'
+      'B D D D'
+      'B E E E'
+      'B F G H';
     grid-template-columns: 1.5fr 1fr 1fr 0.5fr;
     grid-template-columns: 3fr 170px 2fr 0.5fr;
 
@@ -64,7 +64,7 @@ const Content = styled.main`
   }
 
   > p {
-    font-family: "Poppins", sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: clamp(1.5rem, 4vw, 2.4rem);
     grid-area: D;
   }
@@ -85,7 +85,7 @@ const Content = styled.main`
   .price {
     color: ${({ theme }) => theme.COLORS.BLUE_100};
     font-size: clamp(2.8rem, 6vw, 3.2rem);
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
     grid-area: F;
   }
 

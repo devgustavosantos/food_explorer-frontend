@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Container = styled.div`
   width: 100%;
@@ -15,7 +15,7 @@ const Container = styled.div`
 
   h1 {
     font-size: 3rem;
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
   }
 `;
 

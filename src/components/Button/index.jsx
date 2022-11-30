@@ -1,11 +1,11 @@
-import { Container } from "./styles";
+import { Container } from './styles';
 
 export function Button({
   title,
   onClick,
   isHighlighted = true,
   icon: Icon,
-  type = "button",
+  type = 'button',
   disabled = false,
   ...rest
 }) {

@@ -1,22 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { Container, Content } from "./styles";
-
-import { Footer } from "../../components/Footer";
-import { Header } from "../../components/Header";
-import { Wrapper } from "../../components/Wrapper";
-import { Card } from "../../components/Card";
-import { Loading } from "../../components/Loading";
-import { useRequest } from "../../hooks/request";
+import { Card } from '../../components/Card';
+import { Footer } from '../../components/Footer';
+import { Header } from '../../components/Header';
+import { Loading } from '../../components/Loading';
+import { Wrapper } from '../../components/Wrapper';
+import { useRequest } from '../../hooks/request';
+import { Container, Content } from './styles';
 
 export function Favorites() {
   const [favorites, setFavorites] = useState();
 
   const { manageRequests } = useRequest();
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     async function fetchFavorites() {
-      const response = await manageRequests("get", "/favorites");
+      const response = await manageRequests('get', '/favorites');
 
       const theRequestWasSuccessful = Array.isArray(response.data);
 
@@ -26,7 +28,7 @@ export function Favorites() {
 
       if (response instanceof Error) {
         alert(
-          "Não foi possível carregar as informações! Por favor tente novamente mais tarde."
+          'Não foi possível carregar as informações! Por favor tente novamente mais tarde.'
         );
       }
 
@@ -34,11 +36,11 @@ export function Favorites() {
         alert(response.data.message);
       } else {
         alert(
-          "Não foi possível carregar as informações! Por favor tente novamente mais tarde."
+          'Não foi possível carregar as informações! Por favor tente novamente mais tarde.'
         );
       }
 
-      return navigate("/");
+      return navigate('/');
     }
 
     fetchFavorites();

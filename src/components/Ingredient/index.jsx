@@ -1,5 +1,5 @@
-import { Container } from "./styles";
-import { api } from "../../services/api";
+import { api } from '../../services/api';
+import { Container } from './styles';
 
 export function Ingredient({ image, name }) {
   return (

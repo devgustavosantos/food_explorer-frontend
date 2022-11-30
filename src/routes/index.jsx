@@ -1,11 +1,9 @@
-import { useEffect } from "react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter } from 'react-router-dom';
 
-import { AdmRoutes } from "./adm.routes";
-import { ClientRoutes } from "./client.routes";
-import { PublicRoutes } from "./public.routes";
-
-import { useAuth } from "../hooks/auth";
+import { useAuth } from '../hooks/auth';
+import { AdmRoutes } from './adm.routes';
+import { ClientRoutes } from './client.routes';
+import { PublicRoutes } from './public.routes';
 
 export function Routes() {
   const { userInfos } = useAuth();

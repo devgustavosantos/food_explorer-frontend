@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const Container = styled.header`
   width: 100%;
@@ -73,7 +73,7 @@ const Brand = styled(Link)`
   }
 
   h2 {
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: clamp(2rem, 5vw, 2.5rem);
   }
 `;

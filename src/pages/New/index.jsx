@@ -1,29 +1,29 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { IoIosArrowBack } from "react-icons/io";
-import { FiX } from "react-icons/fi";
+import { useState, useEffect } from 'react';
+import { FiX } from 'react-icons/fi';
+import { IoIosArrowBack } from 'react-icons/io';
+import { useNavigate } from 'react-router-dom';
 
-import { Container, Form, Ingredients, Description, Modal } from "./styles";
-import { Header } from "../../components/Header";
-import { Wrapper } from "../../components/Wrapper";
-import { ButtonText } from "../../components/ButtonText";
-import { InputImage } from "../../components/InputImage";
-import { Input } from "../../components/Input";
-import { NewIngredient } from "../../components/NewIngredient";
-import { Button } from "../../components/Button";
-import { Footer } from "../../components/Footer";
-import { Loading } from "../../components/Loading";
-import { useRequest } from "../../hooks/request";
+import { Button } from '../../components/Button';
+import { ButtonText } from '../../components/ButtonText';
+import { Footer } from '../../components/Footer';
+import { Header } from '../../components/Header';
+import { Input } from '../../components/Input';
+import { InputImage } from '../../components/InputImage';
+import { Loading } from '../../components/Loading';
+import { NewIngredient } from '../../components/NewIngredient';
+import { Wrapper } from '../../components/Wrapper';
+import { useRequest } from '../../hooks/request';
+import { Container, Form, Ingredients, Description, Modal } from './styles';
 
 export function New() {
   const [modalOpen, setModalOpen] = useState(false);
 
-  const [name, setName] = useState("");
-  const [category, setCategory] = useState("");
-  const [price, setPrice] = useState("");
-  const [description, setDescription] = useState("");
-  const [newIngredient, setNewIngredient] = useState("");
-  const [ingredientsOfThisMeal, setIngredientsOfThisMeal] = useState([]);
+  const [name, setName] = useState('');
+  const [category, setCategory] = useState('');
+  const [price, setPrice] = useState('');
+  const [description, setDescription] = useState('');
+  const [newIngredient, setNewIngredient] = useState('');
+  // const [ingredientsOfThisMeal, setIngredientsOfThisMeal] = useState([]);
   const [ingredientsRegisteredInDB, setIngredientsRegisteredInDB] = useState();
 
   const navigate = useNavigate();
@@ -31,23 +31,23 @@ export function New() {
   const { manageRequests } = useRequest();
 
   function handleModal() {
-    setModalOpen((prevState) => !prevState);
+    setModalOpen(prevState => !prevState);
   }
 
-  function checkIfTheInputIsEmpty(inputValue) {
-    return inputValue ? true : false;
-  }
+  // function checkIfTheInputIsEmpty(inputValue) {
+  //   return inputValue ? true : false;
+  // }
 
   function handleAddNewIngredient() {
-    console.log("oi");
+    console.log('oi');
   }
 
   function handleRegisterMeal() {
-    console.log({ name, category, ingredientsRegistered, price, description });
+    console.log({ name, category, price, description });
   }
 
   async function fetchIngredients() {
-    const response = await manageRequests("get", "/ingredients");
+    const response = await manageRequests('get', '/ingredients');
 
     return response;
   }
@@ -61,7 +61,7 @@ export function New() {
   function showMessageIfThereIsAnError(withoutErros) {
     if (!withoutErros) {
       alert(
-        "Não foi possível carregar os dados! Por favor, tente novamente mais tarde."
+        'Não foi possível carregar os dados! Por favor, tente novamente mais tarde.'
       );
     }
   }
@@ -69,7 +69,7 @@ export function New() {
   function checkIfThisPageWillBeRendered(hadNoProblem) {
     if (hadNoProblem) return;
 
-    navigate("/");
+    navigate('/');
   }
 
   async function loadData() {
@@ -87,6 +87,7 @@ export function New() {
   }, []);
 
   return (
+    // eslint-disable-next-line react/react-in-jsx-scope
     <Container>
       <Header />
       {!ingredientsRegisteredInDB ? (
@@ -94,20 +95,24 @@ export function New() {
       ) : (
         <Wrapper>
           <Form>
-            <ButtonText title="voltar" icon={IoIosArrowBack} to="/" />
+            <ButtonText
+              title="voltar"
+              icon={IoIosArrowBack}
+              to="/"
+            />
             <h1>Adicionar Prato</h1>
             <InputImage />
             <Input
               title="Nome"
               placeholder="Ex.: Salada Ceasar"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={e => setName(e.target.value)}
             />
             <Input
               title="Categoria"
               placeholder="Ex.: Prato Principal"
               value={category}
-              onChange={(e) => setCategory(e.target.value)}
+              onChange={e => setCategory(e.target.value)}
             />
             <Ingredients>
               <p>Ingredientes</p>
@@ -118,7 +123,7 @@ export function New() {
                 <NewIngredient
                   isNew
                   value={newIngredient}
-                  onChange={(e) => setNewIngredient(e.target.value)}
+                  onChange={e => setNewIngredient(e.target.value)}
                   onClick={handleAddNewIngredient}
                 />
               </div>
@@ -130,14 +135,14 @@ export function New() {
               type="text"
               mask="R$ 00,00"
               value={price}
-              onChange={(e) => setPrice(e.target.value)}
+              onChange={e => setPrice(e.target.value)}
             />
             <Description>
               <p>Descrição</p>
               <textarea
                 placeholder="Fale brevemente sobre o prato, seus ingredientes e composição..."
                 value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                onChange={e => setDescription(e.target.value)}
               ></textarea>
             </Description>
             <Button
@@ -149,9 +154,12 @@ export function New() {
         </Wrapper>
       )}
       <Footer />
-      <Modal className={modalOpen ? "open" : "close"}>
+      <Modal className={modalOpen ? 'open' : 'close'}>
         <div className="alert">
-          <button type="button" onClick={handleModal}>
+          <button
+            type="button"
+            onClick={handleModal}
+          >
             <FiX />
           </button>
           <h2>Ingrediente Novo!</h2>
@@ -159,9 +167,15 @@ export function New() {
             Identificamos que você adicionou um Ingrediente novo. Gostaria de
             adicionar uma foto à ele?
           </p>
-          <Input title="Nome" placeholder="Ex.: Sal" />
+          <Input
+            title="Nome"
+            placeholder="Ex.: Sal"
+          />
           <InputImage />
-          <Button title="Cadastrar sem foto" isHighlighted={false} />
+          <Button
+            title="Cadastrar sem foto"
+            isHighlighted={false}
+          />
           <Button title="Cadastrar com foto" />
         </div>
       </Modal>

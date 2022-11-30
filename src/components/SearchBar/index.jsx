@@ -1,6 +1,6 @@
-import { Container } from "./styles";
+import { FiSearch } from 'react-icons/fi';
 
-import { FiSearch } from "react-icons/fi";
+import { Container } from './styles';
 
 export function SearchBar({ value, onChange, onClick, ...rest }) {
   return (

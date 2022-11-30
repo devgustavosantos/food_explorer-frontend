@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Container = styled.div`
   width: 100%;
@@ -31,7 +31,7 @@ const Container = styled.div`
   }
 
   > h2 {
-    font-family: "Poppins";
+    font-family: 'Poppins';
     font-size: clamp(2rem, 6vw, 2.4rem);
   }
 

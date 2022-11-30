@@ -1,17 +1,17 @@
-import { useState, useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
-import Food from "../../assets/food.png";
-import { Container, Desktop, Mobile } from "./styles";
-import { Header } from "../../components/Header";
-import { Wrapper } from "../../components/Wrapper";
-import { SectionMeals } from "../../components/SectionMeals";
-import { Footer } from "../../components/Footer";
-import { Carousel } from "../../components/Carousel";
-import { Loading } from "../../components/Loading";
-import { useRequest } from "../../hooks/request";
-import { useAuth } from "../../hooks/auth";
-import { useSearch } from "../../hooks/search";
+import Food from '../../assets/food.png';
+import { Carousel } from '../../components/Carousel';
+import { Footer } from '../../components/Footer';
+import { Header } from '../../components/Header';
+import { Loading } from '../../components/Loading';
+import { SectionMeals } from '../../components/SectionMeals';
+import { Wrapper } from '../../components/Wrapper';
+import { useAuth } from '../../hooks/auth';
+import { useRequest } from '../../hooks/request';
+import { useSearch } from '../../hooks/search';
+import { Container, Desktop, Mobile } from './styles';
 
 export function Home() {
   const [meals, setMeals] = useState();
@@ -20,7 +20,7 @@ export function Home() {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const title = searchParams.get("title");
+  const title = searchParams.get('title');
 
   const { manageRequests } = useRequest();
   const { userInfos } = useAuth();
@@ -63,14 +63,14 @@ export function Home() {
 
     const mealsWithCategory = meals.map(meal => ({
       ...meal,
-      category: meal.category == null ? "Sem categoria" : meal.category,
+      category: meal.category == null ? 'Sem categoria' : meal.category,
     }));
 
     return mealsWithCategory;
   }
 
   async function fetchFavorites() {
-    const favoritesResponse = await manageRequests("get", "/favorites");
+    const favoritesResponse = await manageRequests('get', '/favorites');
 
     return favoritesResponse.data;
   }
@@ -94,7 +94,7 @@ export function Home() {
   }
 
   async function fetchMeals() {
-    const mealsResponse = await manageRequests("get", `/meals?title=${search}`);
+    const mealsResponse = await manageRequests('get', `/meals?title=${search}`);
 
     return mealsResponse;
   }
@@ -103,7 +103,7 @@ export function Home() {
     const wasThereSomeError = !Array.isArray(response.data);
 
     if (wasThereSomeError) {
-      return navigate("/off-air");
+      return navigate('/off-air');
     }
 
     return response.data;
@@ -122,15 +122,15 @@ export function Home() {
       const categoriesOrdered = categoriesUnique.sort();
 
       const someUncategorized = categoriesOrdered.find(
-        category => category == "Sem categoria"
+        category => category == 'Sem categoria'
       );
 
       const categoriesFiltered =
         someUncategorized &&
-        categoriesUnique.filter(category => category !== "Sem categoria");
+        categoriesUnique.filter(category => category !== 'Sem categoria');
 
       const categoriesFormatted = someUncategorized
-        ? [...categoriesFiltered, "Sem categoria"]
+        ? [...categoriesFiltered, 'Sem categoria']
         : categoriesUnique;
 
       setCategories(categoriesFormatted);
@@ -156,7 +156,7 @@ export function Home() {
 
   useEffect(() => {
     function loadTheSearch() {
-      if (title || title === "") {
+      if (title || title === '') {
         setSearch(title);
       }
     }
@@ -171,7 +171,10 @@ export function Home() {
         <Wrapper>
           <Mobile>
             <div className="top-mobile">
-              <img src={Food} alt="Imagem de comida" />
+              <img
+                src={Food}
+                alt="Imagem de comida"
+              />
               <h1>Sabores inigualáveis</h1>
               <h3>Sinta o cuidado do preparo com ingredientes selecionados</h3>
             </div>
@@ -179,7 +182,10 @@ export function Home() {
           </Mobile>
           <Desktop>
             <div className="top-desktop">
-              <img src={Food} alt="Imagem de comida" />
+              <img
+                src={Food}
+                alt="Imagem de comida"
+              />
               <h1>Sabores inigualáveis</h1>
               <h3>Sinta o cuidado do preparo com ingredientes selecionados</h3>
             </div>

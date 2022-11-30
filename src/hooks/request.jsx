@@ -1,5 +1,8 @@
-import { createContext, useContext } from "react";
-import { api } from "../services/api";
+/* eslint-disable no-async-promise-executor */
+/* eslint-disable react/prop-types */
+import { createContext, useContext } from 'react';
+
+import { api } from '../services/api';
 
 const Request = createContext();
 
@@ -49,12 +52,12 @@ function RequestProvider({ children }) {
     };
 
     const manageResponseTime = () =>
-      new Promise((resolve, reject) => {
+      new Promise(resolve => {
         const limitTime = 60 * 1000;
 
         setTimeout(() => {
           const maximumTimeExceeded = new Error(
-            "Maximum response time has been exceeded!"
+            'Maximum response time has been exceeded!'
           );
 
           resolve(maximumTimeExceeded);

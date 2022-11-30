@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Container = styled.button`
   width: 100%;
@@ -9,7 +9,7 @@ const Container = styled.button`
   gap: 10px;
   border-radius: 5px;
   border: ${({ theme, isHighlighted }) =>
-    isHighlighted ? "none" : `1px solid ${theme.COLORS.WHITE}`};
+    isHighlighted ? 'none' : `1px solid ${theme.COLORS.WHITE}`};
   font-size: 1.4rem;
   color: ${({ theme }) => theme.COLORS.WHITE};
   background-color: ${({ theme, isHighlighted }) =>

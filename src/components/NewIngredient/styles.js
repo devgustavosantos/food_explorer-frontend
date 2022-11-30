@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Container = styled.div`
   display: flex;
@@ -6,12 +6,12 @@ const Container = styled.div`
   gap: 10px;
 
   border: ${({ theme, isNew }) =>
-    isNew ? `1px dashed ${theme.COLORS.GRAY_900}` : "none"};
+    isNew ? `1px dashed ${theme.COLORS.GRAY_900}` : 'none'};
   border-radius: 10px;
   padding: 6.5px 15px;
 
   background-color: ${({ theme, isNew }) =>
-    isNew ? "transparent" : `${theme.COLORS.BLUE_200}`};
+    isNew ? 'transparent' : `${theme.COLORS.BLUE_200}`};
 
   p {
     font-size: clamp(1.4rem, 4vw, 1.6rem);

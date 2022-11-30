@@ -1,12 +1,12 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Container = styled.div`
   width: 100%;
   margin-bottom: 20px;
   display: grid;
   grid-template-areas:
-    "A B B C"
-    "A D E E";
+    'A B B C'
+    'A D E E';
   grid-template-columns: 1fr 1fr 1.5fr 1fr;
 
   align-items: center;
@@ -20,7 +20,7 @@ const Container = styled.div`
 
   > p:nth-of-type(1) {
     grid-area: B;
-    font-family: "Poppins", sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: clamp(1.6rem, 5vw, 2rem);
   }
 

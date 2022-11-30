@@ -1,22 +1,19 @@
-import { useState, useEffect } from "react";
-import { IoIosArrowBack } from "react-icons/io";
-import { useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { IoIosArrowBack } from 'react-icons/io';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import { Container, Content } from "./styles";
-import { Footer } from "../../components/Footer";
-import { Header } from "../../components/Header";
-import { Wrapper } from "../../components/Wrapper";
-import { ButtonText } from "../../components/ButtonText";
-import { Ingredient } from "../../components/Ingredient";
-import { Loading } from "../../components/Loading";
-import { AdmButtons } from "../../components/AdmButtons";
-import { ClientButtons } from "../../components/ClientButtons";
-import { useRequest } from "../../hooks/request";
-import { api } from "../../services/api";
-import { useAuth } from "../../hooks/auth";
-
-const ingredientImage =
-  "https://www.foodbusinessnews.net/ext/resources/TopicLandingPages/Product-Development-Ingredient-Applications.jpg?1519144948";
+import { AdmButtons } from '../../components/AdmButtons';
+import { ButtonText } from '../../components/ButtonText';
+import { ClientButtons } from '../../components/ClientButtons';
+import { Footer } from '../../components/Footer';
+import { Header } from '../../components/Header';
+import { Ingredient } from '../../components/Ingredient';
+import { Loading } from '../../components/Loading';
+import { Wrapper } from '../../components/Wrapper';
+import { useAuth } from '../../hooks/auth';
+import { useRequest } from '../../hooks/request';
+import { api } from '../../services/api';
+import { Container, Content } from './styles';
 
 export function Details() {
   const { userInfos } = useAuth();
@@ -32,14 +29,20 @@ export function Details() {
     return mealInfos.ingredients.map(ingredient => {
       const { id, name, image } = ingredient;
 
-      return <Ingredient image={image} name={name} key={String(id)} />;
+      return (
+        <Ingredient
+          image={image}
+          name={name}
+          key={String(id)}
+        />
+      );
     });
   }
 
   function renderManipulationButtons() {
-    if (!userInfos || !userInfos.isAdm) {
-      const { meal_id, title, price, image } = mealInfos;
+    const { meal_id, title, price, image } = mealInfos;
 
+    if (!userInfos || !userInfos.isAdm) {
       return (
         <ClientButtons
           meal_id={meal_id}
@@ -56,10 +59,10 @@ export function Details() {
 
   useEffect(() => {
     async function fetchMealInfos() {
-      const response = await manageRequests("get", `/meals/${id}`);
+      const response = await manageRequests('get', `/meals/${id}`);
 
       if (response instanceof Error) {
-        return navigate("/");
+        return navigate('/');
       }
 
       const theRequestWasSuccessful = response.status === 201;
@@ -72,11 +75,11 @@ export function Details() {
         alert(response.data.message);
       } else {
         alert(
-          "Não foi possível carregar as informações! Por favor tente novamente mais tarde."
+          'Não foi possível carregar as informações! Por favor tente novamente mais tarde.'
         );
       }
 
-      return navigate("/");
+      return navigate('/');
     }
 
     fetchMealInfos();
@@ -88,7 +91,11 @@ export function Details() {
       <Wrapper>
         {mealInfos ? (
           <Content>
-            <ButtonText title="voltar" icon={IoIosArrowBack} to="/" />
+            <ButtonText
+              title="voltar"
+              icon={IoIosArrowBack}
+              to="/"
+            />
             <img
               src={`${api.defaults.baseURL}/files/meals/${mealInfos.image}`}
               alt={`Foto do item ${mealInfos.title}`}

@@ -1,16 +1,17 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import Check from "../../assets/situation/check.svg";
-import Clock from "../../assets/situation/clock.svg";
-import ForkAndKnife from "../../assets/situation/fork-knife.svg";
+/* eslint-disable indent */
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import { Cart, Container, Content, Situation } from "./styles";
-import { Footer } from "../../components/Footer";
-import { Header } from "../../components/Header";
-import { Meal } from "../../components/Meal";
-import { Wrapper } from "../../components/Wrapper";
-import { Loading } from "../../components/Loading";
-import { useRequest } from "../../hooks/request";
+import Check from '../../assets/situation/check.svg';
+import Clock from '../../assets/situation/clock.svg';
+import ForkAndKnife from '../../assets/situation/fork-knife.svg';
+import { Footer } from '../../components/Footer';
+import { Header } from '../../components/Header';
+import { Loading } from '../../components/Loading';
+import { Meal } from '../../components/Meal';
+import { Wrapper } from '../../components/Wrapper';
+import { useRequest } from '../../hooks/request';
+import { Cart, Container, Content, Situation } from './styles';
 
 export function Order() {
   const [orderInfos, setOrderInfos] = useState();
@@ -19,26 +20,37 @@ export function Order() {
 
   const { id } = useParams();
 
+  const navigate = useNavigate();
+
   function renderSituation(status) {
     switch (status) {
-      case "pending":
+      case 'pending':
         return (
           <>
-            <img src={Clock} alt="Foto de um relógio." />
+            <img
+              src={Clock}
+              alt="Foto de um relógio."
+            />
             <p>Aguardando confirmação do pagamento</p>
           </>
         );
-      case "preparing":
+      case 'preparing':
         return (
           <>
-            <img src={Check} alt="Foto de um sinal de positivo." />
+            <img
+              src={Check}
+              alt="Foto de um sinal de positivo."
+            />
             <p>Pagamento aprovado!</p>
           </>
         );
-      case "delivered":
+      case 'delivered':
         return (
           <>
-            <img src={ForkAndKnife} alt="Foto de um garfo e uma faca." />
+            <img
+              src={ForkAndKnife}
+              alt="Foto de um garfo e uma faca."
+            />
             <p>Pedido entregue!</p>
           </>
         );
@@ -47,7 +59,7 @@ export function Order() {
 
   useEffect(() => {
     async function fetchOrderInfos() {
-      const orderResponse = await manageRequests("get", `/orders/${id}`);
+      const orderResponse = await manageRequests('get', `/orders/${id}`);
 
       const wasTheRequestSuccessfullyMade = orderResponse.data.id;
 
@@ -57,7 +69,7 @@ export function Order() {
 
       if (orderResponse instanceof Error) {
         alert(
-          "Não foi possível carregar as informações! Por favor tente novamente mais tarde."
+          'Não foi possível carregar as informações! Por favor tente novamente mais tarde.'
         );
       }
 
@@ -65,11 +77,11 @@ export function Order() {
         alert(orderResponse.data.message);
       } else {
         alert(
-          "Não foi possível carregar as informações! Por favor tente novamente mais tarde."
+          'Não foi possível carregar as informações! Por favor tente novamente mais tarde.'
         );
       }
 
-      return navigate("/");
+      return navigate('/');
     }
 
     fetchOrderInfos();
@@ -84,7 +96,7 @@ export function Order() {
         ) : (
           <Content>
             <Cart>
-              <h1>Pedido {String(orderInfos.id).padStart(6, "0")}</h1>
+              <h1>Pedido {String(orderInfos.id).padStart(6, '0')}</h1>
               {orderInfos.meals.map(meal => {
                 const { id, title, price, image, meal_amount } = meal;
                 return (

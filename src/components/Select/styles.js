@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Container = styled.label`
   padding: 15px;
@@ -38,7 +38,7 @@ const Container = styled.label`
     border: none;
     color: ${({ theme }) => theme.COLORS.WHITE};
 
-    -webkit-appearance: ${({ disabled }) => disabled && "none"};
+    -webkit-appearance: ${({ disabled }) => disabled && 'none'};
 
     option {
       background-color: ${({ theme }) => theme.COLORS.BLUE_800};

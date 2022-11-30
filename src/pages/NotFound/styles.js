@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Container = styled.div`
   width: 100%;
@@ -21,7 +21,7 @@ const Container = styled.div`
 
     p {
       margin: 20px 0;
-      font-family: "Poppins", sans-serif;
+      font-family: 'Poppins', sans-serif;
       font-size: 2rem;
     }
   }

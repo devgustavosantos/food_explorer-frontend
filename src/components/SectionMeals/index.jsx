@@ -1,9 +1,9 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from 'react';
 
-import { Container } from "./styles";
-import { Button } from "../Button";
-import { Card } from "../Card";
-import { useSearch } from "../../hooks/search";
+import { useSearch } from '../../hooks/search';
+import { Button } from '../Button';
+import { Card } from '../Card';
+import { Container } from './styles';
 
 export function SectionMeals({ title, meals }) {
   const [showAFewCards, setShowAFewCards] = useState(true);
@@ -15,15 +15,15 @@ export function SectionMeals({ title, meals }) {
   const { search } = useSearch();
 
   function getTheHeightOfACard() {
-    const card = mealsContainer.current.querySelector(".my-card");
+    const card = mealsContainer.current.querySelector('.my-card');
 
     const cardHight = card.offsetHeight;
 
     const cardMargin = Number(
       window
         .getComputedStyle(card, null)
-        .getPropertyValue("margin-bottom")
-        .split("px")[0]
+        .getPropertyValue('margin-bottom')
+        .split('px')[0]
     );
 
     return cardHight + cardMargin;
@@ -57,9 +57,19 @@ export function SectionMeals({ title, meals }) {
     if (search) return null;
 
     if (showAFewCards) {
-      return <Button title="Mostrar mais" onClick={handleVisibleCards} />;
+      return (
+        <Button
+          title="Mostrar mais"
+          onClick={handleVisibleCards}
+        />
+      );
     } else {
-      return <Button title="Mostrar menos" onClick={handleVisibleCards} />;
+      return (
+        <Button
+          title="Mostrar menos"
+          onClick={handleVisibleCards}
+        />
+      );
     }
   }
 
@@ -80,9 +90,15 @@ export function SectionMeals({ title, meals }) {
   }, []);
 
   return (
-    <Container className="my-section-meals" heightOfFewCards={heightOfFewCards}>
+    <Container
+      className="my-section-meals"
+      heightOfFewCards={heightOfFewCards}
+    >
       <h2>{title}</h2>
-      <div className={showAFewCards ? "show-few" : ""} ref={mealsContainer}>
+      <div
+        className={showAFewCards ? 'show-few' : ''}
+        ref={mealsContainer}
+      >
         {meals.map(meal => {
           const { id, title, description, image, price, favorite } = meal;
 

@@ -1,20 +1,20 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { TfiReceipt } from "react-icons/tfi";
-import { FiCreditCard } from "react-icons/fi";
+import { useEffect, useState } from 'react';
+import { FiCreditCard } from 'react-icons/fi';
+import { TfiReceipt } from 'react-icons/tfi';
+import { useNavigate } from 'react-router-dom';
 
-import { Cart, Container, Content, Payment } from "./styles";
-import { Footer } from "../../components/Footer";
-import { Header } from "../../components/Header";
-import { Meal } from "../../components/Meal";
-import { Wrapper } from "../../components/Wrapper";
-import { Button } from "../../components/Button";
-import { Input } from "../../components/Input";
-import qrCodeImg from "../../assets/qrcode.svg";
-import pixImg from "../../assets/pix.svg";
-import { useAuth } from "../../hooks/auth";
-import { useCart } from "../../hooks/cart";
-import { useRequest } from "../../hooks/request";
+import pixImg from '../../assets/pix.svg';
+import qrCodeImg from '../../assets/qrcode.svg';
+import { Button } from '../../components/Button';
+import { Footer } from '../../components/Footer';
+import { Header } from '../../components/Header';
+import { Input } from '../../components/Input';
+import { Meal } from '../../components/Meal';
+import { Wrapper } from '../../components/Wrapper';
+import { useAuth } from '../../hooks/auth';
+import { useCart } from '../../hooks/cart';
+import { useRequest } from '../../hooks/request';
+import { Cart, Container, Content, Payment } from './styles';
 
 export function ShoppingCart() {
   const { userInfos } = useAuth();
@@ -24,9 +24,9 @@ export function ShoppingCart() {
   const navigate = useNavigate();
 
   const [cardPayment, setCardPayment] = useState(false);
-  const [cardNumber, setCardNumber] = useState("");
-  const [cardExpiringDate, setCardExpiringDate] = useState("");
-  const [cardSecurityCode, setCardSecurityCode] = useState("");
+  const [cardNumber, setCardNumber] = useState('');
+  const [cardExpiringDate, setCardExpiringDate] = useState('');
+  const [cardSecurityCode, setCardSecurityCode] = useState('');
 
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -44,7 +44,7 @@ export function ShoppingCart() {
   function warnAboutEmptyInputs(haveAnyEmpty) {
     if (haveAnyEmpty) {
       alert(
-        "Para realizar o pagamento por cartão, é necessário preencher todos os campos! Verifique e tente novamente."
+        'Para realizar o pagamento por cartão, é necessário preencher todos os campos! Verifique e tente novamente.'
       );
     }
   }
@@ -61,7 +61,7 @@ export function ShoppingCart() {
   function alertAboutTheWrongAmountOfNumber(allNumbersAreRight) {
     if (!allNumbersAreRight) {
       alert(
-        "Parece que alguns números do cartão foram preenchidos incorretamente! Verifique e tente novamente."
+        'Parece que alguns números do cartão foram preenchidos incorretamente! Verifique e tente novamente.'
       );
     }
   }
@@ -86,7 +86,7 @@ export function ShoppingCart() {
       `);
 
       if (response) {
-        navigate("/login");
+        navigate('/login');
       }
 
       return;
@@ -107,7 +107,7 @@ export function ShoppingCart() {
       };
     });
 
-    const response = await manageRequests("post", "/orders", reduceMeals);
+    const response = await manageRequests('post', '/orders', reduceMeals);
 
     const wasTheRequestSuccessfullyMade = response.status === 201;
 
@@ -115,10 +115,10 @@ export function ShoppingCart() {
       emptyTheCart();
 
       alert(
-        "Pedido feito com sucesso! Agora aguarde a confirmação do pagamento."
+        'Pedido feito com sucesso! Agora aguarde a confirmação do pagamento.'
       );
 
-      navigate("/all-orders");
+      navigate('/all-orders');
 
       return;
     }
@@ -127,7 +127,7 @@ export function ShoppingCart() {
       return alert(response.data.message);
     } else {
       return alert(
-        "Não foi possível concluir a compra! Por favor tente novamente mais tarde."
+        'Não foi possível concluir a compra! Por favor tente novamente mais tarde.'
       );
     }
   }
@@ -179,15 +179,18 @@ export function ShoppingCart() {
                   <div className="buttons-payment">
                     <button
                       type="button"
-                      className={cardPayment ? "" : "selected-payment"}
+                      className={cardPayment ? '' : 'selected-payment'}
                       onClick={() => handlePaymentOption(false)}
                     >
-                      <img src={pixImg} alt="Imagem do símbolo do Pix" />
+                      <img
+                        src={pixImg}
+                        alt="Imagem do símbolo do Pix"
+                      />
                       PIX
                     </button>
                     <button
                       type="button"
-                      className={cardPayment ? "selected-payment" : ""}
+                      className={cardPayment ? 'selected-payment' : ''}
                       onClick={() => handlePaymentOption(true)}
                     >
                       <FiCreditCard />
@@ -198,9 +201,9 @@ export function ShoppingCart() {
                     <img
                       src={qrCodeImg}
                       alt="Imagem do qrCode"
-                      className={cardPayment ? "hidden" : ""}
+                      className={cardPayment ? 'hidden' : ''}
                     />
-                    <form className={cardPayment ? "" : "hidden"}>
+                    <form className={cardPayment ? '' : 'hidden'}>
                       <Input
                         title="Número do Cartão"
                         placeholder="0000 0000 0000 0000"

@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from 'react';
 
 const CartContext = createContext();
 
@@ -14,11 +14,11 @@ function CartProvider({ children }) {
       setMealsInCart(prevState => [newMeal, ...prevState]);
 
       localStorage.setItem(
-        "@food_explorer-meals",
+        '@food_explorer-meals',
         JSON.stringify([newMeal, ...mealsInCart])
       );
 
-      alert("Prato(s) adicionado(s) com sucesso!");
+      alert('Prato(s) adicionado(s) com sucesso!');
     } else {
       let updatedAmount = mealAlreadyAdd.amount + amount;
       let limitReached;
@@ -26,7 +26,7 @@ function CartProvider({ children }) {
       if (updatedAmount >= 10) {
         updatedAmount = 10;
         limitReached = true;
-        alert("Cada prato possui um limite de 10 unidades por pedido.");
+        alert('Cada prato possui um limite de 10 unidades por pedido.');
       }
 
       const newMealUpdated = {
@@ -41,12 +41,12 @@ function CartProvider({ children }) {
       setMealsInCart([newMealUpdated, ...mealsInCardFiltered]);
 
       localStorage.setItem(
-        "@food_explorer-meals",
+        '@food_explorer-meals',
         JSON.stringify([newMealUpdated, ...mealsInCardFiltered])
       );
 
       if (!limitReached) {
-        alert("Prato(s) adicionado(s) com sucesso!");
+        alert('Prato(s) adicionado(s) com sucesso!');
       }
     }
   }
@@ -59,19 +59,19 @@ function CartProvider({ children }) {
     setMealsInCart(mealsInCardFiltered);
 
     localStorage.setItem(
-      "@food_explorer-meals",
+      '@food_explorer-meals',
       JSON.stringify(mealsInCardFiltered)
     );
   }
 
   function emptyTheCart() {
     setMealsInCart([]);
-    localStorage.removeItem("@food_explorer-meals");
+    localStorage.removeItem('@food_explorer-meals');
   }
 
   useEffect(() => {
     const mealsInMemory = JSON.parse(
-      localStorage.getItem("@food_explorer-meals")
+      localStorage.getItem('@food_explorer-meals')
     );
 
     if (mealsInMemory) {

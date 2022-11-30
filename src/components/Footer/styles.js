@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Container = styled.footer`
   width: 100%;
@@ -36,7 +36,7 @@ const Container = styled.footer`
   }
 
   p {
-    font-family: "DM Sans", sans-serif;
+    font-family: 'DM Sans', sans-serif;
     text-align: center;
     font-size: clamp(1.2rem, 3vw, 1.4rem);
 
