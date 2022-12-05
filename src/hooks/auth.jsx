@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { useContext, createContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 import { api } from '../services/api';
 
@@ -14,28 +13,66 @@ function AuthProvider({ children }) {
 
     localStorage.setItem('@food_explorer:user', JSON.stringify(user));
     localStorage.setItem('@food_explorer:token', token);
+    localStorage.setItem('@food_explorer:session', JSON.stringify(Date.now()));
   }
 
-  function deauthenticateUser() {
+  function clearLoginData() {
     setUserInfos(null);
 
     localStorage.removeItem('@food_explorer:user');
     localStorage.removeItem('@food_explorer:token');
+    localStorage.removeItem('@food_explorer:session_created_at');
   }
 
-  useEffect(() => {
+  function convertDaysToMilliseconds(days) {
+    const milliseconds = days * 24 * 60 * 60 * 1000;
+
+    return milliseconds;
+  }
+
+  function validateSessionTime(mostRecentLoginTime) {
+    const maximumTimeLogged = convertDaysToMilliseconds(1);
+
+    const currentTime = Date.now();
+
+    const timedOutOfSession =
+      currentTime - mostRecentLoginTime > maximumTimeLogged;
+
+    return timedOutOfSession;
+  }
+
+  function getSavedData() {
     const user = JSON.parse(localStorage.getItem('@food_explorer:user'));
     const token = localStorage.getItem('@food_explorer:token');
+    const session = JSON.parse(
+      localStorage.getItem('@food_explorer:session_created_at')
+    );
 
+    return { user, token, session };
+  }
+
+  function includeSavedData(user, token) {
     if (user && token) {
       setUserInfos(user);
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     }
+  }
+
+  useEffect(() => {
+    const { user, token, session } = getSavedData();
+
+    const timedOutOfSession = validateSessionTime(session);
+
+    if (timedOutOfSession) {
+      return clearLoginData();
+    }
+
+    includeSavedData(user, token);
   }, []);
 
   return (
     <AuthContext.Provider
-      value={{ userInfos, authenticateUser, deauthenticateUser }}
+      value={{ userInfos, authenticateUser, clearLoginData }}
     >
       {children}
     </AuthContext.Provider>

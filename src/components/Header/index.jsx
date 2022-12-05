@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import {
-  FiMenu,
-  FiX,
-  FiPlus,
   FiHeart,
+  FiLogOut,
+  FiMenu,
+  FiPlus,
   FiShoppingCart,
   FiUser,
-  FiLogOut,
+  FiX,
 } from 'react-icons/fi';
 import { TfiReceipt } from 'react-icons/tfi';
 import { Link, useNavigate } from 'react-router-dom';
@@ -17,18 +17,18 @@ import { useSearch } from '../../hooks/search';
 import { SearchBar } from '../SearchBar';
 import { Wrapper } from '../Wrapper';
 import {
+  Brand,
   Container,
   Desktop,
-  Mobile,
-  Brand,
   HamburgerMenu,
+  Mobile,
   Navigation,
 } from './styles';
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const { userInfos, deauthenticateUser } = useAuth();
+  const { userInfos, clearLoginData } = useAuth();
   const { search, setSearch } = useSearch();
 
   const navigate = useNavigate();
@@ -241,7 +241,7 @@ export function Header() {
     if (confirmation) {
       navigate('/');
 
-      deauthenticateUser();
+      clearLoginData();
 
       window.location.reload();
     }
