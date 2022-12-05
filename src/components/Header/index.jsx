@@ -110,9 +110,9 @@ export function Header() {
             </Link>
           </li>
           <li>
-            <Link to="/login">
+            <button onClick={handleSignInSignOut}>
               <FiLogOut />
-            </Link>
+            </button>
           </li>
         </ul>
       );
@@ -204,10 +204,10 @@ export function Header() {
             </Link>
           </li>
           <li>
-            <Link to="/login">
+            <button onClick={handleSignInSignOut}>
               <FiLogOut />
               {userInfos ? 'Sair' : 'Entrar'}
-            </Link>
+            </button>
           </li>
         </ul>
       );
