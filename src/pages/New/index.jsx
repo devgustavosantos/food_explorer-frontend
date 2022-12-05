@@ -1,7 +1,5 @@
-import { useState, useEffect } from 'react';
 import { FiX } from 'react-icons/fi';
 import { IoIosArrowBack } from 'react-icons/io';
-import { useNavigate } from 'react-router-dom';
 
 import { Button } from '../../components/Button';
 import { ButtonText } from '../../components/ButtonText';
@@ -12,82 +10,29 @@ import { InputImage } from '../../components/InputImage';
 import { Loading } from '../../components/Loading';
 import { NewIngredient } from '../../components/NewIngredient';
 import { Wrapper } from '../../components/Wrapper';
-import { useRequest } from '../../hooks/request';
 import { Container, Form, Ingredients, Description, Modal } from './styles';
+import { useNew } from './useNew';
 
 export function New() {
-  const [modalOpen, setModalOpen] = useState(false);
-
-  const [name, setName] = useState('');
-  const [category, setCategory] = useState('');
-  const [price, setPrice] = useState('');
-  const [description, setDescription] = useState('');
-  const [newIngredient, setNewIngredient] = useState('');
-  // const [ingredientsOfThisMeal, setIngredientsOfThisMeal] = useState([]);
-  const [ingredientsRegisteredInDB, setIngredientsRegisteredInDB] = useState();
-
-  const navigate = useNavigate();
-
-  const { manageRequests } = useRequest();
-
-  function handleModal() {
-    setModalOpen(prevState => !prevState);
-  }
-
-  // function checkIfTheInputIsEmpty(inputValue) {
-  //   return inputValue ? true : false;
-  // }
-
-  function handleAddNewIngredient() {
-    console.log('oi');
-  }
-
-  function handleRegisterMeal() {
-    console.log({ name, category, price, description });
-  }
-
-  async function fetchIngredients() {
-    const response = await manageRequests('get', '/ingredients');
-
-    return response;
-  }
-
-  function validateTheResponse(response) {
-    const isAValidResponse = Array.isArray(response.data);
-
-    return isAValidResponse;
-  }
-
-  function showMessageIfThereIsAnError(withoutErros) {
-    if (!withoutErros) {
-      alert(
-        'Não foi possível carregar os dados! Por favor, tente novamente mais tarde.'
-      );
-    }
-  }
-
-  function checkIfThisPageWillBeRendered(hadNoProblem) {
-    if (hadNoProblem) return;
-
-    navigate('/');
-  }
-
-  async function loadData() {
-    const response = await fetchIngredients();
-    const responseChecked = validateTheResponse(response);
-    showMessageIfThereIsAnError(responseChecked);
-
-    checkIfThisPageWillBeRendered(responseChecked);
-
-    setIngredientsRegisteredInDB(response.data);
-  }
-
-  useEffect(() => {
-    loadData();
-  }, []);
+  const {
+    modalOpen,
+    category,
+    setCategory,
+    name,
+    setName,
+    price,
+    setPrice,
+    description,
+    setDescription,
+    newIngredient,
+    setNewIngredient,
+    ingredientsRegisteredInDB,
+    handleModal,
+    handleAddNewIngredient,
+    handleRegisterMeal,
+  } = useNew();
 
   return (
-    // eslint-disable-next-line react/react-in-jsx-scope
     <Container>
       <Header />
       {!ingredientsRegisteredInDB ? (
