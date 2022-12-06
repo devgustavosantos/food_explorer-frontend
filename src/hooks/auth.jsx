@@ -13,7 +13,10 @@ function AuthProvider({ children }) {
 
     localStorage.setItem('@food_explorer:user', JSON.stringify(user));
     localStorage.setItem('@food_explorer:token', token);
-    localStorage.setItem('@food_explorer:session', JSON.stringify(Date.now()));
+    localStorage.setItem(
+      '@food_explorer:session_created_at',
+      JSON.stringify(Date.now())
+    );
   }
 
   function clearLoginData() {
@@ -52,15 +55,11 @@ function AuthProvider({ children }) {
   }
 
   function includeSavedData(user, token) {
-    if (user && token) {
-      setUserInfos(user);
-      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    }
+    setUserInfos(user);
+    api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   }
 
-  useEffect(() => {
-    const { user, token, session } = getSavedData();
-
+  function loadLastSessionData({ user, token, session }) {
     const timedOutOfSession = validateSessionTime(session);
 
     if (timedOutOfSession) {
@@ -68,6 +67,16 @@ function AuthProvider({ children }) {
     }
 
     includeSavedData(user, token);
+  }
+
+  useEffect(() => {
+    const { user, token, session } = getSavedData();
+
+    const wasTheUserAlreadyLoggedIn = user && token && session;
+
+    if (wasTheUserAlreadyLoggedIn) {
+      loadLastSessionData({ user, token, session });
+    }
   }, []);
 
   return (
