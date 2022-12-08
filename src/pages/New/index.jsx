@@ -26,79 +26,87 @@ export function New() {
     setDescription,
     newIngredient,
     setNewIngredient,
+    newIngredientPhoto,
+    setNewIngredientPhoto,
+    ingredientsOfThisMeal,
     ingredientsRegisteredInDB,
     handleModal,
     handleAddNewIngredient,
     handleRegisterMeal,
+    handleRegisterIngredient,
   } = useNew();
+
+  if (!ingredientsRegisteredInDB) {
+    return <Loading />;
+  }
 
   return (
     <Container>
       <Header />
-      {!ingredientsRegisteredInDB ? (
-        <Loading />
-      ) : (
-        <Wrapper>
-          <Form>
-            <ButtonText
-              title="voltar"
-              icon={IoIosArrowBack}
-              to="/"
-            />
-            <h1>Adicionar Prato</h1>
-            <InputImage />
-            <Input
-              title="Nome"
-              placeholder="Ex.: Salada Ceasar"
-              value={name}
-              onChange={e => setName(e.target.value)}
-            />
-            <Input
-              title="Categoria"
-              placeholder="Ex.: Prato Principal"
-              value={category}
-              onChange={e => setCategory(e.target.value)}
-            />
-            <Ingredients>
-              <p>Ingredientes</p>
-              <div className="new-ingredients">
-                <NewIngredient value="sal" />
-                <NewIngredient value="açúcar" />
-                <NewIngredient value="fermento americano" />
+      <Wrapper>
+        <Form>
+          <ButtonText
+            title="voltar"
+            icon={IoIosArrowBack}
+            to="/"
+          />
+          <h1>Adicionar Prato</h1>
+          <InputImage />
+          <Input
+            title="Nome"
+            placeholder="Ex.: Salada Ceasar"
+            value={name}
+            onChange={e => setName(e.target.value)}
+          />
+          <Input
+            title="Categoria"
+            placeholder="Ex.: Prato Principal"
+            value={category}
+            onChange={e => setCategory(e.target.value)}
+          />
+          <Ingredients>
+            <p>Ingredientes</p>
+            <div className="new-ingredients">
+              {ingredientsOfThisMeal.map(ingredient => (
                 <NewIngredient
-                  isNew
-                  value={newIngredient}
-                  onChange={e => setNewIngredient(e.target.value)}
-                  onClick={handleAddNewIngredient}
+                  key={ingredient}
+                  value={ingredient}
                 />
-              </div>
-            </Ingredients>
+              ))}
+              <NewIngredient
+                isNew
+                value={newIngredient}
+                onChange={e => setNewIngredient(e.target.value)}
+                onClick={handleAddNewIngredient}
+              />
+            </div>
+          </Ingredients>
 
-            <Input
-              title="Preço"
-              placeholder="R$ 00,00"
-              type="text"
-              mask="R$ 00,00"
-              value={price}
-              onChange={e => setPrice(e.target.value)}
-            />
-            <Description>
-              <p>Descrição</p>
-              <textarea
-                placeholder="Fale brevemente sobre o prato, seus ingredientes e composição..."
-                value={description}
-                onChange={e => setDescription(e.target.value)}
-              ></textarea>
-            </Description>
-            <Button
-              title="Adicionar prato"
-              isHighlighted={false}
-              onClick={handleRegisterMeal}
-            />
-          </Form>
-        </Wrapper>
-      )}
+          <Input
+            title="Preço"
+            placeholder="R$ 00,00"
+            type="text"
+            mask="R$ 00,00"
+            value={price}
+            onChange={e => setPrice(e.target.value)}
+          />
+          <Description>
+            <p>Descrição</p>
+            <textarea
+              placeholder="Fale brevemente sobre o prato, seus ingredientes e composição..."
+              value={description}
+              onChange={e => setDescription(e.target.value)}
+            ></textarea>
+          </Description>
+          <Button
+            title="Adicionar prato"
+            isHighlighted={false}
+            onClick={handleRegisterMeal}
+          />
+        </Form>
+      </Wrapper>
       <Footer />
+
       <Modal className={modalOpen ? 'open' : 'close'}>
         <div className="alert">
           <button
@@ -115,13 +123,22 @@ export function New() {
           <Input
             title="Nome"
             placeholder="Ex.: Sal"
+            value={newIngredient}
+            onChange={e => setNewIngredient(e.target.value)}
           />
-          <InputImage />
+          <InputImage
+            isAMeal={false}
+            onChange={e => setNewIngredientPhoto(e.target.files[0])}
+          />
           <Button
             title="Cadastrar sem foto"
             isHighlighted={false}
+            onClick={() => handleRegisterIngredient(false)}
           />
-          <Button title="Cadastrar com foto" />
+          <Button
+            title="Cadastrar com foto"
+            onClick={() => handleRegisterIngredient(true)}
+          />
         </div>
       </Modal>
     </Container>
