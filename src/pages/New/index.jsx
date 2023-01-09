@@ -32,6 +32,7 @@ export function New() {
     ingredientsRegisteredInDB,
     handleModal,
     handleAddNewIngredient,
+    removeNewIngredient,
     handleRegisterMeal,
   } = useNew();
 
@@ -79,6 +80,7 @@ export function New() {
                 <NewIngredient
                   key={ingredient}
                   value={ingredient}
+                  onClick={() => removeNewIngredient(ingredient)}
                 />
               ))}
               <NewIngredient

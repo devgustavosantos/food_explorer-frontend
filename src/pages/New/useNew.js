@@ -46,6 +46,14 @@ export function useNew() {
     setNewIngredient('');
   }
 
+  function removeNewIngredient(ingredientRemoved) {
+    const ingredientsUpdated = ingredientsOfThisMeal.filter(
+      ingredient => ingredient !== ingredientRemoved
+    );
+
+    setIngredientsOfThisMeal(ingredientsUpdated);
+  }
+
   function handleRegisterMeal() {
     console.log({ name, category, price, description });
   }
@@ -107,6 +115,7 @@ export function useNew() {
     ingredientsRegisteredInDB,
     handleModal,
     handleAddNewIngredient,
+    removeNewIngredient,
     handleRegisterMeal,
   };
 }
