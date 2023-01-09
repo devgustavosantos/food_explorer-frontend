@@ -12,6 +12,7 @@ import { NewIngredient } from '../../components/NewIngredient';
 import { Wrapper } from '../../components/Wrapper';
 import { Container, Form, Ingredients, Description, Modal } from './styles';
 import { useNew } from './useNew';
+import { useRegisterNewIngredient } from './useRegisterNewIngredient';
 
 export function New() {
   const {
@@ -26,15 +27,25 @@ export function New() {
     setDescription,
     newIngredient,
     setNewIngredient,
-    newIngredientPhoto,
-    setNewIngredientPhoto,
+    setIngredientsOfThisMeal,
     ingredientsOfThisMeal,
     ingredientsRegisteredInDB,
     handleModal,
     handleAddNewIngredient,
     handleRegisterMeal,
-    handleRegisterIngredient,
   } = useNew();
+
+  const {
+    newIngredientPhoto,
+    setNewIngredientPhoto,
+    handleRegisterIngredient,
+  } = useRegisterNewIngredient({
+    handleModal,
+    newIngredient,
+    setIngredientsOfThisMeal,
+    setNewIngredient,
+    ingredientsRegisteredInDB,
+  });
 
   if (!ingredientsRegisteredInDB) {
     return <Loading />;
