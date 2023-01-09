@@ -35,17 +35,14 @@ export function New() {
     handleRegisterMeal,
   } = useNew();
 
-  const {
-    newIngredientPhoto,
-    setNewIngredientPhoto,
-    handleRegisterIngredient,
-  } = useRegisterNewIngredient({
-    handleModal,
-    newIngredient,
-    setIngredientsOfThisMeal,
-    setNewIngredient,
-    ingredientsRegisteredInDB,
-  });
+  const { setNewIngredientPhoto, handleRegisterIngredient } =
+    useRegisterNewIngredient({
+      handleModal,
+      newIngredient,
+      setIngredientsOfThisMeal,
+      setNewIngredient,
+      ingredientsRegisteredInDB,
+    });
 
   if (!ingredientsRegisteredInDB) {
     return <Loading />;
