@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { useRequest } from '../../../hooks/request';
-import { showErrorMessage } from '../utils/helpers';
+import { showErrorMessage } from '../../../utils/helpers';
 import { errorMessages } from '../utils/messages';
 
 export function useRegisterNewIngredient({

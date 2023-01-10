@@ -20,6 +20,8 @@ export function Details() {
 
   const [mealInfos, setMealInfos] = useState();
 
+  console.log({ mealInfos });
+
   const { manageRequests } = useRequest();
 
   const { id } = useParams();
@@ -40,7 +42,7 @@ export function Details() {
   }
 
   function renderManipulationButtons() {
-    const { meal_id, title, price, image } = mealInfos;
+    const { id: meal_id, title, price, image } = mealInfos;
 
     if (!userInfos || !userInfos.isAdm) {
       return (
