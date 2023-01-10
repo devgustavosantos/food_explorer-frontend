@@ -49,6 +49,16 @@ function RequestProvider({ children }) {
             reject(error);
           }
         }),
+      patch: () =>
+        new Promise(async (resolve, reject) => {
+          try {
+            const response = await api.patch(resource, infos);
+
+            resolve(response);
+          } catch (error) {
+            reject(error);
+          }
+        }),
     };
 
     const manageResponseTime = () =>

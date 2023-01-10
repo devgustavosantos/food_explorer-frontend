@@ -23,7 +23,7 @@ const Container = styled.div`
     cursor: pointer;
   }
 
-  #meal-image {
+  input {
     display: none;
   }
 `;
