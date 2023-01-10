@@ -1,18 +1,25 @@
 import { useRequest } from '../../hooks/request';
 import { showErrorMessage } from '../../utils/helpers';
+import { messages } from './messages';
 
 export function useAdmButtons({ meal_id }) {
   const { manageRequests } = useRequest();
 
-  async function handleDeleteMeal() {
-    const userConfirmation = confirm(
-      'Você tem certeza que deseja excluir esse prato?'
-    );
+  function confirmExclusion() {
+    const userConfirmation = confirm(messages.confirmationQuestion);
 
-    if (!userConfirmation) return;
+    if (!userConfirmation) {
+      throw messages.abortTheDeletion;
+    }
+  }
 
+  async function deleteMeal() {
     const response = await manageRequests('delete', `/meals/${meal_id}`);
 
+    return response;
+  }
+
+  function verifyIfWasAnError(response) {
     const someErrorHappened = Object.prototype.hasOwnProperty.call(
       response.data,
       'message'
@@ -21,13 +28,26 @@ export function useAdmButtons({ meal_id }) {
     if (someErrorHappened) {
       showErrorMessage({
         userMessage: response.data.message,
-        devMessage: 'The meal was not deleted with success.',
+        devMessage: messages.erroOnDeleteMeal,
       });
     }
+  }
 
-    alert('O prato foi excluído com sucesso!');
+  function successfulDeletion() {
+    alert(messages.successOnDeleteMeal);
 
     location.reload();
   }
+
+  async function handleDeleteMeal() {
+    confirmExclusion();
+
+    const deleteResponse = await deleteMeal();
+
+    verifyIfWasAnError(deleteResponse);
+
+    successfulDeletion();
+  }
+
   return { handleDeleteMeal };
 }
