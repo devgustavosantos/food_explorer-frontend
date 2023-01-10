@@ -10,17 +10,18 @@ import { InputImage } from '../../components/InputImage';
 import { Loading } from '../../components/Loading';
 import { NewIngredient } from '../../components/NewIngredient';
 import { Wrapper } from '../../components/Wrapper';
-import { Container, Form, Ingredients, Description, Modal } from './styles';
-import { useNew } from './useNew';
-import { useRegisterNewIngredient } from './useRegisterNewIngredient';
+import { useNew } from './hooks/useNew';
+import { useRegisterMeal } from './hooks/useRegisterMeal';
+import { useRegisterNewIngredient } from './hooks/useRegisterNewIngredient';
+import { Container, Description, Form, Ingredients, Modal } from './styles';
 
 export function New() {
   const {
     modalOpen,
     category,
     setCategory,
-    name,
-    setName,
+    title,
+    setTitle,
     price,
     setPrice,
     description,
@@ -33,7 +34,9 @@ export function New() {
     handleModal,
     handleAddNewIngredient,
     removeNewIngredient,
-    handleRegisterMeal,
+    photo,
+    setPhoto,
+    resetAllStates,
   } = useNew();
 
   const { setNewIngredientPhoto, handleRegisterIngredient } =
@@ -44,6 +47,17 @@ export function New() {
       setNewIngredient,
       ingredientsRegisteredInDB,
     });
+
+  const { handleRegisterMeal } = useRegisterMeal({
+    title,
+    category,
+    price,
+    description,
+    ingredientsOfThisMeal,
+    photo,
+    newIngredient,
+    resetAllStates,
+  });
 
   if (!ingredientsRegisteredInDB) {
     return <Loading />;
@@ -60,12 +74,15 @@ export function New() {
             to="/"
           />
           <h1>Adicionar Prato</h1>
-          <InputImage />
+          <InputImage
+            isAMeal
+            onChange={e => setPhoto(e.target.files[0])}
+          />
           <Input
             title="Nome"
             placeholder="Ex.: Salada Ceasar"
-            value={name}
-            onChange={e => setName(e.target.value)}
+            value={title}
+            onChange={e => setTitle(e.target.value)}
           />
           <Input
             title="Categoria"
@@ -76,13 +93,17 @@ export function New() {
           <Ingredients>
             <p>Ingredientes</p>
             <div className="new-ingredients">
-              {ingredientsOfThisMeal.map(ingredient => (
-                <NewIngredient
-                  key={ingredient}
-                  value={ingredient}
-                  onClick={() => removeNewIngredient(ingredient)}
-                />
-              ))}
+              {ingredientsOfThisMeal.map(ingredient => {
+                const { id, name } = ingredient;
+
+                return (
+                  <NewIngredient
+                    key={`${id}-${name}`}
+                    value={name}
+                    onClick={() => removeNewIngredient(name)}
+                  />
+                );
+              })}
               <NewIngredient
                 isNew
                 value={newIngredient}

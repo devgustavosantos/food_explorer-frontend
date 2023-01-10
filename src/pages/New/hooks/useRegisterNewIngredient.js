@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
-import { useRequest } from '../../hooks/request';
-import { errorMessages } from './errorMessages';
+import { useRequest } from '../../../hooks/request';
+import { showErrorMessage } from '../utils/helpers';
+import { errorMessages } from '../utils/messages';
 
 export function useRegisterNewIngredient({
   handleModal,
@@ -16,17 +17,11 @@ export function useRegisterNewIngredient({
 
   let ingredientResponse, ingredientPhotoResponse;
 
-  function showErrorMessage({ userMessage, devMessage }) {
-    alert(userMessage);
-
-    throw new Error(devMessage);
-  }
-
   function validateIfNewIngredientIsEmpty() {
     if (!newIngredient) {
       showErrorMessage({
-        userMessage: errorMessages.newIngredienteEmpty.user,
-        devMessage: errorMessages.newIngredienteEmpty.dev,
+        userMessage: errorMessages.newIngredientEmpty.user,
+        devMessage: errorMessages.newIngredientEmpty.dev,
       });
     }
   }
@@ -65,7 +60,10 @@ export function useRegisterNewIngredient({
   }
 
   function updateDisplay() {
-    setIngredientsOfThisMeal(prevState => [newIngredient, ...prevState]);
+    setIngredientsOfThisMeal(prevState => [
+      ingredientResponse.data,
+      ...prevState,
+    ]);
     setNewIngredient('');
     setNewIngredientPhoto(null);
 

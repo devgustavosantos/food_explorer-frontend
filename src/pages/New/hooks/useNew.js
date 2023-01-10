@@ -1,17 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useRequest } from '../../hooks/request';
+import { useRequest } from '../../../hooks/request';
 
 export function useNew() {
   const [modalOpen, setModalOpen] = useState(false);
 
-  const [name, setName] = useState('');
+  const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
-  const [newIngredient, setNewIngredient] = useState('');
 
+  const [photo, setPhoto] = useState(null);
+
+  const [newIngredient, setNewIngredient] = useState('');
   const [ingredientsOfThisMeal, setIngredientsOfThisMeal] = useState([]);
   const [ingredientsRegisteredInDB, setIngredientsRegisteredInDB] = useState();
 
@@ -27,7 +29,7 @@ export function useNew() {
     if (!newIngredient) return;
 
     const ingredientAlreadyAddedToMeal = ingredientsOfThisMeal.find(
-      ingredient => ingredient == newIngredient
+      ingredient => ingredient.name === newIngredient
     );
 
     if (ingredientAlreadyAddedToMeal) {
@@ -42,20 +44,21 @@ export function useNew() {
       return handleModal();
     }
 
-    setIngredientsOfThisMeal(prevState => [newIngredient, ...prevState]);
+    console.log({ ingredientAlreadyRegisteredInTheDB });
+
+    setIngredientsOfThisMeal(prevState => [
+      ingredientAlreadyRegisteredInTheDB,
+      ...prevState,
+    ]);
     setNewIngredient('');
   }
 
   function removeNewIngredient(ingredientRemoved) {
     const ingredientsUpdated = ingredientsOfThisMeal.filter(
-      ingredient => ingredient !== ingredientRemoved
+      ingredient => ingredient.name !== ingredientRemoved
     );
 
     setIngredientsOfThisMeal(ingredientsUpdated);
-  }
-
-  function handleRegisterMeal() {
-    console.log({ name, category, price, description });
   }
 
   async function fetchIngredients() {
@@ -84,6 +87,20 @@ export function useNew() {
     navigate('/');
   }
 
+  function resetAllStates() {
+    setModalOpen(false);
+
+    setTitle('');
+    setCategory('');
+    setPrice('');
+    setDescription('');
+
+    setPhoto(null);
+
+    setNewIngredient('');
+    setIngredientsOfThisMeal([]);
+  }
+
   async function loadData() {
     const response = await fetchIngredients();
     const responseChecked = validateTheResponse(response);
@@ -102,8 +119,8 @@ export function useNew() {
     modalOpen,
     category,
     setCategory,
-    name,
-    setName,
+    title,
+    setTitle,
     price,
     setPrice,
     description,
@@ -116,6 +133,8 @@ export function useNew() {
     handleModal,
     handleAddNewIngredient,
     removeNewIngredient,
-    handleRegisterMeal,
+    photo,
+    setPhoto,
+    resetAllStates,
   };
 }
