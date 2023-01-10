@@ -1,13 +1,11 @@
-import { useState } from 'react';
-
 import { Container } from './styles';
+import { useSelect } from './useSelect';
 
 export function Select({ order_id, status, disabled }) {
-  const [currentStatus, setCurrentStatus] = useState(status);
-
-  function handleStatus(e) {
-    setCurrentStatus(e.target.value);
-  }
+  const { currentStatus, handleChangeStatus } = useSelect({
+    order_id,
+    status,
+  });
 
   return (
     <Container disabled={disabled}>
@@ -21,7 +19,7 @@ export function Select({ order_id, status, disabled }) {
         ></div>
       </div>
       <select
-        onChange={handleStatus}
+        onChange={handleChangeStatus}
         value={currentStatus}
         disabled={disabled}
       >
