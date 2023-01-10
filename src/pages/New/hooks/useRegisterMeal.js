@@ -1,5 +1,5 @@
 import { useRequest } from '../../../hooks/request';
-import { showErrorMessage } from '../utils/helpers';
+import { showErrorMessage } from '../../../utils/helpers';
 import { errorMessages } from '../utils/messages';
 
 export function useRegisterMeal({
