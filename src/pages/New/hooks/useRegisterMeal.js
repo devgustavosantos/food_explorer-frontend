@@ -110,7 +110,7 @@ export function useRegisterMeal({
     return response;
   }
 
-  async function handleRegisterMeal() {
+  function inputsValidation() {
     [title, category, price, description].forEach(input =>
       isInputFilled(input)
     );
@@ -119,24 +119,23 @@ export function useRegisterMeal({
     wasThePhotoAdd();
     isThePriceEnteredValid();
     somethingWasTypedInNewIngredient();
+  }
 
+  async function handleRequests() {
     const mealResponse = await registerTheMeal();
     wasThereAnErrorOnRequest(mealResponse);
 
     const photoResponse = await registerThePhoto(mealResponse.data.id);
     wasThereAnErrorOnRequest(photoResponse);
+  }
+
+  async function handleRegisterMeal() {
+    inputsValidation();
+
+    await handleRequests();
 
     resetAllStates();
     alert('Prato cadastrado com sucesso!');
-
-    console.log({
-      title,
-      category,
-      price: formatPrice(),
-      description,
-      ingredients,
-      photo,
-    });
   }
 
   return {
