@@ -114,36 +114,49 @@ export function useNewAndEdit() {
     setIngredientsRegisteredInDB(response.data);
   }
 
-  async function handleTheRendering() {
+  function checkIfIsEditInterface() {
     const currentPath = location.pathname;
 
     const isEditInterface = currentPath.includes('edit');
 
-    if (!isEditInterface) return;
+    return isEditInterface;
+  }
 
-    setEditInterface(true);
+  async function fetchMealInfos() {
+    const mealId = location.pathname.replace('/edit/', '');
 
-    const mealId = currentPath.replace('/edit/', '');
+    const response = await manageRequests('get', `/meals/${mealId}`);
 
-    const mealResponse = await manageRequests('get', `/meals/${mealId}`);
+    return response;
+  }
 
-    validateRequest({
-      response: mealResponse,
-      devMessage: 'The request to get meal infos was not successful.',
-    });
-
-    const { data } = mealResponse;
-
+  function loadDataOfMeal(data) {
     setMealInfos(data);
-
     setTitle(data.title);
     setCategory(data.category);
     setPrice(String(data.price));
     setPhoto(data.image);
     setDescription(data.description);
     setIngredientsOfThisMeal(data.ingredients);
+  }
 
-    console.log({ mealResponse });
+  async function handleRenderEditInterface() {
+    setEditInterface(true);
+
+    const mealResponse = await fetchMealInfos();
+
+    validateRequest({
+      response: mealResponse,
+      devMessage: 'The request to get meal infos was not successful.',
+    });
+
+    loadDataOfMeal(mealResponse.data);
+  }
+
+  async function handleTheRendering() {
+    const isEditInterface = checkIfIsEditInterface();
+
+    if (isEditInterface) await handleRenderEditInterface();
   }
 
   useEffect(() => {
