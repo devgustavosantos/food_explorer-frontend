@@ -2,36 +2,49 @@ import { useState } from 'react';
 
 import { useRequest } from '../../hooks/request';
 import { validateRequest } from '../../utils/helpers';
+import { messages } from './messages';
 
 export function useSelect({ order_id, status }) {
   const { manageRequests } = useRequest();
 
   const [currentStatus, setCurrentStatus] = useState(status);
 
+  function handleChangeConfirmation() {
+    const confirmation = confirm(messages.changeConfirmation);
+
+    if (!confirmation) {
+      throw messages.abortStatusChange;
+    }
+  }
+
+  async function requestStatusChange(status) {
+    const response = await manageRequests('put', '/orders', {
+      order_id,
+      status,
+    });
+
+    return response;
+  }
+
+  function handleSuccessOnChangeStatus(statusUpdated) {
+    setCurrentStatus(statusUpdated);
+
+    alert(messages.successOnChangeStatus);
+  }
+
   async function handleChangeStatus(e) {
     const statusUpdated = e.target.value;
 
-    const confirmation = confirm(
-      `Você tem certeza que deseja mudar o pedido ${order_id} para o status ${statusUpdated}?`
-    );
+    handleChangeConfirmation();
 
-    if (!confirmation) {
-      throw 'The user abort the change of order status.';
-    }
-
-    const response = await manageRequests('put', '/orders', {
-      order_id,
-      status: statusUpdated,
-    });
+    const statusResponse = await requestStatusChange(statusUpdated);
 
     validateRequest({
-      response,
-      devMessage: 'The order status was not updated successfully.',
+      response: statusResponse,
+      devMessage: messages.errorOnChangeStatus,
     });
 
-    setCurrentStatus(statusUpdated);
-
-    alert('O pedido foi atualizado com sucesso!');
+    handleSuccessOnChangeStatus(statusUpdated);
   }
 
   return { currentStatus, handleChangeStatus };
