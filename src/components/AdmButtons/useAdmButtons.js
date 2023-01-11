@@ -1,8 +1,12 @@
+import { useNavigate } from 'react-router-dom';
+
 import { useRequest } from '../../hooks/request';
 import { showErrorMessage } from '../../utils/helpers';
 import { messages } from './messages';
 
 export function useAdmButtons({ meal_id }) {
+  const navigate = useNavigate();
+
   const { manageRequests } = useRequest();
 
   function confirmExclusion() {
@@ -49,5 +53,9 @@ export function useAdmButtons({ meal_id }) {
     successfulDeletion();
   }
 
-  return { handleDeleteMeal };
+  function handleEditMeal() {
+    navigate(`/edit/${meal_id}`);
+  }
+
+  return { handleDeleteMeal, handleEditMeal };
 }

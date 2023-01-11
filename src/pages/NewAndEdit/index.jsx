@@ -10,12 +10,12 @@ import { InputImage } from '../../components/InputImage';
 import { Loading } from '../../components/Loading';
 import { NewIngredient } from '../../components/NewIngredient';
 import { Wrapper } from '../../components/Wrapper';
-import { useNew } from './hooks/useNew';
+import { useNewAndEdit } from './hooks/useNewAndEdit';
 import { useRegisterMeal } from './hooks/useRegisterMeal';
 import { useRegisterNewIngredient } from './hooks/useRegisterNewIngredient';
 import { Container, Description, Form, Ingredients, Modal } from './styles';
 
-export function New() {
+export function NewAndEdit() {
   const {
     modalOpen,
     category,
@@ -37,7 +37,9 @@ export function New() {
     photo,
     setPhoto,
     resetAllStates,
-  } = useNew();
+    editInterface,
+    mealInfos,
+  } = useNewAndEdit();
 
   const { setNewIngredientPhoto, handleRegisterIngredient } =
     useRegisterNewIngredient({
@@ -63,6 +65,10 @@ export function New() {
     return <Loading />;
   }
 
+  if (editInterface && !mealInfos) {
+    return <Loading />;
+  }
+
   return (
     <Container>
       <Header />
@@ -73,7 +79,8 @@ export function New() {
             icon={IoIosArrowBack}
             to="/"
           />
-          <h1>Adicionar Prato</h1>
+          {!editInterface && <h1>Adicionar Prato</h1>}
+          {editInterface && <h1>Editar Prato</h1>}
           <InputImage
             isAMeal
             onChange={e => setPhoto(e.target.files[0])}
@@ -129,11 +136,20 @@ export function New() {
               onChange={e => setDescription(e.target.value)}
             ></textarea>
           </Description>
-          <Button
-            title="Adicionar prato"
-            isHighlighted={false}
-            onClick={handleRegisterMeal}
-          />
+          {!editInterface && (
+            <Button
+              title="Adicionar prato"
+              isHighlighted={false}
+              onClick={handleRegisterMeal}
+            />
+          )}
+          {editInterface && (
+            <Button
+              title="Salvar modificações"
+              isHighlighted={false}
+              onClick={() => console.log('salvou alterações')}
+            />
+          )}
         </Form>
       </Wrapper>
       <Footer />

@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import { useRequest } from '../../../hooks/request';
+import { validateRequest } from '../../../utils/helpers';
 
-export function useNew() {
+export function useNewAndEdit() {
   const [modalOpen, setModalOpen] = useState(false);
 
   const [title, setTitle] = useState('');
@@ -17,7 +18,11 @@ export function useNew() {
   const [ingredientsOfThisMeal, setIngredientsOfThisMeal] = useState([]);
   const [ingredientsRegisteredInDB, setIngredientsRegisteredInDB] = useState();
 
+  const [editInterface, setEditInterface] = useState(false);
+  const [mealInfos, setMealInfos] = useState();
+
   const navigate = useNavigate();
+  const location = useLocation();
 
   const { manageRequests } = useRequest();
 
@@ -109,8 +114,42 @@ export function useNew() {
     setIngredientsRegisteredInDB(response.data);
   }
 
+  async function handleTheRendering() {
+    const currentPath = location.pathname;
+
+    const isEditInterface = currentPath.includes('edit');
+
+    if (!isEditInterface) return;
+
+    setEditInterface(true);
+
+    const mealId = currentPath.replace('/edit/', '');
+
+    const mealResponse = await manageRequests('get', `/meals/${mealId}`);
+
+    validateRequest({
+      response: mealResponse,
+      devMessage: 'The request to get meal infos was not successful.',
+    });
+
+    const { data } = mealResponse;
+
+    setMealInfos(data);
+
+    setTitle(data.title);
+    setCategory(data.category);
+    setPrice(String(data.price));
+    setPhoto(data.image);
+    setDescription(data.description);
+    setIngredientsOfThisMeal(data.ingredients);
+
+    console.log({ mealResponse });
+  }
+
   useEffect(() => {
     loadData();
+
+    handleTheRendering();
   }, []);
 
   return {
@@ -134,5 +173,7 @@ export function useNew() {
     photo,
     setPhoto,
     resetAllStates,
+    editInterface,
+    mealInfos,
   };
 }

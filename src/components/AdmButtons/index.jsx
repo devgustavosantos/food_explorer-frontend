@@ -5,7 +5,7 @@ import { Container } from './styles';
 import { useAdmButtons } from './useAdmButtons';
 
 export function AdmButtons({ meal_id }) {
-  const { handleDeleteMeal } = useAdmButtons({ meal_id });
+  const { handleDeleteMeal, handleEditMeal } = useAdmButtons({ meal_id });
 
   return (
     <Container>
@@ -13,6 +13,7 @@ export function AdmButtons({ meal_id }) {
         icon={FiEdit2}
         title="Editar"
         isHighlighted={false}
+        onClick={handleEditMeal}
       />
       <Button
         icon={FiTrash}

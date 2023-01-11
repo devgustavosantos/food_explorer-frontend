@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { AllOrders } from '../pages/AllOrders';
 import { Details } from '../pages/Details';
 import { Home } from '../pages/Home';
-import { New } from '../pages/New';
+import { NewAndEdit } from '../pages/NewAndEdit';
 import { NotFound } from '../pages/NotFound';
 import { OffAir } from '../pages/OffAir';
 import { Order } from '../pages/Order';
@@ -22,7 +22,11 @@ export function AdmRoutes() {
       />
       <Route
         path="/new"
-        element={<New />}
+        element={<NewAndEdit />}
+      />
+      <Route
+        path="/edit/:id"
+        element={<NewAndEdit />}
       />
       <Route
         path="/details/:id"

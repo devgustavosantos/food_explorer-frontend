@@ -48,7 +48,7 @@ export function Header() {
           <li>
             <button
               type="button"
-              onClick={() => handleGoToPage('/favorites')}
+              onClick={e => handleGoToPage({ e, path: '/favorites' })}
             >
               <FiHeart />
             </button>
@@ -61,7 +61,7 @@ export function Header() {
           <li>
             <button
               type="button"
-              onClick={() => handleGoToPage('/all-orders')}
+              onClick={e => handleGoToPage({ e, path: '/all-orders' })}
             >
               <TfiReceipt />
             </button>
@@ -69,7 +69,7 @@ export function Header() {
           <li>
             <button
               type="button"
-              onClick={() => handleGoToPage('/profile')}
+              onClick={e => handleGoToPage({ e, path: '/profile' })}
             >
               <FiUser />
             </button>
@@ -95,7 +95,10 @@ export function Header() {
             />
           </li>
           <li>
-            <Link to="/new">
+            <Link
+              to="#"
+              onClick={e => handleGoToPage({ e, path: '/new' })}
+            >
               <FiPlus />
             </Link>
           </li>
@@ -134,7 +137,7 @@ export function Header() {
           <li>
             <button
               type="button"
-              onClick={() => handleGoToPage('/favorites')}
+              onClick={e => handleGoToPage({ e, path: '/favorites' })}
             >
               <FiHeart />
               Favoritos
@@ -149,7 +152,7 @@ export function Header() {
           <li>
             <button
               type="button"
-              onClick={() => handleGoToPage('/all-orders')}
+              onClick={e => handleGoToPage({ e, path: '/all-orders' })}
             >
               <TfiReceipt />
               Pedidos
@@ -158,7 +161,7 @@ export function Header() {
           <li>
             <button
               type="button"
-              onClick={() => handleGoToPage('/profile')}
+              onClick={e => handleGoToPage({ e, path: '/profile' })}
             >
               <FiUser />
               Perfil
@@ -186,7 +189,10 @@ export function Header() {
             />
           </li>
           <li>
-            <Link to="/new">
+            <Link
+              to="#"
+              onClick={e => handleGoToPage({ e, path: '/new' })}
+            >
               <FiPlus />
               Adicionar
             </Link>
@@ -214,7 +220,9 @@ export function Header() {
     }
   }
 
-  function handleGoToPage(page) {
+  function handleGoToPage({ e, path }) {
+    e.preventDefault();
+
     if (!userInfos) {
       const response = confirm(`
         Para utilizar esse recurso você precisa estar logado.
@@ -224,10 +232,14 @@ export function Header() {
       if (response) {
         navigate('/login');
       }
+
+      return;
     }
 
-    if (userInfos) {
-      navigate(page);
+    navigate(path);
+
+    if (path === '/new') {
+      window.location.reload();
     }
   }
 
