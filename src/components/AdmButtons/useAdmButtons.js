@@ -40,7 +40,9 @@ export function useAdmButtons({ meal_id }) {
   function successfulDeletion() {
     alert(messages.successOnDeleteMeal);
 
-    location.reload();
+    navigate('/');
+
+    window.location.reload();
   }
 
   async function handleDeleteMeal() {
