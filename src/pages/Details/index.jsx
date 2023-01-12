@@ -22,8 +22,6 @@ export function Details() {
   const [mealInfos, setMealInfos] = useState();
   const [mealImage, setMealImage] = useState();
 
-  console.log({ mealInfos });
-
   const { manageRequests } = useRequest();
 
   const { id } = useParams();

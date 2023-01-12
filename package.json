@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:online": "vite --host",
     "build": "vite build",
     "preview": "vite preview",
     "prettier": "prettier --write .",

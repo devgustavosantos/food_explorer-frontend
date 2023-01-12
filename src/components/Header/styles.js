@@ -1,12 +1,14 @@
-import styled from 'styled-components';
-
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 const Container = styled.header`
   width: 100%;
-
   padding: clamp(15px, 4vw, 30px) 0;
   background-color: ${({ theme }) => theme.COLORS.BLUE_700};
+  position: sticky;
+  top: -2px;
+  left: 0;
+  z-index: 3;
 `;
 
 const Desktop = styled.div`

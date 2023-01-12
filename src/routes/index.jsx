@@ -1,4 +1,4 @@
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 import { useAuth } from '../hooks/auth';
 import { AdmRoutes } from './adm.routes';
@@ -22,5 +22,5 @@ export function Routes() {
     }
   }
 
-  return <BrowserRouter>{rederRoutes()}</BrowserRouter>;
+  return <HashRouter>{rederRoutes()}</HashRouter>;
 }
