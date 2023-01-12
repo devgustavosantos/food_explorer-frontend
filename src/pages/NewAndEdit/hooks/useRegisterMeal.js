@@ -1,5 +1,6 @@
 import { useRequest } from '../../../hooks/request';
-import { showErrorMessage } from '../../../utils/helpers';
+import { validateRequest } from '../../../utils/helpers';
+import { formatPrice } from '../utils/helpers';
 import { errorMessages } from '../utils/messages';
 
 export function useRegisterMeal({
@@ -8,93 +9,22 @@ export function useRegisterMeal({
   price,
   description,
   ingredientsOfThisMeal: ingredients,
-  newIngredient,
   photo,
   resetAllStates,
+  inputsValidation,
 }) {
   const { manageRequests } = useRequest();
-
-  function isInputFilled(input) {
-    if (!input) {
-      showErrorMessage({
-        userMessage: errorMessages.genericInputEmpty.user,
-        devMessage: errorMessages.genericInputEmpty.dev,
-      });
-    }
-  }
-
-  function atLeastAIngredientWasAdded() {
-    if (ingredients.length < 1) {
-      showErrorMessage({
-        userMessage: errorMessages.anyIngredientAdd.user,
-        devMessage: errorMessages.anyIngredientAdd.dev,
-      });
-    }
-  }
-
-  function somethingWasTypedInNewIngredient() {
-    if (newIngredient) {
-      showErrorMessage({
-        userMessage: errorMessages.newIngredientNotAdd.user,
-        devMessage: errorMessages.newIngredientNotAdd.dev,
-      });
-    }
-  }
-
-  function wasThePhotoAdd() {
-    if (!photo) {
-      showErrorMessage({
-        userMessage: errorMessages.anyPhotoAdded.user,
-        devMessage: errorMessages.anyPhotoAdded.dev,
-      });
-    }
-  }
-
-  function formatPrice() {
-    const priceWithoutSymbols = price.replace('R$ ', '');
-
-    const priceWithDot = priceWithoutSymbols.replace(',', '.');
-
-    return priceWithDot;
-  }
-
-  function isThePriceEnteredValid() {
-    const priceWithDot = formatPrice();
-
-    const isThePriceAValidNumber = !isNaN(Number(priceWithDot));
-
-    if (!isThePriceAValidNumber) {
-      showErrorMessage({
-        userMessage: errorMessages.priceInvalid.user,
-        devMessage: errorMessages.priceInvalid.dev,
-      });
-    }
-  }
 
   async function registerTheMeal() {
     const response = await manageRequests('post', '/meals', {
       title,
       category,
-      price: formatPrice(),
+      price: formatPrice(price),
       description,
       ingredients,
     });
 
     return response;
-  }
-
-  function wasThereAnErrorOnRequest(response) {
-    const someErrorHappened = Object.prototype.hasOwnProperty.call(
-      response.data,
-      'message'
-    );
-
-    if (someErrorHappened) {
-      showErrorMessage({
-        userMessage: response.data.message,
-        devMessage: errorMessages.onRegisterIngredient.dev,
-      });
-    }
   }
 
   async function registerThePhoto(mealId) {
@@ -110,23 +40,18 @@ export function useRegisterMeal({
     return response;
   }
 
-  function inputsValidation() {
-    [title, category, price, description].forEach(input =>
-      isInputFilled(input)
-    );
-
-    atLeastAIngredientWasAdded();
-    wasThePhotoAdd();
-    isThePriceEnteredValid();
-    somethingWasTypedInNewIngredient();
-  }
-
   async function handleRequests() {
     const mealResponse = await registerTheMeal();
-    wasThereAnErrorOnRequest(mealResponse);
+    validateRequest({
+      response: mealResponse,
+      devMessage: errorMessages.onRegisterIngredient.dev,
+    });
 
     const photoResponse = await registerThePhoto(mealResponse.data.id);
-    wasThereAnErrorOnRequest(photoResponse);
+    validateRequest({
+      response: photoResponse,
+      devMessage: errorMessages.onRegisterIngredient.dev,
+    });
   }
 
   async function handleRegisterMeal() {

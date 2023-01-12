@@ -52,6 +52,16 @@ export function NewAndEdit() {
       ingredientsRegisteredInDB,
     });
 
+  const { inputsValidation } = useValidations({
+    title,
+    category,
+    price,
+    description,
+    ingredientsOfThisMeal,
+    newIngredient,
+    photo,
+  });
+
   const { handleRegisterMeal } = useRegisterMeal({
     title,
     category,
@@ -61,16 +71,7 @@ export function NewAndEdit() {
     photo,
     newIngredient,
     resetAllStates,
-  });
-
-  const { inputsValidation } = useValidations({
-    title,
-    category,
-    price,
-    description,
-    ingredientsOfThisMeal,
-    newIngredient,
-    photo,
+    inputsValidation,
   });
 
   const { handleEditMeal } = useEditMeal({
