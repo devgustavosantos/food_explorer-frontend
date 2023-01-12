@@ -13,12 +13,14 @@ import { Wrapper } from '../../components/Wrapper';
 import { useAuth } from '../../hooks/auth';
 import { useRequest } from '../../hooks/request';
 import { api } from '../../services/api';
+import { handleImageRequest } from '../../utils/helpers';
 import { Container, Content } from './styles';
 
 export function Details() {
   const { userInfos } = useAuth();
 
   const [mealInfos, setMealInfos] = useState();
+  const [mealImage, setMealImage] = useState();
 
   console.log({ mealInfos });
 
@@ -58,6 +60,18 @@ export function Details() {
       return <AdmButtons meal_id={meal_id} />;
     }
   }
+
+  async function renderImage() {
+    if (!mealInfos) return;
+
+    const url = `${api.defaults.baseURL}/files/meals/${mealInfos.image}`;
+
+    handleImageRequest({ url, setState: setMealImage });
+  }
+
+  useEffect(() => {
+    renderImage();
+  }, [mealInfos]);
 
   useEffect(() => {
     async function fetchMealInfos() {
@@ -99,7 +113,7 @@ export function Details() {
               to="/"
             />
             <img
-              src={`${api.defaults.baseURL}/files/meals/${mealInfos.image}`}
+              src={mealImage}
               alt={`Foto do item ${mealInfos.title}`}
             />
             <h1>{mealInfos.title}</h1>

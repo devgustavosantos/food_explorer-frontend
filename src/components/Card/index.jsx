@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaHeart } from 'react-icons/fa';
 import { FiHeart } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
@@ -6,12 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/auth';
 import { useRequest } from '../../hooks/request';
 import { api } from '../../services/api';
+import { handleImageRequest } from '../../utils/helpers';
 import { AdmButtons } from '../AdmButtons';
 import { ClientButtons } from '../ClientButtons';
 import { Container } from './styles';
 
 export function Card({ meal_id, title, description, price, image, isFav }) {
   const [favoriteMeal, setFavoriteMeal] = useState(isFav);
+  const [cardImage, setCardImage] = useState();
 
   const { userInfos } = useAuth();
 
@@ -74,11 +76,21 @@ export function Card({ meal_id, title, description, price, image, isFav }) {
     navigate(`/details/${meal_id}`);
   }
 
+  async function renderImage() {
+    const url = `${api.defaults.baseURL}/files/meals/${image}`;
+
+    handleImageRequest({ url, setState: setCardImage });
+  }
+
+  useEffect(() => {
+    renderImage();
+  }, []);
+
   return (
     <Container className="my-card">
       {renderButtonFav()}
       <img
-        src={`${api.defaults.baseURL}/files/meals/${image}`}
+        src={cardImage}
         alt={`Foto do prato ${title}`}
         onClick={handleGoToDetails}
       />

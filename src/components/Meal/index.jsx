@@ -1,4 +1,7 @@
+import { useEffect, useState } from 'react';
+
 import { api } from '../../services/api';
+import { handleImageRequest } from '../../utils/helpers';
 import { Container } from './styles';
 
 export function Meal({
@@ -10,11 +13,24 @@ export function Meal({
   onClick,
   ...rest
 }) {
+  const [mealImage, setMealImage] = useState();
+
+  async function renderImage() {
+    const url = `${api.defaults.baseURL}/files/meals/${image}`;
+
+    handleImageRequest({ url, setState: setMealImage });
+  }
+
+  useEffect(() => {
+    renderImage();
+  }, []);
+
   return (
     <Container {...rest}>
       <img
-        src={`${api.defaults.baseURL}/files/meals/${image}`}
+        src={mealImage}
         alt={`Foto do prato ${title}`}
+        data-oi="oi"
       />
       <p>{`${meal_amount}x ${title}`}</p>
       <p>{`R$ ${price}`}</p>

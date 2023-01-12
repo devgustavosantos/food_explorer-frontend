@@ -1,3 +1,6 @@
+import defaultImage from '../assets/cross-circle.svg';
+import { api } from '../services/api';
+
 export function showErrorMessage({ userMessage, devMessage }) {
   alert(userMessage);
 
@@ -15,5 +18,19 @@ export function validateRequest({ response, devMessage }) {
       userMessage: response.data.message,
       devMessage,
     });
+  }
+}
+
+export async function handleImageRequest({ url, setState }) {
+  try {
+    const response = await api.get(url, {
+      responseType: 'blob',
+    });
+
+    const imgUrl = URL.createObjectURL(response.data);
+
+    setState(imgUrl);
+  } catch {
+    setState(defaultImage);
   }
 }
