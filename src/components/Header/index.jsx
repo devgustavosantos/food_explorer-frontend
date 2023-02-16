@@ -28,9 +28,13 @@ import {
   LinkName,
 } from './styles.js';
 
-
 const links = [
-  { name: 'Favoritos', icon: <FiHeart />, url: '/favorites', isRestrict: true },
+  {
+    name: 'Favoritos',
+    icon: <FiHeart />,
+    url: '/favorites',
+    isRestrict: true,
+  },
   {
     name: 'Carinho',
     icon: <FiShoppingCart />,
@@ -43,8 +47,18 @@ const links = [
     url: '/all-orders',
     isRestrict: true,
   },
-  { name: 'Perfil', icon: <FiUser />, url: '/profile', isRestrict: true },
-  { name: 'Entrar/Sair', icon: <FiLogOut />, url: '/login', isRestrict: false },
+  {
+    name: 'Perfil',
+    icon: <FiUser />,
+    url: '/profile',
+    isRestrict: true,
+  },
+  {
+    name: 'Entrar/Sair',
+    icon: <FiLogOut />,
+    url: '/login',
+    isRestrict: false,
+  },
 ];
 
 export function Header() {
@@ -89,7 +103,7 @@ export function Header() {
             <List>
               {links.map(link => (
                 <ListItem key={link.name}>
-                  <Link>
+                  <Link title={link.name}>
                     {link.icon}
                     <LinkName>{link.name}</LinkName>
                   </Link>

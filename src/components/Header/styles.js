@@ -2,11 +2,17 @@ import styled from 'styled-components';
 
 import { defaultBreakpoint } from '../../styles/variables';
 import { Container as SearchBar } from '../SearchBar/styles';
-
+import { Container as Wrapper } from '../Wrapper/styles';
 
 const Container = styled.header`
   background-color: ${({ theme }) => theme.COLORS.BLUE_700};
   padding: clamp(15px, 4vw, 30px) 0px;
+
+  @media (min-width: ${defaultBreakpoint}) {
+    ${Wrapper} {
+      display: flex;
+    }
+  }
 `;
 
 const Top = styled.div`
@@ -45,33 +51,52 @@ const MenuIcon = styled.span`
   align-items: center;
   display: flex;
   justify-content: center;
+
+  @media (min-width: ${defaultBreakpoint}) {
+    display: none;
+    overflow: hidden;
+  }
 `;
 
-const Hamburger = styled.span``;
-
-const XIcon = styled.span``;
-
 const Base = styled.div`
+  display: flex;
+  width: 100%;
+
+  ${SearchBar} {
+    margin: 0 2rem;
+  }
+
   @media (max-width: ${defaultBreakpoint}) {
+    display: block;
     max-height: ${({ isMenuOpen }) => (isMenuOpen ? '1000px' : '0')};
     overflow: hidden;
     transition: all 0.5s ease 0s;
 
     ${SearchBar} {
-      margin-top: 2rem;
+      margin: 2rem 0 0 0;
     }
   }
 `;
 
-const Navigation = styled.nav``;
+const Navigation = styled.nav`
+  display: flex;
+  align-items: center;
+`;
 
 const List = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 1rem;
+
+  @media (min-width: ${defaultBreakpoint}) {
+    flex-direction: row;
+    align-items: center;
+  }
 `;
 
 const ListItem = styled.li`
+  list-style: none;
+
   @media (max-width: ${defaultBreakpoint}) {
     &:first-child {
       margin-top: 2rem;
@@ -85,9 +110,17 @@ const Link = styled.a`
   display: flex;
   font-size: clamp(1.4rem, 4vw, 1.6rem);
   gap: 10px;
+
+  > svg {
+    font-size: clamp(1.8rem, 4vw, 2.2rem);
+  }
 `;
 
-const LinkName = styled.span``;
+const LinkName = styled.span`
+  @media (min-width: ${defaultBreakpoint}) {
+    display: none;
+  }
+`;
 
 export {
   Container,
