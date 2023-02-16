@@ -49,4 +49,11 @@ export default createGlobalStyle`
     text-decoration: none;
   }
 
+  .swal2-popup {
+    font-size: 1.6rem;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    border-radius: 10px;
+  }
+
 `;

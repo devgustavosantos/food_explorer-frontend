@@ -1,17 +1,9 @@
-import { useState } from 'react';
-import {
-  FiHeart,
-  FiLogOut,
-  FiMenu,
-  FiShoppingCart,
-  FiUser,
-  FiX,
-} from 'react-icons/fi';
-import { TfiReceipt } from 'react-icons/tfi';
+import { FiMenu, FiX } from 'react-icons/fi';
 
 import foodExplorerLogo from '../../assets/logo.svg';
 import { SearchBar } from '../SearchBar';
 import { Wrapper } from '../Wrapper';
+import { clientLinks } from './data';
 import {
   Container,
   Top,
@@ -24,55 +16,19 @@ import {
   Navigation,
   List,
   ListItem,
-  Link,
+  NavigationLink,
   LinkName,
 } from './styles.js';
-
-const links = [
-  {
-    name: 'Favoritos',
-    icon: <FiHeart />,
-    url: '/favorites',
-    isRestrict: true,
-  },
-  {
-    name: 'Carinho',
-    icon: <FiShoppingCart />,
-    url: '/cart',
-    isRestrict: false,
-  },
-  {
-    name: 'Pedidos',
-    icon: <TfiReceipt />,
-    url: '/all-orders',
-    isRestrict: true,
-  },
-  {
-    name: 'Perfil',
-    icon: <FiUser />,
-    url: '/profile',
-    isRestrict: true,
-  },
-  {
-    name: 'Entrar/Sair',
-    icon: <FiLogOut />,
-    url: '/login',
-    isRestrict: false,
-  },
-];
+import { useHeader } from './useHeader';
 
 export function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  function handleMenu() {
-    setIsMenuOpen(state => !state);
-  }
+  const { isMenuOpen, handleMenu, handleNavigation } = useHeader();
 
   return (
     <Container>
       <Wrapper>
         <Top>
-          <Brand>
+          <Brand to="/">
             <Image
               src={foodExplorerLogo}
               alt=""
@@ -101,12 +57,16 @@ export function Header() {
           <SearchBar />
           <Navigation>
             <List>
-              {links.map(link => (
+              {clientLinks.map(link => (
                 <ListItem key={link.name}>
-                  <Link title={link.name}>
+                  <NavigationLink
+                    title={link.name}
+                    onClick={handleNavigation}
+                    name={link.name}
+                  >
                     {link.icon}
                     <LinkName>{link.name}</LinkName>
-                  </Link>
+                  </NavigationLink>
                 </ListItem>
               ))}
             </List>

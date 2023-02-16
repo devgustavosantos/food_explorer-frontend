@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
 
 import { defaultBreakpoint } from '../../styles/variables';
 import { Container as SearchBar } from '../SearchBar/styles';
@@ -20,7 +22,7 @@ const Top = styled.div`
   justify-content: space-between;
 `;
 
-const Brand = styled.a`
+const Brand = styled(Link)`
   align-items: center;
   color: ${({ theme }) => theme.COLORS.WHITE};
   display: flex;
@@ -104,7 +106,7 @@ const ListItem = styled.li`
   }
 `;
 
-const Link = styled.a`
+const NavigationLink = styled.a`
   align-items: center;
   color: ${({ theme }) => theme.COLORS.WHITE};
   display: flex;
@@ -134,6 +136,6 @@ export {
   Navigation,
   List,
   ListItem,
-  Link,
+  NavigationLink,
   LinkName,
 };
