@@ -19,3 +19,19 @@ export async function alertRestrictedArea() {
 
   return userChoice.isConfirmed;
 }
+
+export async function confirmLogout() {
+  const userChoice = await Swal.fire({
+    title: 'Tem certeza que deseja sair?',
+    icon: 'question',
+    background: theme.COLORS.BLUE_700,
+    color: theme.COLORS.WHITE,
+    showCancelButton: true,
+    cancelButtonColor: theme.COLORS.RED_900,
+    cancelButtonText: 'Não, quero ficar!',
+    confirmButtonColor: '#ffffff33',
+    confirmButtonText: 'Sim, quero sair!',
+  });
+
+  return userChoice.isConfirmed;
+}

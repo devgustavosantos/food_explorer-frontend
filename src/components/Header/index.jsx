@@ -3,7 +3,8 @@ import { FiMenu, FiX } from 'react-icons/fi';
 import foodExplorerLogo from '../../assets/logo.svg';
 import { SearchBar } from '../SearchBar';
 import { Wrapper } from '../Wrapper';
-import { clientLinks } from './data';
+import { AdminNavigation } from './components/AdminNavigation';
+import { ClientNavigation } from './components/ClientNavigation';
 import {
   Container,
   Top,
@@ -14,15 +15,19 @@ import {
   MenuIcon,
   Base,
   Navigation,
-  List,
-  ListItem,
-  NavigationLink,
-  LinkName,
 } from './styles.js';
 import { useHeader } from './useHeader';
 
 export function Header() {
-  const { isMenuOpen, handleMenu, handleNavigation } = useHeader();
+  const {
+    handleLogout,
+    handleMenu,
+    isMenuOpen,
+    isUserLoggedIn,
+    shouldAdmNavigationBeRendered,
+    shouldClientNavigationBeRendered,
+    userInfos,
+  } = useHeader();
 
   return (
     <Container>
@@ -56,20 +61,15 @@ export function Header() {
         <Base isMenuOpen={isMenuOpen}>
           <SearchBar />
           <Navigation>
-            <List>
-              {clientLinks.map(link => (
-                <ListItem key={link.name}>
-                  <NavigationLink
-                    title={link.name}
-                    onClick={handleNavigation}
-                    name={link.name}
-                  >
-                    {link.icon}
-                    <LinkName>{link.name}</LinkName>
-                  </NavigationLink>
-                </ListItem>
-              ))}
-            </List>
+            {shouldAdmNavigationBeRendered && (
+              <AdminNavigation onLogout={handleLogout} />
+            )}
+            {shouldClientNavigationBeRendered && (
+              <ClientNavigation
+                isUserLoggedIn={isUserLoggedIn}
+                onLogout={handleLogout}
+              />
+            )}
           </Navigation>
         </Base>
       </Wrapper>

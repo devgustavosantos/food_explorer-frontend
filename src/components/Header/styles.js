@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-
 import { defaultBreakpoint } from '../../styles/variables';
 import { Container as SearchBar } from '../SearchBar/styles';
 import { Container as Wrapper } from '../Wrapper/styles';
@@ -85,44 +84,46 @@ const Navigation = styled.nav`
   align-items: center;
 `;
 
-const List = styled.ul`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+// const List = styled.ul`
+//   display: flex;
+//   flex-direction: column;
+//   gap: 1rem;
 
-  @media (min-width: ${defaultBreakpoint}) {
-    flex-direction: row;
-    align-items: center;
-  }
-`;
+//   @media (min-width: ${defaultBreakpoint}) {
+//     flex-direction: row;
+//     align-items: center;
+//   }
+// `;
 
-const ListItem = styled.li`
-  list-style: none;
+// const ListItem = styled.li`
+//   list-style: none;
 
-  @media (max-width: ${defaultBreakpoint}) {
-    &:first-child {
-      margin-top: 2rem;
-    }
-  }
-`;
+//   @media (max-width: ${defaultBreakpoint}) {
+//     &:first-child {
+//       margin-top: 2rem;
+//     }
+//   }
+// `;
 
-const NavigationLink = styled.a`
-  align-items: center;
-  color: ${({ theme }) => theme.COLORS.WHITE};
-  display: flex;
-  font-size: clamp(1.4rem, 4vw, 1.6rem);
-  gap: 10px;
+// const NavigationLink = styled.a`
+//   align-items: center;
+//   color: ${({ theme }) => theme.COLORS.WHITE};
+//   display: flex;
+//   font-size: clamp(1.4rem, 4vw, 1.6rem);
+//   gap: 10px;
+// `;
 
-  > svg {
-    font-size: clamp(1.8rem, 4vw, 2.2rem);
-  }
-`;
+// const IconMenu = styled.span`
+//   font-size: clamp(1.8rem, 4vw, 2.2rem);
+//   display: flex;
+//   align-items: center;
+// `;
 
-const LinkName = styled.span`
-  @media (min-width: ${defaultBreakpoint}) {
-    display: none;
-  }
-`;
+// const LinkName = styled.span`
+//   @media (min-width: ${defaultBreakpoint}) {
+//     display: none;
+//   }
+// `;
 
 export {
   Container,
@@ -134,8 +135,4 @@ export {
   MenuIcon,
   Base,
   Navigation,
-  List,
-  ListItem,
-  NavigationLink,
-  LinkName,
 };

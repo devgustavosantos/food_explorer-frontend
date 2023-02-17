@@ -1,20 +1,10 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useAuth } from '../../hooks/auth';
-import { alertRestrictedArea } from './alerts';
+import { alertRestrictedArea } from '../../alerts';
 import { clientLinks } from './data';
 
-export function useHeader() {
+export function useClientNavigation({ isUserLoggedIn, onLogout }) {
   const navigate = useNavigate();
-
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const { userInfos } = useAuth();
-
-  function handleMenu() {
-    setIsMenuOpen(state => !state);
-  }
 
   async function handleNavigation(event) {
     event.preventDefault();
@@ -23,7 +13,10 @@ export function useHeader() {
 
     const linkSelected = clientLinks.find(link => link.name === title);
 
-    if (!userInfos && linkSelected.isRestrict) {
+    const userWantsToLogoutNow =
+      isUserLoggedIn && linkSelected.url === '/login';
+
+    if (!isUserLoggedIn && linkSelected.isRestrict) {
       const userWantToLoginNow = await alertRestrictedArea();
 
       if (!userWantToLoginNow) return;
@@ -31,8 +24,12 @@ export function useHeader() {
       return navigate('/login');
     }
 
+    if (userWantsToLogoutNow) {
+      return onLogout();
+    }
+
     navigate(linkSelected.url);
   }
 
-  return { isMenuOpen, handleMenu, handleNavigation };
+  return { handleNavigation };
 }
