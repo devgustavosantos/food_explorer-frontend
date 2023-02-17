@@ -1,20 +1,20 @@
 import { FiMenu, FiX } from 'react-icons/fi';
 
 import foodExplorerLogo from '../../assets/logo.svg';
-import { SearchBar } from '../SearchBar';
 import { Wrapper } from '../Wrapper';
 import { AdminNavigation } from './components/AdminNavigation';
 import { ClientNavigation } from './components/ClientNavigation';
+import { SearchBar } from './components/SearchBar';
 import {
-  Container,
-  Top,
-  Image,
-  Brand,
-  Title,
-  ButtonMenu,
-  MenuIcon,
   Base,
+  Brand,
+  ButtonMenu,
+  Container,
+  Image,
+  MenuIcon,
   Navigation,
+  Title,
+  Top,
 } from './styles.js';
 import { useHeader } from './useHeader';
 
@@ -26,7 +26,6 @@ export function Header() {
     isUserLoggedIn,
     shouldAdmNavigationBeRendered,
     shouldClientNavigationBeRendered,
-    userInfos,
   } = useHeader();
 
   return (

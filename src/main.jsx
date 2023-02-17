@@ -4,8 +4,8 @@ import { ThemeProvider } from 'styled-components';
 
 import { AuthProvider } from './hooks/auth';
 import { CartProvider } from './hooks/cart';
+import { MealsProvider } from './hooks/meals';
 import { RequestProvider } from './hooks/request';
-import { SearchProvider } from './hooks/search';
 import { Routes } from './routes/index';
 import GlobalStyles from './styles/global';
 import theme from './styles/theme';
@@ -17,9 +17,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <RequestProvider>
         <AuthProvider>
           <CartProvider>
-            <SearchProvider>
+            <MealsProvider>
               <Routes />
-            </SearchProvider>
+            </MealsProvider>
           </CartProvider>
         </AuthProvider>
       </RequestProvider>

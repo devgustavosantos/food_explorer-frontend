@@ -43,4 +43,4 @@ const LinkName = styled.span`
   }
 `;
 
-export { Container, ListItem, NavigationLink, IconMenu, LinkName };
+export { Container, IconMenu, LinkName, ListItem, NavigationLink };

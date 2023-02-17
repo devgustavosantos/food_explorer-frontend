@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
 
-import { useSearch } from '../../hooks/search';
 import { Button } from '../Button';
 import { Card } from '../Card';
 import { Container } from './styles';
@@ -11,8 +10,6 @@ export function SectionMeals({ title, meals }) {
   const [heightOfFewCards, setHeightOfFewCards] = useState(0);
 
   const mealsContainer = useRef();
-
-  const { search } = useSearch();
 
   function getTheHeightOfACard() {
     const card = mealsContainer.current.querySelector('.my-card');
@@ -54,8 +51,6 @@ export function SectionMeals({ title, meals }) {
   function renderButtons() {
     if (meals.length < 3) return null;
 
-    if (search) return null;
-
     if (showAFewCards) {
       return (
         <Button
@@ -72,12 +67,6 @@ export function SectionMeals({ title, meals }) {
       );
     }
   }
-
-  useEffect(() => {
-    if (search) {
-      setShowAFewCards(false);
-    }
-  }, [search]);
 
   useEffect(() => {
     function showAllCardsDuringASearch() {

@@ -38,6 +38,5 @@ export function useHeader() {
     isUserLoggedIn,
     shouldAdmNavigationBeRendered,
     shouldClientNavigationBeRendered,
-    userInfos,
   };
 }
