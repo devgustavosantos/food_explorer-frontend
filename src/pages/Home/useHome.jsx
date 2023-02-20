@@ -8,8 +8,7 @@ import { useMeals } from '../../hooks/meals';
 import { useRequest } from '../../hooks/request';
 
 export function useHome() {
-  const { mealsInDB, setMealsInDB, organizedMeals, setOrganizedMeals } =
-    useMeals();
+  const { setMealsInDB, organizedMeals, setOrganizedMeals } = useMeals();
   const [categories, setCategories] = useState();
 
   const navigate = useNavigate();
@@ -160,5 +159,5 @@ export function useHome() {
     loadMeals();
   }, []);
 
-  return { organizedMeals, renderCardsMobile, renderCardsDesktop };
+  return { organizedMeals, categories, renderCardsMobile, renderCardsDesktop };
 }

@@ -7,9 +7,10 @@ import { Container, Desktop, Mobile } from './styles';
 import { useHome } from './useHome';
 
 export function Home() {
-  const { organizedMeals, renderCardsMobile, renderCardsDesktop } = useHome();
+  const { organizedMeals, categories, renderCardsMobile, renderCardsDesktop } =
+    useHome();
 
-  if (!organizedMeals) return <Loading />;
+  if (organizedMeals.length === 0 || !categories) return <Loading />;
 
   return (
     <Container>
